@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
 import { getResidence, residences, type Residence } from "../data/residences";
-import { images } from "../components/images";
+import { images, type ImageKey } from "../components/images";
 import { Reveal } from "../components/Reveal";
 
 export const Route = createFileRoute("/residences/$slug")({
@@ -53,41 +54,145 @@ export const Route = createFileRoute("/residences/$slug")({
 function ResidenceDetail() {
   const { residence } = Route.useLoaderData() as { residence: Residence };
   const { lang, t } = useI18n();
-  const next =
-    residences[(residences.findIndex((r) => r.slug === residence.slug) + 1) % residences.length]!;
+  const [expanded, setExpanded] = useState(false);
+
+  const index = residences.findIndex((r) => r.slug === residence.slug);
+  const next = residences[(index + 1) % residences.length]!;
+  const others = residences.filter((r) => r.slug !== residence.slug).slice(0, 3);
+
+  const galleryKeys: ImageKey[] = [
+    residence.image,
+    ...(["salon", "terrace", "hero", "josefstadt"] as ImageKey[]).filter(
+      (k) => k !== residence.image,
+    ),
+  ];
+  const [main, ...thumbs] = galleryKeys;
+
+  const mailto = `mailto:office@langegasse-collection.at?subject=${encodeURIComponent(
+    residence.name[lang],
+  )}`;
+
+  const paragraphs = residence.description[lang];
+  const visible = expanded ? paragraphs : paragraphs.slice(0, 2);
+
+  const details: [string, string][] = [
+    [t.residences.propertyType, t.residences.propertyTypeValue],
+    [t.residences.area, residence.area],
+    [t.residences.outdoor, residence.outdoor],
+    [t.residences.rooms, residence.rooms],
+    [t.residences.status, residence.status[lang]],
+    [t.residences.price, residence.price[lang]],
+    [t.residences.building, t.residences.buildingValue],
+    [t.residences.district, t.residences.districtValue],
+    [t.residences.ref, `LGC-${String(residence.order).padStart(3, "0")}`],
+  ];
 
   return (
     <article>
-      <div className="relative h-[60vh] min-h-[420px] overflow-hidden">
-        <img
-          src={images[residence.image]}
-          alt={residence.name[lang]}
-          width={1600}
-          height={1072}
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/30 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-6 pb-12 lg:px-10">
-          <p className="eyebrow text-gold">{residence.status[lang]}</p>
-          <h1 className="mt-4 max-w-3xl text-4xl text-ivory md:text-6xl">
-            {residence.name[lang]}
-          </h1>
-          <p className="mt-3 text-sm text-ivory/80">{residence.kicker[lang]}</p>
+      {/* Gallery */}
+      <section className="grid gap-2 md:grid-cols-[2fr_1fr] md:gap-3 lg:h-[68vh] lg:min-h-[520px]">
+        <figure className="relative overflow-hidden">
+          <img
+            src={images[main!]}
+            alt={residence.name[lang]}
+            width={1600}
+            height={1072}
+            className="h-[46vh] w-full object-cover md:h-full"
+          />
+        </figure>
+        <div className="grid gap-2 md:gap-3">
+          {thumbs.slice(0, 2).map((k) => (
+            <figure key={k} className="relative overflow-hidden">
+              <img
+                src={images[k]}
+                alt={residence.name[lang]}
+                loading="lazy"
+                width={1200}
+                height={800}
+                className="h-[22vh] w-full object-cover md:h-full"
+              />
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* Sticky summary bar */}
+      <div className="sticky top-16 z-30 border-y border-border bg-background/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4 lg:px-10">
+          <div className="min-w-0">
+            <p className="truncate font-[family-name:var(--font-display)] text-lg">
+              {residence.name[lang]}
+            </p>
+            <p className="eyebrow text-muted-foreground">{t.residences.districtValue}</p>
+          </div>
+          <div className="flex items-center gap-8">
+            <div className="hidden items-center gap-8 sm:flex">
+              {[
+                [t.residences.area, residence.area],
+                [t.residences.rooms, residence.rooms],
+                [t.residences.outdoor, residence.outdoor],
+              ].map(([label, value]) => (
+                <div key={label}>
+                  <p className="eyebrow text-muted-foreground">{label}</p>
+                  <p className="font-[family-name:var(--font-display)] text-base">{value}</p>
+                </div>
+              ))}
+            </div>
+            <a
+              href={mailto}
+              className="eyebrow bg-charcoal px-6 py-3 text-ivory transition-colors hover:bg-teal"
+            >
+              {t.residences.inquire}
+            </a>
+          </div>
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-16 px-6 py-20 lg:grid-cols-[2fr_1fr] lg:px-10 lg:py-28">
-        <div>
-          <p className="eyebrow text-accent">{t.residences.description}</p>
+      <div className="mx-auto grid max-w-7xl gap-16 px-6 py-16 lg:grid-cols-[1.7fr_1fr] lg:px-10 lg:py-24">
+        <div className="min-w-0">
+          {/* Headline */}
+          <p className="eyebrow text-accent">{residence.status[lang]}</p>
+          <h1 className="mt-4 text-4xl leading-tight md:text-5xl">{residence.name[lang]}</h1>
+          <p className="mt-3 text-sm text-muted-foreground">{residence.kicker[lang]}</p>
+          <p className="mt-6 font-[family-name:var(--font-display)] text-2xl">
+            {residence.price[lang]}
+          </p>
+
+          {/* Overview */}
+          <h2 className="eyebrow mt-16 text-accent">{t.residences.overview}</h2>
           <div className="mt-6 flex flex-col gap-5">
-            {residence.description[lang].map((p) => (
+            {visible.map((p) => (
               <p key={p} className="max-w-2xl text-[0.95rem] leading-[1.9]">
                 {p}
               </p>
             ))}
           </div>
+          {paragraphs.length > 2 && (
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              className="eyebrow link-underline mt-6 text-accent"
+            >
+              {expanded ? t.residences.readLess : t.residences.readMore}
+            </button>
+          )}
 
-          <p className="eyebrow mt-16 text-accent">{t.residences.features}</p>
+          {/* Property details */}
+          <h2 className="eyebrow mt-16 text-accent">{t.residences.propertyDetails}</h2>
+          <dl className="mt-6 grid gap-x-12 sm:grid-cols-2">
+            {details.map(([label, value]) => (
+              <div
+                key={label}
+                className="flex items-baseline justify-between gap-6 border-b border-border py-4"
+              >
+                <dt className="eyebrow text-muted-foreground">{label}</dt>
+                <dd className="text-right text-sm">{value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          {/* Amenities */}
+          <h2 className="eyebrow mt-16 text-accent">{t.residences.amenities}</h2>
           <ul className="mt-6 grid gap-x-10 gap-y-3 sm:grid-cols-2">
             {residence.features[lang].map((f) => (
               <li key={f} className="border-b border-border py-3 text-sm">
@@ -95,44 +200,103 @@ function ResidenceDetail() {
               </li>
             ))}
           </ul>
+
+          {/* Location */}
+          <h2 className="eyebrow mt-16 text-accent">{t.residences.location}</h2>
+          <p className="mt-6 max-w-2xl text-[0.95rem] leading-[1.9]">{t.residences.locationText}</p>
+          <figure className="mt-8 overflow-hidden">
+            <img
+              src={images.josefstadt}
+              alt={t.residences.districtValue}
+              loading="lazy"
+              width={1600}
+              height={900}
+              className="h-[320px] w-full object-cover"
+            />
+          </figure>
+          <Link to="/neighborhood" className="eyebrow link-underline mt-6 inline-block text-accent">
+            {t.nav.neighborhood} →
+          </Link>
         </div>
 
-        <aside className="h-fit bg-card p-8 lg:sticky lg:top-28">
-          <dl className="flex flex-col gap-6">
+        {/* Agent card */}
+        <aside className="h-fit bg-card p-8 lg:sticky lg:top-40">
+          <p className="eyebrow text-muted-foreground">{t.residences.listedBy}</p>
+          <p className="mt-3 font-[family-name:var(--font-display)] text-2xl">{t.brand.name}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{t.contact.addressValue}</p>
+
+          <div className="mt-8 flex flex-col gap-3">
+            <a
+              href={mailto}
+              className="eyebrow bg-charcoal px-6 py-4 text-center text-ivory transition-colors hover:bg-teal"
+            >
+              {t.residences.scheduleTour}
+            </a>
+            <a
+              href="tel:+4319999999"
+              className="eyebrow border border-charcoal px-6 py-4 text-center transition-colors hover:bg-stone"
+            >
+              {t.residences.call}
+            </a>
+          </div>
+
+          <dl className="mt-10 flex flex-col gap-5 border-t border-border pt-8">
             {[
               [t.residences.area, residence.area],
               [t.residences.outdoor, residence.outdoor],
               [t.residences.rooms, residence.rooms],
               [t.residences.status, residence.status[lang]],
-              [t.residences.price, residence.price[lang]],
             ].map(([label, value]) => (
-              <div key={label} className="border-b border-border pb-4">
+              <div key={label} className="flex items-baseline justify-between gap-6">
                 <dt className="eyebrow text-muted-foreground">{label}</dt>
-                <dd className="mt-2 font-[family-name:var(--font-display)] text-xl">{value}</dd>
+                <dd className="font-[family-name:var(--font-display)] text-lg">{value}</dd>
               </div>
             ))}
           </dl>
-          <a
-            href={`mailto:office@langegasse-collection.at?subject=${encodeURIComponent(residence.name[lang])}`}
-            className="eyebrow mt-8 inline-block w-full bg-charcoal px-6 py-4 text-center text-ivory transition-colors hover:bg-teal"
-          >
-            {t.residences.inquire}
-          </a>
         </aside>
       </div>
 
+      {/* Other residences */}
       <Reveal className="border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-6 py-14 lg:px-10">
-          <Link to="/residences" className="eyebrow link-underline">
-            ← {t.residences.back}
-          </Link>
-          <Link
-            to="/residences/$slug"
-            params={{ slug: next.slug }}
-            className="eyebrow link-underline text-accent"
-          >
-            {t.residences.next}: {next.name[lang]} →
-          </Link>
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
+          <h2 className="eyebrow text-accent">{t.residences.similar}</h2>
+          <div className="mt-10 grid gap-10 md:grid-cols-3">
+            {others.map((r) => (
+              <Link
+                key={r.slug}
+                to="/residences/$slug"
+                params={{ slug: r.slug }}
+                className="group block"
+              >
+                <figure className="overflow-hidden">
+                  <img
+                    src={images[r.image]}
+                    alt={r.name[lang]}
+                    loading="lazy"
+                    width={1200}
+                    height={800}
+                    className="h-[240px] w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                  />
+                </figure>
+                <p className="eyebrow mt-5 text-muted-foreground">{r.status[lang]}</p>
+                <p className="mt-2 font-[family-name:var(--font-display)] text-xl">{r.name[lang]}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{r.kicker[lang]}</p>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-16 flex flex-wrap items-center justify-between gap-6 border-t border-border pt-10">
+            <Link to="/residences" className="eyebrow link-underline">
+              ← {t.residences.back}
+            </Link>
+            <Link
+              to="/residences/$slug"
+              params={{ slug: next.slug }}
+              className="eyebrow link-underline text-accent"
+            >
+              {t.residences.next}: {next.name[lang]} →
+            </Link>
+          </div>
         </div>
       </Reveal>
     </article>
