@@ -133,7 +133,7 @@ function ResidenceDetail() {
       </section>
 
       {/* Sticky summary bar */}
-      <div className="sticky top-24 z-30 border-y border-border bg-background/90 backdrop-blur">
+      <div className="noir sticky top-24 z-30 border-y border-white/10 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4 lg:px-10">
           <div className="min-w-0">
             <p className="truncate font-[family-name:var(--font-display)] text-lg">
