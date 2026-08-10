@@ -88,7 +88,23 @@ function ResidenceDetail() {
   ];
 
   return (
-    <article>
+    <article className="noir -mt-[88px] pt-[88px] lg:-mt-[104px] lg:pt-[104px]">
+      {/* Breadcrumb */}
+      <nav
+        aria-label="Breadcrumb"
+        className="mx-auto flex max-w-7xl flex-wrap items-center gap-2 px-6 pt-6 pb-5 text-[0.65rem] tracking-[0.22em] uppercase text-muted-foreground lg:px-10"
+      >
+        <Link to="/residences" className="transition-colors hover:text-foreground">
+          {lang === "de" ? "Objekte" : "Properties"}
+        </Link>
+        <span className="opacity-40">/</span>
+        <Link to="/residences" className="transition-colors hover:text-foreground">
+          {lang === "de" ? "Luxus-Residenzen" : "Luxury Apartments"}
+        </Link>
+        <span className="opacity-40">/</span>
+        <span className="text-accent">{residence.name[lang]}</span>
+      </nav>
+
       {/* Gallery */}
       <section className="grid gap-2 md:grid-cols-[2fr_1fr] md:gap-3 lg:h-[68vh] lg:min-h-[520px]">
         <figure className="relative overflow-hidden">
@@ -117,7 +133,7 @@ function ResidenceDetail() {
       </section>
 
       {/* Sticky summary bar */}
-      <div className="sticky top-16 z-30 border-y border-border bg-background/95 backdrop-blur">
+      <div className="sticky top-24 z-30 border-y border-border bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4 lg:px-10">
           <div className="min-w-0">
             <p className="truncate font-[family-name:var(--font-display)] text-lg">
@@ -140,7 +156,7 @@ function ResidenceDetail() {
             </div>
             <a
               href={mailto}
-              className="eyebrow bg-charcoal px-6 py-3 text-ivory transition-colors hover:bg-teal"
+              className="eyebrow bg-accent px-6 py-3 text-accent-foreground transition-colors hover:bg-foreground hover:text-background"
             >
               {t.residences.inquire}
             </a>
@@ -220,7 +236,7 @@ function ResidenceDetail() {
         </div>
 
         {/* Agent card */}
-        <aside className="h-fit bg-card p-8 lg:sticky lg:top-40">
+        <aside className="h-fit border border-border bg-card p-8 lg:sticky lg:top-48">
           <p className="eyebrow text-muted-foreground">{t.residences.listedBy}</p>
           <p className="mt-3 font-[family-name:var(--font-display)] text-2xl">{t.brand.name}</p>
           <p className="mt-2 text-sm text-muted-foreground">{t.contact.addressValue}</p>
@@ -228,13 +244,13 @@ function ResidenceDetail() {
           <div className="mt-8 flex flex-col gap-3">
             <a
               href={mailto}
-              className="eyebrow bg-charcoal px-6 py-4 text-center text-ivory transition-colors hover:bg-teal"
+              className="eyebrow bg-accent px-6 py-4 text-center text-accent-foreground transition-colors hover:bg-foreground hover:text-background"
             >
               {t.residences.scheduleTour}
             </a>
             <a
               href="tel:+4319999999"
-              className="eyebrow border border-charcoal px-6 py-4 text-center transition-colors hover:bg-stone"
+              className="eyebrow border border-border px-6 py-4 text-center transition-colors hover:bg-muted"
             >
               {t.residences.call}
             </a>
