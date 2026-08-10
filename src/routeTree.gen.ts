@@ -10,12 +10,36 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BuildingRouteImport } from './routes/building'
+import { Route as ImprintRouteImport } from './routes/imprint'
+import { Route as NeighborhoodRouteImport } from './routes/neighborhood'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ResidencesIndexRouteImport } from './routes/residences.index'
 import { Route as ResidencesSlugRouteImport } from './routes/residences.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuildingRoute = BuildingRouteImport.update({
+  id: '/building',
+  path: '/building',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImprintRoute = ImprintRouteImport.update({
+  id: '/imprint',
+  path: '/imprint',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NeighborhoodRoute = NeighborhoodRouteImport.update({
+  id: '/neighborhood',
+  path: '/neighborhood',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResidencesIndexRoute = ResidencesIndexRouteImport.update({
@@ -31,30 +55,68 @@ const ResidencesSlugRoute = ResidencesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/building': typeof BuildingRoute
+  '/imprint': typeof ImprintRoute
+  '/neighborhood': typeof NeighborhoodRoute
+  '/privacy': typeof PrivacyRoute
   '/residences/$slug': typeof ResidencesSlugRoute
   '/residences/': typeof ResidencesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/building': typeof BuildingRoute
+  '/imprint': typeof ImprintRoute
+  '/neighborhood': typeof NeighborhoodRoute
+  '/privacy': typeof PrivacyRoute
   '/residences/$slug': typeof ResidencesSlugRoute
   '/residences': typeof ResidencesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/building': typeof BuildingRoute
+  '/imprint': typeof ImprintRoute
+  '/neighborhood': typeof NeighborhoodRoute
+  '/privacy': typeof PrivacyRoute
   '/residences/$slug': typeof ResidencesSlugRoute
   '/residences/': typeof ResidencesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/residences/$slug' | '/residences/'
+  fullPaths:
+    | '/'
+    | '/building'
+    | '/imprint'
+    | '/neighborhood'
+    | '/privacy'
+    | '/residences/$slug'
+    | '/residences/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/residences/$slug' | '/residences'
-  id: '__root__' | '/' | '/residences/$slug' | '/residences/'
+  to:
+    | '/'
+    | '/building'
+    | '/imprint'
+    | '/neighborhood'
+    | '/privacy'
+    | '/residences/$slug'
+    | '/residences'
+  id:
+    | '__root__'
+    | '/'
+    | '/building'
+    | '/imprint'
+    | '/neighborhood'
+    | '/privacy'
+    | '/residences/$slug'
+    | '/residences/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuildingRoute: typeof BuildingRoute
+  ImprintRoute: typeof ImprintRoute
+  NeighborhoodRoute: typeof NeighborhoodRoute
+  PrivacyRoute: typeof PrivacyRoute
   ResidencesSlugRoute: typeof ResidencesSlugRoute
   ResidencesIndexRoute: typeof ResidencesIndexRoute
 }
@@ -66,6 +128,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/building': {
+      id: '/building'
+      path: '/building'
+      fullPath: '/building'
+      preLoaderRoute: typeof BuildingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/imprint': {
+      id: '/imprint'
+      path: '/imprint'
+      fullPath: '/imprint'
+      preLoaderRoute: typeof ImprintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/neighborhood': {
+      id: '/neighborhood'
+      path: '/neighborhood'
+      fullPath: '/neighborhood'
+      preLoaderRoute: typeof NeighborhoodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/residences/': {
@@ -87,6 +177,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuildingRoute: BuildingRoute,
+  ImprintRoute: ImprintRoute,
+  NeighborhoodRoute: NeighborhoodRoute,
+  PrivacyRoute: PrivacyRoute,
   ResidencesSlugRoute: ResidencesSlugRoute,
   ResidencesIndexRoute: ResidencesIndexRoute,
 }
