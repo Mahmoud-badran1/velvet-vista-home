@@ -88,7 +88,7 @@ function ResidenceDetail() {
   ];
 
   return (
-    <article className="noir">
+    <article className="bg-background text-foreground">
       {/* Breadcrumb */}
       <nav
         aria-label="Breadcrumb"
