@@ -58,7 +58,7 @@ function Index() {
           height={1088}
           className="kenburns h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-charcoal/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/35 to-charcoal/20" />
         <div className="absolute inset-0 flex items-end">
           <div className="mx-auto w-full max-w-7xl px-6 pb-16 lg:px-10 lg:pb-24">
             <p className="eyebrow text-gold">{t.home.heroEyebrow}</p>
