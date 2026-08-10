@@ -1,0 +1,262 @@
+export const dictionary = {
+  de: {
+    nav: {
+      home: "Startseite",
+      residences: "Residenzen",
+      building: "Das Haus",
+      neighborhood: "Josefstadt",
+      contact: "Kontakt",
+    },
+    brand: { name: "Lange Gasse Collection", place: "Wien Josefstadt" },
+    home: {
+      metaTitle: "Lange Gasse Collection — Residenzen in Wien Josefstadt",
+      metaDescription:
+        "Vier außergewöhnliche Residenzen in einem Jugendstilhaus in der Lange Gasse, 1080 Wien. Penthouses, Maisonetten und Terrassen über den Dächern der Stadt.",
+      heroEyebrow: "1080 Wien · Josefstadt",
+      heroTitle: "Vier Residenzen über den Dächern der Josefstadt",
+      heroText:
+        "Ein Jugendstilhaus aus dem Jahr 1890, behutsam weitergebaut: Dachgeschoße mit Panoramafenstern, weiten Terrassen und der Ruhe des achten Bezirks.",
+      heroCta: "Residenzen ansehen",
+      introEyebrow: "Die Collection",
+      introTitle: "Ein Haus, vier Charaktere",
+      introText:
+        "Von der kompakten Zweizimmer-Wohnung bis zum 285 m² Penthouse mit privatem Direktlift — jede Einheit ist barrierefrei, ohne Dachschrägen und in bester Güte gebaut.",
+      residencesEyebrow: "Auswahl",
+      residencesTitle: "Die Residenzen",
+      buildingEyebrow: "Das Haus",
+      buildingTitle: "Jugendstil, weitergedacht",
+      buildingText:
+        "Baujahr um 1890. Im Dachgeschoß wurde kürzlich neuer Wohnraum geschaffen — mit eigenem Hauseingang, Direktlift und Garage für die oberen Ebenen.",
+      buildingCta: "Mehr über das Haus",
+      locationEyebrow: "Die Lage",
+      locationTitle: "Josefstadt, achter Bezirk",
+      locationText:
+        "Der kleinste Bezirk Wiens: Theater in der Josefstadt, Kaffeehäuser, Buchhandlungen, Schulen und die Ringstraße in wenigen Minuten.",
+      locationCta: "Die Nachbarschaft",
+      contactEyebrow: "Kontakt",
+      contactTitle: "Besichtigung vereinbaren",
+      contactText:
+        "Wir zeigen Ihnen die Residenzen gerne persönlich und diskret. Schreiben Sie uns oder rufen Sie an.",
+    },
+    residences: {
+      metaTitle: "Residenzen — Lange Gasse Collection",
+      metaDescription:
+        "Vier Residenzen von 62,5 m² bis 285 m² mit Terrassen, Panoramafenstern und privatem Lift in Wien Josefstadt.",
+      eyebrow: "Übersicht",
+      title: "Die Residenzen",
+      lead: "Vier Einheiten zwischen 62,5 und 285 m² — jede mit eigenem Charakter.",
+      view: "Ansehen",
+      area: "Wohnfläche",
+      outdoor: "Terrassen",
+      rooms: "Zimmer",
+      status: "Status",
+      price: "Preis",
+      description: "Beschreibung",
+      features: "Ausstattung",
+      inquire: "Anfragen",
+      back: "Alle Residenzen",
+      next: "Nächste Residenz",
+    },
+    building: {
+      metaTitle: "Das Haus — Lange Gasse Collection",
+      metaDescription:
+        "Ein Jugendstilhaus aus 1890 in der Lange Gasse, 1080 Wien, mit neu geschaffenen Dachgeschoßen, Direktlift und Hausgarage.",
+      eyebrow: "Das Haus",
+      title: "Jugendstil aus 1890",
+      lead: "Ein Wiener Zinshaus, das seine Geschichte trägt und zugleich neue Wohnebenen erhalten hat.",
+      sections: [
+        {
+          title: "Herkunft",
+          text: "Das Haus stammt aus der Zeit um 1890 — Jugendstilfassade, hohe Räume, großzügige Proportionen. Es steht in der Lange Gasse, einer der ruhigsten Adressen der Josefstadt.",
+        },
+        {
+          title: "Neue Dachebenen",
+          text: "Im Dachgeschoß wurde kürzlich neuer Wohnraum geschaffen: durchgehend ohne Dachschrägen, barrierefrei, mit Panoramafenstern und weiten Terrassen.",
+        },
+        {
+          title: "Diskretion",
+          text: "Eigener Hauseingang, Direktlift und Garage für die oberen Ebenen. Die Penthouse-Bewohner erreichen ihre Wohnung, ohne das Haupthaus zu betreten.",
+        },
+        {
+          title: "Material",
+          text: "Echtmarmorbäder, massives Teak, Glaskamin, Fußbodenheizung — durchwegs in bester Güte ausgeführt.",
+        },
+      ],
+    },
+    neighborhood: {
+      metaTitle: "Josefstadt — Lange Gasse Collection",
+      metaDescription:
+        "Leben in der Wiener Josefstadt: Theater, Kaffeehäuser, Schulen und die Innenstadt in Gehweite.",
+      eyebrow: "Die Lage",
+      title: "Josefstadt",
+      lead: "Der achte Bezirk ist der kleinste Wiens — und einer der begehrtesten.",
+      sections: [
+        { title: "Kultur", text: "Theater in der Josefstadt, Volkskundemuseum, Galerien und Buchhandlungen im Umkreis weniger Minuten." },
+        { title: "Kaffeehaus", text: "Traditionshäuser und moderne Röstereien prägen die Lange Gasse und die Josefstädter Straße." },
+        { title: "Bildung", text: "Schulen, Gymnasien und die Universität Wien liegen fußläufig oder eine Station entfernt." },
+        { title: "Verbindungen", text: "Straßenbahn 2 und J, U2 Rathaus, der Ring und die Innenstadt in wenigen Minuten." },
+      ],
+    },
+    contact: {
+      title: "Kontakt",
+      email: "E-Mail",
+      phone: "Telefon",
+      address: "Adresse",
+      addressValue: "Lange Gasse, 1080 Wien, Österreich",
+      write: "Nachricht schreiben",
+    },
+    footer: { rights: "Alle Rechte vorbehalten.", imprint: "Impressum", privacy: "Datenschutz" },
+    imprint: {
+      metaTitle: "Impressum — Lange Gasse Collection",
+      metaDescription: "Impressum und Offenlegung der Lange Gasse Collection, 1080 Wien.",
+      title: "Impressum",
+      body: [
+        "Angaben gemäß §5 ECG und §25 Mediengesetz.",
+        "Lange Gasse Collection, Lange Gasse, 1080 Wien, Österreich.",
+        "Die vollständigen Angaben zu Medieninhaber, Firmenbuchnummer, UID und Aufsichtsbehörde werden vor Veröffentlichung ergänzt.",
+        "Angaben zum Energieausweis (HWB, fGEE) werden je Objekt nachgereicht.",
+      ],
+    },
+    privacy: {
+      metaTitle: "Datenschutz — Lange Gasse Collection",
+      metaDescription: "Informationen zum Umgang mit personenbezogenen Daten auf dieser Website.",
+      title: "Datenschutz",
+      body: [
+        "Diese Website verarbeitet keine personenbezogenen Daten über Formulare. Kontaktaufnahme erfolgt direkt per E-Mail oder Telefon.",
+        "Es werden keine Analyse- oder Marketing-Cookies gesetzt. Die gewählte Sprache wird ausschließlich lokal im Browser gespeichert.",
+        "Bei Kontaktaufnahme verwenden wir Ihre Daten ausschließlich zur Beantwortung Ihrer Anfrage.",
+      ],
+    },
+  },
+  en: {
+    nav: {
+      home: "Home",
+      residences: "Residences",
+      building: "The Building",
+      neighborhood: "Josefstadt",
+      contact: "Contact",
+    },
+    brand: { name: "Lange Gasse Collection", place: "Vienna Josefstadt" },
+    home: {
+      metaTitle: "Lange Gasse Collection — Residences in Vienna Josefstadt",
+      metaDescription:
+        "Four exceptional residences in a Jugendstil house on Lange Gasse, 1080 Vienna. Penthouses, maisonettes and terraces above the rooftops.",
+      heroEyebrow: "1080 Vienna · Josefstadt",
+      heroTitle: "Four residences above the rooftops of Josefstadt",
+      heroText:
+        "A Jugendstil house from 1890, carefully built upon: rooftop levels with panoramic windows, generous terraces and the calm of the eighth district.",
+      heroCta: "View the residences",
+      introEyebrow: "The Collection",
+      introTitle: "One house, four characters",
+      introText:
+        "From a compact two-room apartment to a 285 m² penthouse with its own direct lift — every unit is barrier-free, free of sloped ceilings and built to the highest standard.",
+      residencesEyebrow: "Selection",
+      residencesTitle: "The Residences",
+      buildingEyebrow: "The Building",
+      buildingTitle: "Jugendstil, continued",
+      buildingText:
+        "Built around 1890. New living space was recently created on the rooftop levels — with a private entrance, direct lift and garage for the upper floors.",
+      buildingCta: "More about the building",
+      locationEyebrow: "The Location",
+      locationTitle: "Josefstadt, eighth district",
+      locationText:
+        "Vienna's smallest district: Theater in der Josefstadt, coffee houses, bookshops, schools and the Ringstrasse minutes away.",
+      locationCta: "The neighbourhood",
+      contactEyebrow: "Contact",
+      contactTitle: "Arrange a viewing",
+      contactText:
+        "We are glad to show the residences personally and discreetly. Write to us or call.",
+    },
+    residences: {
+      metaTitle: "Residences — Lange Gasse Collection",
+      metaDescription:
+        "Four residences from 62.5 m² to 285 m² with terraces, panoramic windows and a private lift in Vienna Josefstadt.",
+      eyebrow: "Overview",
+      title: "The Residences",
+      lead: "Four homes between 62.5 and 285 m² — each with its own character.",
+      view: "View",
+      area: "Living space",
+      outdoor: "Terraces",
+      rooms: "Rooms",
+      status: "Status",
+      price: "Price",
+      description: "Description",
+      features: "Features",
+      inquire: "Enquire",
+      back: "All residences",
+      next: "Next residence",
+    },
+    building: {
+      metaTitle: "The Building — Lange Gasse Collection",
+      metaDescription:
+        "An 1890 Jugendstil house on Lange Gasse, 1080 Vienna, with newly created rooftop levels, direct lift and house garage.",
+      eyebrow: "The Building",
+      title: "Jugendstil from 1890",
+      lead: "A Viennese townhouse that carries its history and has gained new living levels.",
+      sections: [
+        {
+          title: "Origin",
+          text: "The house dates from around 1890 — a Jugendstil facade, high ceilings, generous proportions. It stands on Lange Gasse, one of the quietest addresses in Josefstadt.",
+        },
+        {
+          title: "New rooftop levels",
+          text: "New living space was recently created on the rooftop levels: entirely free of sloped ceilings, barrier-free, with panoramic windows and wide terraces.",
+        },
+        {
+          title: "Discretion",
+          text: "A private entrance, direct lift and garage serve the upper levels. Penthouse residents reach their apartment without entering the main house.",
+        },
+        {
+          title: "Material",
+          text: "Genuine marble baths, solid teak, a glass fireplace, underfloor heating — executed throughout to the highest standard.",
+        },
+      ],
+    },
+    neighborhood: {
+      metaTitle: "Josefstadt — Lange Gasse Collection",
+      metaDescription:
+        "Living in Vienna's Josefstadt: theatre, coffee houses, schools and the city centre within walking distance.",
+      eyebrow: "The Location",
+      title: "Josefstadt",
+      lead: "The eighth district is Vienna's smallest — and one of its most sought after.",
+      sections: [
+        { title: "Culture", text: "Theater in der Josefstadt, the Folk Life Museum, galleries and bookshops all within a few minutes." },
+        { title: "Coffee houses", text: "Traditional houses and modern roasteries define Lange Gasse and Josefstädter Strasse." },
+        { title: "Education", text: "Schools, gymnasiums and the University of Vienna are within walking distance or one stop away." },
+        { title: "Connections", text: "Tram 2 and J, U2 Rathaus, the Ring and the historic centre within minutes." },
+      ],
+    },
+    contact: {
+      title: "Contact",
+      email: "Email",
+      phone: "Phone",
+      address: "Address",
+      addressValue: "Lange Gasse, 1080 Vienna, Austria",
+      write: "Write a message",
+    },
+    footer: { rights: "All rights reserved.", imprint: "Imprint", privacy: "Privacy" },
+    imprint: {
+      metaTitle: "Imprint — Lange Gasse Collection",
+      metaDescription: "Imprint and disclosure for the Lange Gasse Collection, 1080 Vienna.",
+      title: "Imprint",
+      body: [
+        "Information pursuant to §5 ECG and §25 of the Austrian Media Act.",
+        "Lange Gasse Collection, Lange Gasse, 1080 Vienna, Austria.",
+        "Full details of the media owner, company register number, VAT ID and supervisory authority will be added before publication.",
+        "Energy certificate figures (HWB, fGEE) will be provided per unit.",
+      ],
+    },
+    privacy: {
+      metaTitle: "Privacy — Lange Gasse Collection",
+      metaDescription: "How personal data is handled on this website.",
+      title: "Privacy",
+      body: [
+        "This website processes no personal data through forms. Contact is made directly by email or telephone.",
+        "No analytics or marketing cookies are set. The selected language is stored locally in your browser only.",
+        "If you contact us, we use your details solely to answer your enquiry.",
+      ],
+    },
+  },
+} as const;
+
+export type Dictionary = (typeof dictionary)["de"];
