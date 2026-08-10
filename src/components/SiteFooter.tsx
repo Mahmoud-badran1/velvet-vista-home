@@ -8,14 +8,16 @@ export function SiteFooter() {
   return (
     <footer className="bg-charcoal text-ivory">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
-        <img
-          src={logo.url}
-          alt="Lange Gasse Collection"
-          loading="lazy"
-          width={1536}
-          height={1024}
-          className="mx-auto w-full max-w-md mix-blend-multiply invert-0 opacity-90"
-        />
+        <div className="bg-ivory px-6 py-8">
+          <img
+            src={logo.url}
+            alt="Lange Gasse Collection"
+            loading="lazy"
+            width={1536}
+            height={1024}
+            className="mx-auto w-full max-w-lg"
+          />
+        </div>
 
         <div className="mt-16 grid gap-12 border-t border-ivory/15 pt-12 md:grid-cols-3">
           <div>
