@@ -3,6 +3,7 @@ import { useI18n } from "../i18n";
 import { residences } from "../data/residences";
 import { images } from "../components/images";
 import { Reveal } from "../components/Reveal";
+import { HeroFilm } from "../components/HeroFilm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -49,34 +50,8 @@ function Index() {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative h-[88vh] min-h-[520px] overflow-hidden">
-        <img
-          src={images.hero}
-          alt="Lange Gasse Collection, Vienna Josefstadt"
-          width={1920}
-          height={1088}
-          className="kenburns h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/35 to-charcoal/20" />
-        <div className="absolute inset-0 flex items-end">
-          <div className="mx-auto w-full max-w-7xl px-6 pb-16 lg:px-10 lg:pb-24">
-            <p className="eyebrow text-gold">{t.home.heroEyebrow}</p>
-            <h1 className="mt-5 max-w-4xl text-4xl leading-[1.08] text-ivory md:text-7xl">
-              {t.home.heroTitle}
-            </h1>
-            <p className="mt-6 max-w-lg text-sm leading-relaxed text-ivory/80">
-              {t.home.heroText}
-            </p>
-            <Link
-              to="/residences"
-              className="eyebrow mt-10 inline-block border border-gold px-8 py-4 text-ivory transition-colors hover:bg-gold hover:text-charcoal"
-            >
-              {t.home.heroCta}
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Hero film */}
+      <HeroFilm />
 
       {/* Intro */}
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">

@@ -1,11 +1,23 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { Menu, X, Search, Heart } from "lucide-react";
 import { useI18n } from "../i18n";
 
 export function SiteHeader() {
   const { lang, setLang, t } = useI18n();
   const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const overFilm = pathname === "/" && !scrolled && !open;
 
   const links = [
     { to: "/residences", label: t.nav.residences },
@@ -14,10 +26,20 @@ export function SiteHeader() {
   ] as const;
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-4 lg:px-8 lg:pt-6">
-      <div className="mx-auto max-w-7xl rounded-full bg-ivory shadow-[0_10px_40px_-12px_rgba(0,0,0,0.35)] ring-1 ring-black/5">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-700 ease-out ${
+        overFilm ? "px-0 pt-0" : "px-4 pt-4 lg:px-8 lg:pt-6"
+      }`}
+    >
+      <div
+        className={`mx-auto transition-all duration-700 ease-out ${
+          overFilm
+            ? "max-w-none rounded-none bg-transparent text-white shadow-none ring-0"
+            : "max-w-7xl rounded-full bg-ivory text-charcoal shadow-[0_10px_40px_-12px_rgba(0,0,0,0.35)] ring-1 ring-black/5"
+        }`}
+      >
         <div className="grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 lg:h-[72px] lg:px-10">
-          <Link to="/" className="min-w-0 text-charcoal" onClick={() => setOpen(false)}>
+          <Link to="/" className="min-w-0" onClick={() => setOpen(false)}>
             <span className="block truncate font-[family-name:var(--font-display)] text-lg tracking-[0.14em] uppercase">
               Lange Gasse Collection
             </span>
@@ -26,14 +48,16 @@ export function SiteHeader() {
             </span>
           </Link>
 
-          <div className="flex shrink-0 items-center gap-6 text-charcoal">
+          <div className="flex shrink-0 items-center gap-6">
             <nav className="hidden items-center gap-7 md:flex">
               {links.map((l) => (
                 <Link
                   key={l.to}
                   to={l.to}
                   className="eyebrow link-underline"
-                  activeProps={{ className: "eyebrow link-underline text-teal" }}
+                  activeProps={{
+                    className: `eyebrow link-underline ${overFilm ? "text-white" : "text-teal"}`,
+                  }}
                 >
                   {l.label}
                 </Link>
@@ -72,7 +96,7 @@ export function SiteHeader() {
         </div>
 
         {open && (
-          <nav className="flex flex-col gap-4 border-t border-black/10 px-8 py-6 text-charcoal">
+          <nav className="flex flex-col gap-4 border-t border-black/10 px-8 py-6">
             {links.map((l) => (
               <Link key={l.to} to={l.to} className="eyebrow" onClick={() => setOpen(false)}>
                 {l.label}
