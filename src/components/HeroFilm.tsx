@@ -117,9 +117,9 @@ export function HeroFilm() {
       </section>
 
       {/* Architecture shaped by light */}
-      <section className="noir relative">
+      <section className="relative bg-background">
         <div className="mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
-          <h2 className="max-w-3xl text-3xl leading-[1.25] text-white/90 md:text-6xl">
+          <h2 className="max-w-3xl text-3xl leading-[1.25] text-foreground md:text-6xl">
             {lang === "de" ? "Architektur, geformt vom Licht." : "Architecture shaped by light."}
           </h2>
         </div>
@@ -133,7 +133,7 @@ export function HeroFilm() {
             className="h-full w-full object-cover"
             style={{ transform: `scale(${1.06 - Math.min(p, 1) * 0.04})` }}
           />
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,5,5,0.5),transparent_35%,rgba(5,5,5,0.55))]" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,5,5,0.18),transparent_40%,rgba(5,5,5,0.22))]" />
         </figure>
       </section>
     </>
