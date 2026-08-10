@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
-import { getResidence, residences } from "../data/residences";
+import { getResidence, residences, type Residence } from "../data/residences";
 import { images } from "../components/images";
 import { Reveal } from "../components/Reveal";
 
@@ -51,7 +51,7 @@ export const Route = createFileRoute("/residences/$slug")({
 });
 
 function ResidenceDetail() {
-  const { residence } = Route.useLoaderData();
+  const { residence } = Route.useLoaderData() as { residence: Residence };
   const { lang, t } = useI18n();
   const next =
     residences[(residences.findIndex((r) => r.slug === residence.slug) + 1) % residences.length]!;
