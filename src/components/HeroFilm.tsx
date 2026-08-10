@@ -32,7 +32,7 @@ export function HeroFilm() {
 
   return (
     <>
-      <section className="noir relative h-screen w-full overflow-hidden">
+      <section className="noir relative -mt-16 h-screen w-full overflow-hidden lg:-mt-[72px]">
         <div
           className="absolute inset-0"
           style={{
