@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { Menu, X, Search, Heart } from "lucide-react";
 import { useI18n } from "../i18n";
+import logo from "../assets/logo-nbg.png.asset.json";
+
 
 export function SiteHeader() {
   const { lang, setLang, t } = useI18n();
@@ -41,13 +43,17 @@ export function SiteHeader() {
       >
         <div className="grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 lg:h-[72px] lg:px-10">
           <Link to="/" className="min-w-0" onClick={() => setOpen(false)}>
-            <span className="block truncate font-[family-name:var(--font-display)] text-lg tracking-[0.14em] uppercase">
-              Lange Gasse Collection
-            </span>
-            <span className="eyebrow hidden text-[0.6rem] opacity-60 sm:block">
-              {t.brand.place}
-            </span>
+            <img
+              src={logo.url}
+              alt="Lange Gasse Collection"
+              width={600}
+              height={120}
+              className={`h-8 w-auto max-w-[180px] object-contain transition-all duration-700 sm:h-9 lg:h-10 ${
+                overFilm ? "brightness-0 invert" : ""
+              }`}
+            />
           </Link>
+
 
           <div className="flex shrink-0 items-center gap-6">
             <nav className="hidden items-center gap-7 md:flex">
