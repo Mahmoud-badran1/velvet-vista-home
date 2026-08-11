@@ -37,7 +37,7 @@ export function SiteHeader() {
       <div
         className={`mx-auto transition-all duration-700 ease-out ${
           overFilm
-            ? "max-w-none rounded-none bg-transparent text-white shadow-none ring-0"
+            ? "max-w-none rounded-none bg-transparent text-charcoal shadow-none ring-0"
             : "max-w-7xl rounded-full bg-ivory text-charcoal shadow-[0_10px_40px_-12px_rgba(0,0,0,0.35)] ring-1 ring-black/5"
         }`}
       >
@@ -48,9 +48,7 @@ export function SiteHeader() {
               alt="Lange Gasse Collection"
               width={600}
               height={120}
-              className={`h-8 w-auto max-w-[180px] object-contain transition-all duration-700 sm:h-9 lg:h-10 ${
-                overFilm ? "brightness-0 invert" : ""
-              }`}
+              className="h-8 w-auto max-w-[180px] object-contain transition-all duration-700 sm:h-9 lg:h-10"
             />
           </Link>
 
@@ -63,7 +61,7 @@ export function SiteHeader() {
                   to={l.to}
                   className="eyebrow link-underline"
                   activeProps={{
-                    className: `eyebrow link-underline ${overFilm ? "text-white" : "text-teal"}`,
+                    className: "eyebrow link-underline text-teal",
                   }}
                 >
                   {l.label}
