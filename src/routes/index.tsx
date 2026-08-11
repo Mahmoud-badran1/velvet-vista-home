@@ -52,6 +52,12 @@ function Index() {
   const c = homeCopy;
   const mailto = "mailto:office@langegasse-collection.at?subject=Private%20Viewing";
 
+  const [cityIndex, setCityIndex] = useState(0);
+  const landmarks = c.city.landmarks;
+  const current = landmarks[cityIndex];
+  const nextCity = () => setCityIndex((i) => (i + 1) % landmarks.length);
+  const prevCity = () => setCityIndex((i) => (i - 1 + landmarks.length) % landmarks.length);
+
   return (
     <div>
       {/* 01 — HERO */}
