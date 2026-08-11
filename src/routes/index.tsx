@@ -194,7 +194,7 @@ function Index() {
         <div className="mt-16 grid gap-10 md:grid-cols-2">
           {[
             { copy: c.cinemas.left, img: images.cityRooftops, fit: "aspect-[16/9]" },
-            { copy: c.cinemas.right, img: images.horizonHills, fit: "h-[46vh]" },
+            { copy: c.cinemas.right, img: images.horizonHills, fit: "aspect-[16/9]" },
           ].map((col, i) => (
             <Reveal key={col.copy.title.en} delay={i * 120}>
               <figure className="overflow-hidden">
