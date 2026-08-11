@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useI18n } from "../i18n";
 import { residences } from "../data/residences";
 import { images, type ImageKey } from "../components/images";
@@ -49,6 +51,12 @@ function Index() {
   const { lang } = useI18n();
   const c = homeCopy;
   const mailto = "mailto:office@langegasse-collection.at?subject=Private%20Viewing";
+
+  const [cityIndex, setCityIndex] = useState(0);
+  const landmarks = c.city.landmarks;
+  const current = landmarks[cityIndex] ?? landmarks[0];
+  const nextCity = () => setCityIndex((i) => (i + 1) % landmarks.length);
+  const prevCity = () => setCityIndex((i) => (i - 1 + landmarks.length) % landmarks.length);
 
   return (
     <div>
@@ -114,38 +122,65 @@ function Index() {
       </section>
 
       {/* 03 — THE CITY */}
-      <section id="location" className="bg-card">
+      <section id="location" className="noir overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
           <Reveal>
-            <p className="eyebrow text-accent">{c.city.eyebrow[lang]}</p>
-            <h2 className="mt-4 text-3xl md:text-5xl">{c.city.title[lang]}</h2>
-            <p className="mt-6 max-w-xl text-sm leading-[1.9] text-muted-foreground">
+            <p className="eyebrow text-gold">{c.city.eyebrow[lang]}</p>
+            <h2 className="mt-4 text-3xl text-ivory md:text-5xl">{c.city.title[lang]}</h2>
+            <p className="mt-6 max-w-xl text-sm leading-[1.9] text-ivory/65">
               {c.city.body[lang]}
             </p>
           </Reveal>
         </div>
-        <div className="scrollbar-none flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-24 lg:px-10 lg:pb-32">
-          {c.city.landmarks.map((l) => (
-            <figure
-              key={l.key}
-              className="w-[74vw] shrink-0 snap-start sm:w-[42vw] lg:w-[26vw]"
-            >
-              <div className="overflow-hidden">
-                <img
-                  src={images[l.key as ImageKey]}
-                  alt={l.name[lang]}
-                  loading="lazy"
-                  width={1400}
-                  height={1800}
-                  className="h-[52vh] w-full object-cover transition-transform duration-[1400ms] hover:scale-[1.04]"
-                />
+
+        <div className="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <div className="order-2 lg:order-1">
+              <div className="flex items-baseline gap-5">
+                <span className="font-[family-name:var(--font-display)] text-8xl leading-none text-gold md:text-9xl">
+                  {current.minutes}
+                </span>
+                <span className="eyebrow text-ivory/70">{c.city.walkLabel[lang]}</span>
               </div>
-              <figcaption className="mt-5">
-                <p className="font-[family-name:var(--font-display)] text-xl">{l.name[lang]}</p>
-                <p className="eyebrow mt-1 text-muted-foreground">{l.meta[lang]}</p>
-              </figcaption>
+              <div className="rule-gold my-10" />
+              <p className="eyebrow text-lg text-ivory md:text-xl">{current.phrase[lang]}</p>
+              <p className="mt-3 text-sm text-ivory/60">{current.name[lang]}</p>
+            </div>
+
+            <figure className="order-1 overflow-hidden lg:order-2">
+              <img
+                src={images[current.key as ImageKey]}
+                alt={current.name[lang]}
+                width={1400}
+                height={1800}
+                className="h-[52vh] w-full object-cover"
+              />
             </figure>
-          ))}
+          </div>
+
+          <div className="mt-12 flex items-center justify-between border-t border-white/10 pt-6">
+            <span className="eyebrow text-ivory/60">
+              {String(cityIndex + 1).padStart(2, "0")} / {String(landmarks.length).padStart(2, "0")}
+            </span>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={prevCity}
+                aria-label="Previous landmark"
+                className="flex size-12 items-center justify-center rounded-full border border-ivory/30 text-ivory transition hover:bg-ivory hover:text-charcoal"
+              >
+                <ChevronLeft className="size-5" />
+              </button>
+              <button
+                type="button"
+                onClick={nextCity}
+                aria-label="Next landmark"
+                className="flex size-12 items-center justify-center rounded-full border border-ivory/30 text-ivory transition hover:bg-ivory hover:text-charcoal"
+              >
+                <ChevronRight className="size-5" />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

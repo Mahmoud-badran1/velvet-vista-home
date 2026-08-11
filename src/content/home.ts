@@ -35,12 +35,13 @@ export const homeCopy = {
       de: "Fünf Wahrzeichen, alle in wenigen Minuten erreichbar. Die Stadt ist hier kein Ausblick, sondern Nachbarschaft.",
       en: "Five landmarks, each only minutes away. Here the city is not a view — it is the neighbourhood.",
     },
+    walkLabel: { de: "MINUTEN ZU FUß", en: "MINUTES WALK" },
     landmarks: [
-      { key: "rathaus", name: { de: "Rathaus", en: "City Hall" }, meta: { de: "6 Minuten zu Fuß", en: "6 minutes on foot" } },
-      { key: "parliament", name: { de: "Parlament", en: "Parliament" }, meta: { de: "10 Minuten zu Fuß", en: "10 minutes on foot" } },
-      { key: "university", name: { de: "Universität Wien", en: "University of Vienna" }, meta: { de: "8 Minuten zu Fuß", en: "8 minutes on foot" } },
-      { key: "opera", name: { de: "Staatsoper", en: "State Opera" }, meta: { de: "15 Minuten", en: "15 minutes" } },
-      { key: "stephansdom", name: { de: "Stephansdom", en: "St. Stephen's" }, meta: { de: "18 Minuten", en: "18 minutes" } },
+      { key: "rathaus", name: { de: "Rathaus", en: "City Hall" }, minutes: 6, phrase: { de: "ZUM RATHAUS", en: "TO THE CITY HALL" } },
+      { key: "parliament", name: { de: "Parlament", en: "Parliament" }, minutes: 10, phrase: { de: "ZUM PARLAMENT", en: "TO THE PARLIAMENT" } },
+      { key: "university", name: { de: "Universität Wien", en: "University of Vienna" }, minutes: 8, phrase: { de: "ZUR UNIVERSITÄT", en: "TO THE UNIVERSITY" } },
+      { key: "opera", name: { de: "Staatsoper", en: "State Opera" }, minutes: 15, phrase: { de: "ZUR OPER", en: "TO THE OPERA" } },
+      { key: "stephansdom", name: { de: "Stephansdom", en: "St. Stephen's Cathedral" }, minutes: 18, phrase: { de: "ZUM STEPHANSDOM", en: "TO THE CATHEDRAL" } },
     ],
   },
   cinemas: {
