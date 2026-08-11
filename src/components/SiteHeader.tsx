@@ -48,7 +48,7 @@ export function SiteHeader() {
               alt="Lange Gasse Collection"
               width={600}
               height={120}
-              className={`h-12 w-auto max-w-[280px] object-contain transition-all duration-700 sm:h-14 lg:h-16 ${
+              className={`h-14 w-auto max-w-[320px] object-contain transition-all duration-700 sm:h-16 lg:h-20 ${
                 overFilm ? "brightness-0 invert" : ""
               }`}
             />
