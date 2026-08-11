@@ -3,10 +3,10 @@ type L = { de: string; en: string };
 export const homeCopy = {
   hero: {
     eyebrow: { de: "Private Residenz · Wien Josefstadt", en: "Private Residence · Vienna Josefstadt" },
-    title: { de: "Zwischen der Stadt\nund dem Horizont.", en: "Between the city\nand the horizon." },
+    title: { de: "EINE STADT DER SCHÖNHEIT.\nEIN ZUHAUSE FÜR SIE.", en: "A CITY OF BEAUTY.\nA HOME OF YOUR OWN." },
     sub: {
-      de: "Ein Haus aus dem Jahr 1890 in der Lange Gasse, weitergedacht als vier private Residenzen über den Dächern des achten Bezirks.",
-      en: "An 1890 house on Lange Gasse, reimagined as four private residences above the rooftops of the eighth district.",
+      de: "Vier private Residenzen in der Lange Gasse, über den Dächern des achten Bezirks — zwischen der Stadt und dem Horizont.",
+      en: "Four private residences on Lange Gasse, above the rooftops of the eighth district — between the city and the horizon.",
     },
     ctaPrimary: { de: "Die Residenzen", en: "The Residences" },
     ctaFilm: { de: "Den Film ansehen", en: "Watch the Film" },
@@ -21,7 +21,6 @@ export const homeCopy = {
     },
     stats: [
       { label: { de: "Bezirk", en: "District" }, value: { de: "1080 Josefstadt", en: "1080 Josefstadt" } },
-      { label: { de: "Baujahr", en: "Built" }, value: { de: "um 1890", en: "circa 1890" } },
       { label: { de: "Residenzen", en: "Residences" }, value: { de: "Vier", en: "Four" } },
     ],
   },
