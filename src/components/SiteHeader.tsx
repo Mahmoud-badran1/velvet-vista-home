@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { Menu, X, Search, Heart } from "lucide-react";
 import { useI18n } from "../i18n";
+import logo from "../assets/logo-nbg.png.asset.json";
+
 
 export function SiteHeader() {
   const { lang, setLang, t } = useI18n();
