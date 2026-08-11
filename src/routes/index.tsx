@@ -61,7 +61,7 @@ function Index() {
           height={1280}
           className="kenburns absolute inset-0 size-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ivory via-ivory/70 to-ivory/40" />
+        <div className="absolute inset-0 bg-black/10" />
 
         <div className="relative mx-auto w-full max-w-7xl px-6 pt-40 pb-20 lg:px-10 lg:pb-28">
           <p className="eyebrow text-charcoal/60">{c.hero.eyebrow[lang]}</p>
