@@ -13,14 +13,17 @@ export const homeCopy = {
     scroll: { de: "Nach unten", en: "Scroll to discover" },
   },
   address: {
-    eyebrow: { de: "01 — Die Adresse", en: "01 — The Address" },
-    title: { de: "Lange Gasse, 1080 Wien", en: "Lange Gasse, 1080 Vienna" },
+    eyebrow: { de: "01 — Der Standort", en: "01 — The Location" },
+    title: {
+      de: "Wo die Stadt Kultur begegnet.\nWo Geschichte auf Morgen trifft.\nWo die Stadt zu Hause wird.",
+      en: "Where the city meets culture.\nWhere history meets tomorrow.\nWhere the city meets home.",
+    },
     body: {
-      de: "Die Josefstadt ist der kleinste Bezirk Wiens und der stillste innerhalb des Gürtels. Enge Gassen, Theater, Buchhandlungen, Kaffeehäuser — und in wenigen Minuten die Ringstraße. Eine Adresse, die man nicht erklären muss.",
-      en: "Josefstadt is Vienna's smallest district and the quietest inside the belt. Narrow lanes, theatres, bookshops, coffee houses — and the Ringstrasse minutes away. An address that needs no explanation.",
+      de: "Die Josefstadt ist Wiens stillster Bezirk innerhalb des Gürtels — ein Ort, an dem Theater, Buchhandlungen und Kaffeehäuser auf engen Gassen leben. Hier ist Kultur keine Destination, sondern der Alltag. Eine Adresse, die Geschichte und Gegenwart auf einer Straße vereint.",
+      en: "Josefstadt is Vienna's quietest district inside the belt — a place where theatres, bookshops and coffee houses live on narrow lanes. Here culture is not a destination, but daily life. An address where history and the present meet on a single street.",
     },
     stats: [
-      { label: { de: "Bezirk", en: "District" }, value: { de: "1080 Josefstadt", en: "1080 Josefstadt" } },
+      { label: { de: "Bezirk", en: "District" }, value: { de: "Josefstadt", en: "Josefstadt" } },
       { label: { de: "Residenzen", en: "Residences" }, value: { de: "Vier", en: "Four" } },
     ],
   },
