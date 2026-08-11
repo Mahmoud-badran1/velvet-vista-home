@@ -41,14 +41,14 @@ export function SiteHeader() {
             : "max-w-7xl rounded-full bg-ivory text-charcoal shadow-[0_10px_40px_-12px_rgba(0,0,0,0.35)] ring-1 ring-black/5"
         }`}
       >
-        <div className="grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 lg:h-[72px] lg:px-10">
+        <div className="grid h-20 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 lg:h-[96px] lg:px-10">
           <Link to="/" className="min-w-0" onClick={() => setOpen(false)}>
             <img
               src={logo.url}
               alt="Lange Gasse Collection"
               width={600}
               height={120}
-              className={`h-8 w-auto max-w-[180px] object-contain transition-all duration-700 sm:h-9 lg:h-10 ${
+              className={`h-12 w-auto max-w-[280px] object-contain transition-all duration-700 sm:h-14 lg:h-16 ${
                 overFilm ? "brightness-0 invert" : ""
               }`}
             />

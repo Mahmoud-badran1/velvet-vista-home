@@ -1,23 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
-import logo from "../assets/lange-gasse-logo.jpg.asset.json";
-
 export function SiteFooter() {
   const { t } = useI18n();
 
   return (
     <footer className="bg-charcoal text-ivory">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
-        <img
-          src={logo.url}
-          alt="Lange Gasse Collection"
-          loading="lazy"
-          width={1536}
-          height={1024}
-          className="mx-auto w-full max-w-lg"
-        />
-
-        <div className="mt-16 grid gap-12 border-t border-ivory/15 pt-12 md:grid-cols-3">
+        <div className="grid gap-12 md:grid-cols-3">
           <div>
             <p className="eyebrow text-gold">{t.contact.address}</p>
             <p className="mt-3 text-sm leading-relaxed opacity-80">{t.contact.addressValue}</p>
