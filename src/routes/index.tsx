@@ -54,7 +54,7 @@ function Index() {
 
   const [cityIndex, setCityIndex] = useState(0);
   const landmarks = c.city.landmarks;
-  const current = landmarks[cityIndex];
+  const current = landmarks[cityIndex] ?? landmarks[0];
   const nextCity = () => setCityIndex((i) => (i + 1) % landmarks.length);
   const prevCity = () => setCityIndex((i) => (i - 1 + landmarks.length) % landmarks.length);
 
