@@ -64,31 +64,31 @@ function Index() {
         <div className="absolute inset-0 bg-black/10" />
 
         <div className="relative mx-auto w-full max-w-7xl px-6 pt-40 pb-20 lg:px-10 lg:pb-28">
-          <p className="eyebrow text-charcoal/60">{c.hero.eyebrow[lang]}</p>
-          <h1 className="mt-6 max-w-5xl text-5xl leading-[0.95] whitespace-pre-line text-charcoal md:text-7xl lg:text-8xl xl:text-9xl">
+          <p className="eyebrow text-white/70">{c.hero.eyebrow[lang]}</p>
+          <h1 className="mt-6 max-w-5xl text-5xl leading-[0.95] whitespace-pre-line text-white md:text-7xl lg:text-8xl xl:text-9xl">
             {c.hero.title[lang]}
           </h1>
-          <h3 className="mt-8 max-w-2xl font-[family-name:var(--font-display)] text-lg leading-snug text-charcoal/80 md:text-2xl">
+          <h3 className="mt-8 max-w-2xl font-[family-name:var(--font-display)] text-lg leading-snug text-white/90 md:text-2xl">
             {c.hero.subtitle[lang]}
           </h3>
-          <p className="mt-8 max-w-lg text-sm leading-[1.9] text-charcoal/70">{c.hero.sub[lang]}</p>
+          <p className="mt-8 max-w-lg text-sm leading-[1.9] text-white/80">{c.hero.sub[lang]}</p>
 
           <div className="mt-12 flex flex-wrap items-center gap-8">
             <Link
               to="/residences"
-              className="eyebrow border border-charcoal/30 px-8 py-4 text-charcoal transition-colors hover:bg-charcoal hover:text-ivory"
+              className="eyebrow border border-white/40 px-8 py-4 text-white transition-colors hover:bg-white hover:text-charcoal"
             >
               {c.hero.ctaPrimary[lang]}
             </Link>
-            <Link to="/film" className="eyebrow link-underline text-teal">
+            <Link to="/film" className="eyebrow link-underline text-white">
               {c.hero.ctaFilm[lang]} →
             </Link>
           </div>
         </div>
 
         <div className="relative mx-auto flex w-full max-w-7xl items-center gap-4 px-6 pb-10 lg:px-10">
-          <span className="eyebrow text-[0.6rem] text-charcoal/50">{c.hero.scroll[lang]}</span>
-          <span className="h-px w-24 origin-left animate-pulse bg-charcoal/30" />
+          <span className="eyebrow text-[0.6rem] text-white/60">{c.hero.scroll[lang]}</span>
+          <span className="h-px w-24 origin-left animate-pulse bg-white/40" />
         </div>
       </section>
 
