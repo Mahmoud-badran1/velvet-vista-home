@@ -23,6 +23,7 @@ export function SiteHeader() {
     { to: "/residences", label: t.nav.residences },
     { to: "/building", label: t.nav.building },
     { to: "/neighborhood", label: t.nav.neighborhood },
+    { to: "/film", label: lang === "de" ? "Der Film" : "The Film" },
   ] as const;
 
   return (

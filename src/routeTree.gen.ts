@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BuildingRouteImport } from './routes/building'
+import { Route as FilmRouteImport } from './routes/film'
 import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as NeighborhoodRouteImport } from './routes/neighborhood'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const BuildingRoute = BuildingRouteImport.update({
   id: '/building',
   path: '/building',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FilmRoute = FilmRouteImport.update({
+  id: '/film',
+  path: '/film',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImprintRoute = ImprintRouteImport.update({
@@ -56,6 +62,7 @@ const ResidencesSlugRoute = ResidencesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/building': typeof BuildingRoute
+  '/film': typeof FilmRoute
   '/imprint': typeof ImprintRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/building': typeof BuildingRoute
+  '/film': typeof FilmRoute
   '/imprint': typeof ImprintRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/building': typeof BuildingRoute
+  '/film': typeof FilmRoute
   '/imprint': typeof ImprintRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/building'
+    | '/film'
     | '/imprint'
     | '/neighborhood'
     | '/privacy'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/building'
+    | '/film'
     | '/imprint'
     | '/neighborhood'
     | '/privacy'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/building'
+    | '/film'
     | '/imprint'
     | '/neighborhood'
     | '/privacy'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BuildingRoute: typeof BuildingRoute
+  FilmRoute: typeof FilmRoute
   ImprintRoute: typeof ImprintRoute
   NeighborhoodRoute: typeof NeighborhoodRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/building'
       fullPath: '/building'
       preLoaderRoute: typeof BuildingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/film': {
+      id: '/film'
+      path: '/film'
+      fullPath: '/film'
+      preLoaderRoute: typeof FilmRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/imprint': {
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BuildingRoute: BuildingRoute,
+  FilmRoute: FilmRoute,
   ImprintRoute: ImprintRoute,
   NeighborhoodRoute: NeighborhoodRoute,
   PrivacyRoute: PrivacyRoute,
@@ -187,13 +208,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
