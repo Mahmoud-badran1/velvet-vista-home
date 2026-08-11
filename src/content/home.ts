@@ -3,7 +3,7 @@ type L = { de: string; en: string };
 export const homeCopy = {
   hero: {
     eyebrow: { de: "Private Residenz · Wien Josefstadt", en: "Private Residence · Vienna Josefstadt" },
-    title: { de: "DIE KUNST DES LEBENS.\nWIEN.", en: "THE ART OF LIVING.\nVIENNA." },
+    title: { de: "DIE KUNST DES LEBENS IN WIEN", en: "THE ART OF LIVING IN VIENNA" },
     subtitle: { de: "Der Ort, an dem Leben Kunst wird.", en: "The place where life becomes art." },
     sub: {
       de: "Vier private Residenzen in der Lange Gasse, über den Dächern des achten Bezirks — zwischen der Stadt und dem Horizont.",
