@@ -4,7 +4,7 @@ import terraceAsset from "../assets/terrace.jpg.asset.json";
 const terrace = terraceAsset.url;
 import josefstadt from "../assets/josefstadt.jpg";
 import light from "../assets/light-architecture.jpg";
-import heroResidenceAsset from "../assets/hero-residence.png.asset.json";
+import heroResidenceAsset from "../assets/roof.jpeg.asset.json";
 const heroResidence = heroResidenceAsset.url;
 import rathaus from "../assets/rathaus.jpg";
 import parliament from "../assets/parliament.jpg";
