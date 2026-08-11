@@ -53,7 +53,7 @@ function Index() {
   return (
     <div>
       {/* 01 — HERO */}
-      <section className="noir relative -mt-[88px] flex min-h-[100svh] flex-col justify-end overflow-hidden">
+      <section className="noir relative -mt-16 lg:-mt-[72px] flex min-h-[100svh] flex-col justify-end overflow-hidden">
         <img
           src={images.heroResidence}
           alt="Lange Gasse Collection facade in evening light"
