@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useI18n } from "../i18n";
 import { residences } from "../data/residences";
 import { images, type ImageKey } from "../components/images";
