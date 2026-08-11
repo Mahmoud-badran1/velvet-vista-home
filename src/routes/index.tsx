@@ -193,8 +193,8 @@ function Index() {
         </Reveal>
         <div className="mt-16 grid gap-10 md:grid-cols-2">
           {[
-            { copy: c.cinemas.left, img: images.cityRooftops },
-            { copy: c.cinemas.right, img: images.horizonHills },
+            { copy: c.cinemas.left, img: images.cityRooftops, fit: "aspect-[16/9]" },
+            { copy: c.cinemas.right, img: images.horizonHills, fit: "h-[46vh]" },
           ].map((col, i) => (
             <Reveal key={col.copy.title.en} delay={i * 120}>
               <figure className="overflow-hidden">
@@ -204,7 +204,7 @@ function Index() {
                   loading="lazy"
                   width={1920}
                   height={1080}
-                  className="h-[46vh] w-full object-cover"
+                  className={`w-full object-cover ${col.fit}`}
                 />
               </figure>
               <p className="eyebrow mt-6 text-accent">{col.copy.title[lang]}</p>
