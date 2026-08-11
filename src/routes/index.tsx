@@ -53,7 +53,7 @@ function Index() {
   return (
     <div>
       {/* 01 — HERO */}
-      <section className="noir relative -mt-16 lg:-mt-[72px] flex min-h-[100svh] flex-col justify-end overflow-hidden">
+      <section className="relative -mt-16 lg:-mt-[72px] flex min-h-[100svh] flex-col justify-end overflow-hidden">
         <img
           src={images.heroResidence}
           alt="Lange Gasse Collection facade in evening light"
@@ -61,31 +61,31 @@ function Index() {
           height={1280}
           className="kenburns absolute inset-0 size-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 to-[#050505]/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ivory via-ivory/70 to-ivory/40" />
 
         <div className="relative mx-auto w-full max-w-7xl px-6 pt-40 pb-20 lg:px-10 lg:pb-28">
-          <p className="eyebrow text-ivory/70">{c.hero.eyebrow[lang]}</p>
-          <h1 className="mt-6 max-w-4xl text-[2.6rem] leading-[1.05] whitespace-pre-line text-ivory md:text-6xl lg:text-7xl">
+          <p className="eyebrow text-charcoal/60">{c.hero.eyebrow[lang]}</p>
+          <h1 className="mt-6 max-w-4xl text-[2.6rem] leading-[1.05] whitespace-pre-line text-charcoal md:text-6xl lg:text-7xl">
             {c.hero.title[lang]}
           </h1>
-          <p className="mt-8 max-w-lg text-sm leading-[1.9] text-ivory/70">{c.hero.sub[lang]}</p>
+          <p className="mt-8 max-w-lg text-sm leading-[1.9] text-charcoal/70">{c.hero.sub[lang]}</p>
 
           <div className="mt-12 flex flex-wrap items-center gap-8">
             <Link
               to="/residences"
-              className="eyebrow border border-ivory/40 px-8 py-4 text-ivory transition-colors hover:bg-ivory hover:text-charcoal"
+              className="eyebrow border border-charcoal/30 px-8 py-4 text-charcoal transition-colors hover:bg-charcoal hover:text-ivory"
             >
               {c.hero.ctaPrimary[lang]}
             </Link>
-            <Link to="/film" className="eyebrow link-underline text-gold">
+            <Link to="/film" className="eyebrow link-underline text-teal">
               {c.hero.ctaFilm[lang]} →
             </Link>
           </div>
         </div>
 
         <div className="relative mx-auto flex w-full max-w-7xl items-center gap-4 px-6 pb-10 lg:px-10">
-          <span className="eyebrow text-[0.6rem] text-ivory/50">{c.hero.scroll[lang]}</span>
-          <span className="h-px w-24 origin-left animate-pulse bg-ivory/40" />
+          <span className="eyebrow text-[0.6rem] text-charcoal/50">{c.hero.scroll[lang]}</span>
+          <span className="h-px w-24 origin-left animate-pulse bg-charcoal/30" />
         </div>
       </section>
 
