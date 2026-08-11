@@ -65,9 +65,12 @@ function Index() {
 
         <div className="relative mx-auto w-full max-w-7xl px-6 pt-40 pb-20 lg:px-10 lg:pb-28">
           <p className="eyebrow text-charcoal/60">{c.hero.eyebrow[lang]}</p>
-          <h1 className="mt-6 max-w-4xl text-[2.6rem] leading-[1.05] whitespace-pre-line text-charcoal md:text-6xl lg:text-7xl">
+          <h1 className="mt-6 max-w-5xl text-5xl leading-[0.95] whitespace-pre-line text-charcoal md:text-7xl lg:text-8xl xl:text-9xl">
             {c.hero.title[lang]}
           </h1>
+          <h3 className="mt-8 max-w-2xl font-[family-name:var(--font-display)] text-lg leading-snug text-charcoal/80 md:text-2xl">
+            {c.hero.subtitle[lang]}
+          </h3>
           <p className="mt-8 max-w-lg text-sm leading-[1.9] text-charcoal/70">{c.hero.sub[lang]}</p>
 
           <div className="mt-12 flex flex-wrap items-center gap-8">
