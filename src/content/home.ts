@@ -95,8 +95,8 @@ export const homeCopy = {
     title: { de: "Aus der Nähe betrachtet", en: "Seen up close" },
     items: [
       { key: "detailStone", label: { de: "Naturstein", en: "Natural stone" } },
-      { key: "detailJoinery", label: { de: "Tischlerarbeit", en: "Joinery" } },
-      { key: "detailLight", label: { de: "Tageslicht", en: "Daylight" } },
+      { key: "detailJoinery", label: { de: "Tageslicht", en: "DAYLIGHT" } },
+      { key: "detailLight", label: { de: "Beleuchtung", en: "LIGHTING" } },
     ],
   },
   life: {
