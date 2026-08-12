@@ -15,7 +15,6 @@ import { Route as FilmRouteImport } from './routes/film'
 import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as NeighborhoodRouteImport } from './routes/neighborhood'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as ResidencesIndexRouteImport } from './routes/residences.index'
 import { Route as ResidencesSlugRouteImport } from './routes/residences.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -48,11 +47,6 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResidencesIndexRoute = ResidencesIndexRouteImport.update({
-  id: '/residences/',
-  path: '/residences/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ResidencesSlugRoute = ResidencesSlugRouteImport.update({
   id: '/residences/$slug',
   path: '/residences/$slug',
@@ -67,7 +61,6 @@ export interface FileRoutesByFullPath {
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
   '/residences/$slug': typeof ResidencesSlugRoute
-  '/residences/': typeof ResidencesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -77,7 +70,6 @@ export interface FileRoutesByTo {
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
   '/residences/$slug': typeof ResidencesSlugRoute
-  '/residences': typeof ResidencesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +80,6 @@ export interface FileRoutesById {
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
   '/residences/$slug': typeof ResidencesSlugRoute
-  '/residences/': typeof ResidencesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +91,6 @@ export interface FileRouteTypes {
     | '/neighborhood'
     | '/privacy'
     | '/residences/$slug'
-    | '/residences/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -110,7 +100,6 @@ export interface FileRouteTypes {
     | '/neighborhood'
     | '/privacy'
     | '/residences/$slug'
-    | '/residences'
   id:
     | '__root__'
     | '/'
@@ -120,7 +109,6 @@ export interface FileRouteTypes {
     | '/neighborhood'
     | '/privacy'
     | '/residences/$slug'
-    | '/residences/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,7 +119,6 @@ export interface RootRouteChildren {
   NeighborhoodRoute: typeof NeighborhoodRoute
   PrivacyRoute: typeof PrivacyRoute
   ResidencesSlugRoute: typeof ResidencesSlugRoute
-  ResidencesIndexRoute: typeof ResidencesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -178,13 +165,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/residences/': {
-      id: '/residences/'
-      path: '/residences'
-      fullPath: '/residences/'
-      preLoaderRoute: typeof ResidencesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/residences/$slug': {
       id: '/residences/$slug'
       path: '/residences/$slug'
@@ -203,7 +183,6 @@ const rootRouteChildren: RootRouteChildren = {
   NeighborhoodRoute: NeighborhoodRoute,
   PrivacyRoute: PrivacyRoute,
   ResidencesSlugRoute: ResidencesSlugRoute,
-  ResidencesIndexRoute: ResidencesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
