@@ -371,7 +371,7 @@ function Index() {
       </section>
 
       {/* 10 — RESIDENCES */}
-      <section id="residence" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      <section id="residences" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <Reveal>
           <p className="eyebrow text-accent">{c.residences.eyebrow[lang]}</p>
           <h2 className="mt-4 text-3xl md:text-5xl">{c.residences.title[lang]}</h2>
