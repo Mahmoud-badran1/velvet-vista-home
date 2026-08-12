@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useI18n } from "../i18n";
 import { residences } from "../data/residences";
-import { images, type ImageKey } from "../components/images";
+import { images, getImage, type ImageKey } from "../components/images";
 import { Reveal } from "../components/Reveal";
 import { homeCopy } from "../content/home";
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
 import { getResidence, residences, type Residence } from "../data/residences";
-import { images, type ImageKey } from "../components/images";
+import { images, getImage, type ImageKey } from "../components/images";
 import { Reveal } from "../components/Reveal";
 
 export const Route = createFileRoute("/residences/$slug")({
