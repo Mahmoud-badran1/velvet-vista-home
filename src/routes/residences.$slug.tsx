@@ -287,7 +287,7 @@ function ResidenceDetail() {
               >
                 <figure className="overflow-hidden">
                   <img
-                    src={images[r.image]}
+                    src={getImage(r.image)}
                     alt={r.name[lang]}
                     loading="lazy"
                     width={1200}
