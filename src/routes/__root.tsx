@@ -82,12 +82,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lange Gasse Collection — Vienna Josefstadt" },
+      { title: "Zianat — Vienna Josefstadt" },
       {
         name: "description",
-        content: "Four residences in a Jugendstil house on Lange Gasse, 1080 Vienna.",
+        content: "Four residences in a Jugendstil house in Vienna's 8th district, Josefstadt.",
       },
-      { property: "og:site_name", content: "Lange Gasse Collection" },
+      { property: "og:site_name", content: "Zianat" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

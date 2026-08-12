@@ -6,13 +6,13 @@ import { Reveal } from "../components/Reveal";
 export const Route = createFileRoute("/neighborhood")({
   head: () => ({
     meta: [
-      { title: "Josefstadt — Lange Gasse Collection" },
+      { title: "Josefstadt — Zianat" },
       {
         name: "description",
         content:
           "Living in Vienna's Josefstadt: theatre, coffee houses, schools and the city centre within walking distance.",
       },
-      { property: "og:title", content: "Josefstadt — Lange Gasse Collection" },
+      { property: "og:title", content: "Josefstadt — Zianat" },
       {
         property: "og:description",
         content: "Vienna's smallest district, and one of its most sought after.",

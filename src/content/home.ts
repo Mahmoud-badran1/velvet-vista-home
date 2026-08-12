@@ -6,8 +6,8 @@ export const homeCopy = {
     title: { de: "DIE KUNST DES LEBENS IN WIEN", en: "THE ART OF LIVING IN VIENNA" },
     subtitle: { de: "Der Ort, an dem Leben Kunst wird.", en: "The place where life becomes art." },
     sub: {
-      de: "Vier private Residenzen in der Lange Gasse, über den Dächern des achten Bezirks — zwischen der Stadt und dem Horizont.",
-      en: "Four private residences on Lange Gasse, above the rooftops of the eighth district — between the city and the horizon.",
+      de: "Vier private Residenzen im achten Bezirk, über den Dächern der Stadt — zwischen der Stadt und dem Horizont.",
+      en: "Four private residences in the eighth district, above the rooftops of the city — between the city and the horizon.",
     },
     ctaPrimary: { de: "Die Residenzen", en: "The Residences" },
     ctaFilm: { de: "Den Film ansehen", en: "Watch the Film" },

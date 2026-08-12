@@ -35,7 +35,7 @@ export function SiteFooter() {
         </div>
 
         <p className="eyebrow mt-12 opacity-50">
-          © {new Date().getFullYear()} Lange Gasse Collection. {t.footer.rights}
+          © {new Date().getFullYear()} Zianat. {t.footer.rights}
         </p>
       </div>
     </footer>

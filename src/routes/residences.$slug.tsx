@@ -23,7 +23,7 @@ export const Route = createFileRoute("/residences/$slug")({
       return { meta: [{ title: "Unavailable" }, { name: "robots", content: "noindex" }] };
     }
     const r = loaderData.residence;
-    const title = `${r.name.de} — Lange Gasse Collection`;
+    const title = `${r.name.de} — Zianat`;
     return {
       meta: [
         { title },
@@ -45,7 +45,6 @@ export const Route = createFileRoute("/residences/$slug")({
             description: r.intro.en,
             address: {
               "@type": "PostalAddress",
-              streetAddress: "Lange Gasse",
               postalCode: "1080",
               addressLocality: "Vienna",
               addressCountry: "AT",

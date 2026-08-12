@@ -7,6 +7,6 @@ export default defineMcp({
   title: "Cozy Corner Estates",
   version: "0.1.0",
   instructions:
-    "Public tools for the Lange Gasse Collection, four private residences in Vienna Josefstadt. Use `list_residences` to see all units and `get_residence` for the full description of one unit by slug. All content is DE/EN.",
+    "Public tools for Zianat, four private residences in Vienna Josefstadt. Use `list_residences` to see all units and `get_residence` for the full description of one unit by slug. All content is DE/EN.",
   tools: [listResidencesTool, getResidenceTool],
 });

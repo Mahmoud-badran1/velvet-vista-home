@@ -11,7 +11,7 @@ export type SiteSettings = {
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  contactEmail: "office@langegasse-collection.at",
+  contactEmail: "m.alzayanat@remax-smart.at",
   contactPhone: "+43 1 555 0000",
   filmUrl: null,
   agentName: null,

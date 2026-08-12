@@ -6,13 +6,13 @@ import { Reveal } from "../components/Reveal";
 export const Route = createFileRoute("/building")({
   head: () => ({
     meta: [
-      { title: "Das Haus · The Building — Lange Gasse Collection" },
+      { title: "Das Haus · The Building — Zianat" },
       {
         name: "description",
         content:
-          "An 1890 Jugendstil house on Lange Gasse, 1080 Vienna, with newly created rooftop levels, direct lift and house garage.",
+          "An 1890 Jugendstil house in Vienna's 8th district, with newly created rooftop levels, direct lift and house garage.",
       },
-      { property: "og:title", content: "The Building — Lange Gasse Collection" },
+      { property: "og:title", content: "The Building — Zianat" },
       {
         property: "og:description",
         content: "Jugendstil from 1890, carefully continued with new rooftop residences.",

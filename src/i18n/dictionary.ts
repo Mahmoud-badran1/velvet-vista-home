@@ -7,11 +7,11 @@ export const dictionary = {
       neighborhood: "Josefstadt",
       contact: "Kontakt",
     },
-    brand: { name: "Lange Gasse Collection", place: "Wien Josefstadt" },
+    brand: { name: "Zianat", place: "Wien Josefstadt" },
     home: {
-      metaTitle: "Lange Gasse Collection — Residenzen in Wien Josefstadt",
+      metaTitle: "Zianat — Residenzen in Wien Josefstadt",
       metaDescription:
-        "Vier außergewöhnliche Residenzen in einem Jugendstilhaus in der Lange Gasse, 1080 Wien. Penthouses, Maisonetten und Terrassen über den Dächern der Stadt.",
+        "Vier außergewöhnliche Residenzen in einem Jugendstilhaus im 8. Wiener Gemeindebezirk. Penthouses, Maisonetten und Terrassen über den Dächern der Stadt.",
       heroEyebrow: "1080 Wien · Josefstadt",
       heroTitle: "Vier Residenzen über den Dächern der Josefstadt",
       heroText:
@@ -39,7 +39,7 @@ export const dictionary = {
         "Wir zeigen Ihnen die Residenzen gerne persönlich und diskret. Schreiben Sie uns oder rufen Sie an.",
     },
     residences: {
-      metaTitle: "Residenzen — Lange Gasse Collection",
+      metaTitle: "Residenzen — Zianat",
       metaDescription:
         "Vier Residenzen von 62,5 m² bis 285 m² mit Terrassen, Panoramafenstern und privatem Lift in Wien Josefstadt.",
       eyebrow: "Übersicht",
@@ -62,7 +62,7 @@ export const dictionary = {
       amenities: "Ausstattung & Extras",
       location: "Lage",
       locationText:
-        "Lange Gasse, 1080 Wien — Josefstadt. Theater, Kaffeehäuser und die Ringstraße in wenigen Minuten.",
+        "1080 Wien — Josefstadt. Theater, Kaffeehäuser und die Ringstraße in wenigen Minuten.",
       readMore: "Mehr lesen",
       readLess: "Weniger",
       similar: "Weitere Residenzen",
@@ -78,16 +78,16 @@ export const dictionary = {
       ref: "Objektnummer",
     },
     building: {
-      metaTitle: "Das Haus — Lange Gasse Collection",
+      metaTitle: "Das Haus — Zianat",
       metaDescription:
-        "Ein Jugendstilhaus aus 1890 in der Lange Gasse, 1080 Wien, mit neu geschaffenen Dachgeschoßen, Direktlift und Hausgarage.",
+        "Ein Jugendstilhaus aus 1890 im 8. Wiener Gemeindebezirk, mit neu geschaffenen Dachgeschoßen, Direktlift und Hausgarage.",
       eyebrow: "Das Haus",
       title: "Jugendstil aus 1890",
       lead: "Ein Wiener Zinshaus, das seine Geschichte trägt und zugleich neue Wohnebenen erhalten hat.",
       sections: [
         {
           title: "Herkunft",
-          text: "Das Haus stammt aus der Zeit um 1890 — Jugendstilfassade, hohe Räume, großzügige Proportionen. Es steht in der Lange Gasse, einer der ruhigsten Adressen der Josefstadt.",
+          text: "Das Haus stammt aus der Zeit um 1890 — Jugendstilfassade, hohe Räume, großzügige Proportionen. Es steht an einer der ruhigsten Adressen der Josefstadt.",
         },
         {
           title: "Neue Dachebenen",
@@ -104,7 +104,7 @@ export const dictionary = {
       ],
     },
     neighborhood: {
-      metaTitle: "Josefstadt — Lange Gasse Collection",
+      metaTitle: "Josefstadt — Zianat",
       metaDescription:
         "Leben in der Wiener Josefstadt: Theater, Kaffeehäuser, Schulen und die Innenstadt in Gehweite.",
       eyebrow: "Die Lage",
@@ -112,7 +112,7 @@ export const dictionary = {
       lead: "Der achte Bezirk ist der kleinste Wiens — und einer der begehrtesten.",
       sections: [
         { title: "Kultur", text: "Theater in der Josefstadt, Volkskundemuseum, Galerien und Buchhandlungen im Umkreis weniger Minuten." },
-        { title: "Kaffeehaus", text: "Traditionshäuser und moderne Röstereien prägen die Lange Gasse und die Josefstädter Straße." },
+        { title: "Kaffeehaus", text: "Traditionshäuser und moderne Röstereien prägen die Josefstädter Straße und ihre Umgebung." },
         { title: "Bildung", text: "Schulen, Gymnasien und die Universität Wien liegen fußläufig oder eine Station entfernt." },
         { title: "Verbindungen", text: "Straßenbahn 2 und J, U2 Rathaus, der Ring und die Innenstadt in wenigen Minuten." },
       ],
@@ -122,23 +122,23 @@ export const dictionary = {
       email: "E-Mail",
       phone: "Telefon",
       address: "Adresse",
-      addressValue: "Lange Gasse, 1080 Wien, Österreich",
+      addressValue: "1080 Wien, Österreich",
       write: "Nachricht schreiben",
     },
     footer: { rights: "Alle Rechte vorbehalten.", imprint: "Impressum", privacy: "Datenschutz" },
     imprint: {
-      metaTitle: "Impressum — Lange Gasse Collection",
-      metaDescription: "Impressum und Offenlegung der Lange Gasse Collection, 1080 Wien.",
+      metaTitle: "Impressum — Zianat",
+      metaDescription: "Impressum und Offenlegung für Zianat, 1080 Wien.",
       title: "Impressum",
       body: [
         "Angaben gemäß §5 ECG und §25 Mediengesetz.",
-        "Lange Gasse Collection, Lange Gasse, 1080 Wien, Österreich.",
+        "Zianat, 1080 Wien, Österreich.",
         "Die vollständigen Angaben zu Medieninhaber, Firmenbuchnummer, UID und Aufsichtsbehörde werden vor Veröffentlichung ergänzt.",
         "Angaben zum Energieausweis (HWB, fGEE) werden je Objekt nachgereicht.",
       ],
     },
     privacy: {
-      metaTitle: "Datenschutz — Lange Gasse Collection",
+      metaTitle: "Datenschutz — Zianat",
       metaDescription: "Informationen zum Umgang mit personenbezogenen Daten auf dieser Website.",
       title: "Datenschutz",
       body: [
@@ -156,11 +156,11 @@ export const dictionary = {
       neighborhood: "Josefstadt",
       contact: "Contact",
     },
-    brand: { name: "Lange Gasse Collection", place: "Vienna Josefstadt" },
+    brand: { name: "Zianat", place: "Vienna Josefstadt" },
     home: {
-      metaTitle: "Lange Gasse Collection — Residences in Vienna Josefstadt",
+      metaTitle: "Zianat — Residences in Vienna Josefstadt",
       metaDescription:
-        "Four exceptional residences in a Jugendstil house on Lange Gasse, 1080 Vienna. Penthouses, maisonettes and terraces above the rooftops.",
+        "Four exceptional residences in a Jugendstil house in Vienna's 8th district. Penthouses, maisonettes and terraces above the rooftops.",
       heroEyebrow: "1080 Vienna · Josefstadt",
       heroTitle: "Four residences above the rooftops of Josefstadt",
       heroText:
@@ -188,7 +188,7 @@ export const dictionary = {
         "We are glad to show the residences personally and discreetly. Write to us or call.",
     },
     residences: {
-      metaTitle: "Residences — Lange Gasse Collection",
+      metaTitle: "Residences — Zianat",
       metaDescription:
         "Four residences from 62.5 m² to 285 m² with terraces, panoramic windows and a private lift in Vienna Josefstadt.",
       eyebrow: "Overview",
@@ -211,7 +211,7 @@ export const dictionary = {
       amenities: "Features & amenities",
       location: "Location",
       locationText:
-        "Lange Gasse, 1080 Vienna — Josefstadt. Theatre, coffee houses and the Ringstrasse minutes away.",
+        "1080 Vienna — Josefstadt. Theatre, coffee houses and the Ringstrasse minutes away.",
       readMore: "Read more",
       readLess: "Read less",
       similar: "Other residences",
@@ -227,16 +227,16 @@ export const dictionary = {
       ref: "Listing ID",
     },
     building: {
-      metaTitle: "The Building — Lange Gasse Collection",
+      metaTitle: "The Building — Zianat",
       metaDescription:
-        "An 1890 Jugendstil house on Lange Gasse, 1080 Vienna, with newly created rooftop levels, direct lift and house garage.",
+        "An 1890 Jugendstil house in Vienna's 8th district, with newly created rooftop levels, direct lift and house garage.",
       eyebrow: "The Building",
       title: "Jugendstil from 1890",
       lead: "A Viennese townhouse that carries its history and has gained new living levels.",
       sections: [
         {
           title: "Origin",
-          text: "The house dates from around 1890 — a Jugendstil facade, high ceilings, generous proportions. It stands on Lange Gasse, one of the quietest addresses in Josefstadt.",
+          text: "The house dates from around 1890 — a Jugendstil facade, high ceilings, generous proportions. It stands on one of the quietest addresses in Josefstadt.",
         },
         {
           title: "New rooftop levels",
@@ -253,7 +253,7 @@ export const dictionary = {
       ],
     },
     neighborhood: {
-      metaTitle: "Josefstadt — Lange Gasse Collection",
+      metaTitle: "Josefstadt — Zianat",
       metaDescription:
         "Living in Vienna's Josefstadt: theatre, coffee houses, schools and the city centre within walking distance.",
       eyebrow: "The Location",
@@ -261,7 +261,7 @@ export const dictionary = {
       lead: "The eighth district is Vienna's smallest — and one of its most sought after.",
       sections: [
         { title: "Culture", text: "Theater in der Josefstadt, the Folk Life Museum, galleries and bookshops all within a few minutes." },
-        { title: "Coffee houses", text: "Traditional houses and modern roasteries define Lange Gasse and Josefstädter Strasse." },
+        { title: "Coffee houses", text: "Traditional houses and modern roasteries define Josefstädter Strasse and the streets around it." },
         { title: "Education", text: "Schools, gymnasiums and the University of Vienna are within walking distance or one stop away." },
         { title: "Connections", text: "Tram 2 and J, U2 Rathaus, the Ring and the historic centre within minutes." },
       ],
@@ -271,23 +271,23 @@ export const dictionary = {
       email: "Email",
       phone: "Phone",
       address: "Address",
-      addressValue: "Lange Gasse, 1080 Vienna, Austria",
+      addressValue: "1080 Vienna, Austria",
       write: "Write a message",
     },
     footer: { rights: "All rights reserved.", imprint: "Imprint", privacy: "Privacy" },
     imprint: {
-      metaTitle: "Imprint — Lange Gasse Collection",
-      metaDescription: "Imprint and disclosure for the Lange Gasse Collection, 1080 Vienna.",
+      metaTitle: "Imprint — Zianat",
+      metaDescription: "Imprint and disclosure for Zianat, 1080 Vienna.",
       title: "Imprint",
       body: [
         "Information pursuant to §5 ECG and §25 of the Austrian Media Act.",
-        "Lange Gasse Collection, Lange Gasse, 1080 Vienna, Austria.",
+        "Zianat, 1080 Vienna, Austria.",
         "Full details of the media owner, company register number, VAT ID and supervisory authority will be added before publication.",
         "Energy certificate figures (HWB, fGEE) will be provided per unit.",
       ],
     },
     privacy: {
-      metaTitle: "Privacy — Lange Gasse Collection",
+      metaTitle: "Privacy — Zianat",
       metaDescription: "How personal data is handled on this website.",
       title: "Privacy",
       body: [
