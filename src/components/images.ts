@@ -1,5 +1,6 @@
 import hero from "../assets/hero-building.jpg";
-import salon from "../assets/salon.jpg";
+import salonAsset from "../assets/salon.jpg.asset.json";
+const salon = salonAsset.url;
 import terraceAsset from "../assets/terrace.jpg.asset.json";
 const terrace = terraceAsset.url;
 import josefstadt from "../assets/josefstadt.jpg";
