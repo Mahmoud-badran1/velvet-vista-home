@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "cozy-corner-estates",
+      "version": "0.1.0",
+      "title": "Cozy Corner Estates"
+    },
+    "tools": [
+      {
+        "name": "list_residences",
+        "title": "List residences",
+        "description": "List all residences available in the Lange Gasse Collection with their key facts (size, outdoor space, rooms, status, price).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "lang": {
+              "default": "en",
+              "description": "Language for the text fields.",
+              "type": "string",
+              "enum": [
+                "de",
+                "en"
+              ]
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_residence",
+        "title": "Get residence details",
+        "description": "Get the full public details of one residence by slug: intro, description paragraphs, features and key facts.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Residence slug, one of: maisonette-168, stadtwohnung-62, penthouse-285, penthouse-maisonette-235"
+            },
+            "lang": {
+              "default": "en",
+              "description": "Language for the text fields.",
+              "type": "string",
+              "enum": [
+                "de",
+                "en"
+              ]
+            }
+          },
+          "required": [
+            "slug"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
