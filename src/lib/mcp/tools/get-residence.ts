@@ -15,6 +15,7 @@ export default defineTool({
       .describe(`Residence slug, one of: ${residences.map((r) => r.slug).join(", ")}`),
     lang: z.enum(["de", "en"]).default("en").describe("Language for the text fields."),
   },
+  outputSchema: { residence: z.record(z.string(), z.unknown()) },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ slug, lang }) => {
     const r = getResidence(slug);

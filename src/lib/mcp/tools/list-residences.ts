@@ -10,6 +10,7 @@ export default defineTool({
   inputSchema: {
     lang: z.enum(["de", "en"]).default("en").describe("Language for the text fields."),
   },
+  outputSchema: { residences: z.array(z.record(z.string(), z.unknown())) },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ lang }) => {
     const items = [...residences]
