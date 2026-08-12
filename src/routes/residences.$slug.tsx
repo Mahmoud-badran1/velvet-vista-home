@@ -8,6 +8,7 @@ import {
   getResolvedResidence,
   type ResolvedResidence,
 } from "../lib/residence-content";
+import { useSiteSettings } from "../lib/site-settings";
 
 export const Route = createFileRoute("/residences/$slug")({
   loader: async ({ params }) => {
@@ -62,6 +63,7 @@ function ResidenceDetail() {
     allResolved: ResolvedResidence[];
   };
   const { lang, t } = useI18n();
+  const { contactEmail } = useSiteSettings();
   const [expanded, setExpanded] = useState(false);
   const [lightbox, setLightbox] = useState<number | null>(null);
 
@@ -84,9 +86,7 @@ function ResidenceDetail() {
     return () => window.removeEventListener("keydown", onKey);
   }, [lightbox, galleryUrls.length]);
 
-  const mailto = `mailto:office@langegasse-collection.at?subject=${encodeURIComponent(
-    residence.name[lang],
-  )}`;
+  const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(residence.name[lang])}`;
 
   const paragraphs = residence.description[lang];
   const visible = expanded ? paragraphs : paragraphs.slice(0, 2);
@@ -133,8 +133,8 @@ function ResidenceDetail() {
             className="h-[46vh] w-full cursor-pointer object-cover md:h-full"
           />
         </figure>
-        <div className="grid gap-2 md:gap-3">
-          {thumbs.slice(0, 2).map((url, i) => (
+        <div className="grid grid-cols-2 grid-rows-2 gap-2 md:gap-3">
+          {thumbs.slice(0, 4).map((url, i) => (
             <figure key={url} className="group relative overflow-hidden">
               <img
                 src={url}
@@ -145,7 +145,7 @@ function ResidenceDetail() {
                 onClick={() => setLightbox(i + 1)}
                 className="h-[22vh] w-full cursor-pointer object-cover md:h-full"
               />
-              {i === 1 && galleryUrls.length > 3 && (
+              {i === 3 && galleryUrls.length > 5 && (
                 <button
                   type="button"
                   onClick={() => setLightbox(0)}

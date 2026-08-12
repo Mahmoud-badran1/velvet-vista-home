@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { supabase } from "../../integrations/supabase/client";
 import { useAdminSession } from "../../lib/admin-auth";
+import { AdminSection } from "../../components/admin/AdminSection";
 import type { Tables } from "../../integrations/supabase/types";
 
 type Apartment = Tables<"apartments">;
@@ -54,7 +55,7 @@ function EditResidence() {
       .update({ name_de: nameDe, name_en: nameEn, description_de: descDe, description_en: descEn })
       .eq("id", apartment.id);
     setSaving(false);
-    setMessage(error ? `Fehler: ${error.message}` : "Gespeichert.");
+    setMessage(error ? `خطأ: ${error.message}` : "تم الحفظ بنجاح.");
   }
 
   async function handleUpload(files: FileList | null) {
@@ -68,7 +69,7 @@ function EditResidence() {
         .from("apartment-images")
         .upload(path, file);
       if (uploadError) {
-        setMessage(`Fehler beim Hochladen: ${uploadError.message}`);
+        setMessage(`خطأ أثناء الرفع: ${uploadError.message}`);
         continue;
       }
       const { data: publicUrl } = supabase.storage.from("apartment-images").getPublicUrl(path);
@@ -84,7 +85,7 @@ function EditResidence() {
         .select("*")
         .single();
       if (insertError) {
-        setMessage(`Fehler: ${insertError.message}`);
+        setMessage(`خطأ: ${insertError.message}`);
         continue;
       }
       setImages((prev) => [...prev, inserted]);
@@ -94,10 +95,10 @@ function EditResidence() {
   }
 
   async function handleDelete(image: ApartmentImage) {
-    if (!confirm("Dieses Foto wirklich löschen?")) return;
+    if (!confirm("هل تريد بالتأكيد حذف هذه الصورة؟")) return;
     const { error } = await supabase.from("apartment_images").delete().eq("id", image.id);
     if (error) {
-      setMessage(`Fehler: ${error.message}`);
+      setMessage(`خطأ: ${error.message}`);
       return;
     }
     if (image.storage_path) {
@@ -119,7 +120,7 @@ function EditResidence() {
         { ...b, display_order: orderA },
       ]);
     if (error) {
-      setMessage(`Fehler: ${error.message}`);
+      setMessage(`خطأ: ${error.message}`);
       return;
     }
     const next = [...images];
@@ -130,126 +131,143 @@ function EditResidence() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div dir="rtl" className="mx-auto max-w-3xl px-6 py-16">
       <Link
         to="/lgc-manage-8673cd970652f87a"
         className="text-sm text-muted-foreground hover:text-foreground"
       >
-        ← Zurück zur Übersicht
+        → العودة إلى القائمة
       </Link>
       <h1 className="mt-4 text-2xl font-semibold">{apartment.name_de || apartment.slug}</h1>
 
       {status === "loading" && (
-        <p className="mt-4 text-sm text-muted-foreground">Anmeldung läuft…</p>
+        <p className="mt-4 text-sm text-muted-foreground">جارٍ تسجيل الدخول…</p>
       )}
       {status === "error" && (
-        <p className="mt-4 text-sm text-red-600">Anmeldefehler: {authError}</p>
+        <p className="mt-4 text-sm text-red-600">خطأ في تسجيل الدخول: {authError}</p>
       )}
 
       <div className="mt-8 grid gap-6">
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium">Name (Deutsch)</span>
-          <input
-            className="rounded border border-border bg-transparent px-3 py-2"
-            value={nameDe}
-            onChange={(e) => setNameDe(e.target.value)}
-          />
-        </label>
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium">Name (Englisch)</span>
-          <input
-            className="rounded border border-border bg-transparent px-3 py-2"
-            value={nameEn}
-            onChange={(e) => setNameEn(e.target.value)}
-          />
-        </label>
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium">Beschreibung (Deutsch)</span>
-          <span className="text-xs text-muted-foreground">
-            Absätze durch eine Leerzeile trennen.
-          </span>
-          <textarea
-            className="min-h-[220px] rounded border border-border bg-transparent px-3 py-2"
-            value={descDe}
-            onChange={(e) => setDescDe(e.target.value)}
-          />
-        </label>
-        <label className="grid gap-1.5 text-sm">
-          <span className="font-medium">Beschreibung (Englisch)</span>
-          <span className="text-xs text-muted-foreground">Separate paragraphs with a blank line.</span>
-          <textarea
-            className="min-h-[220px] rounded border border-border bg-transparent px-3 py-2"
-            value={descEn}
-            onChange={(e) => setDescEn(e.target.value)}
-          />
-        </label>
+        <AdminSection number={1} title="الاسم">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">الاسم (ألماني)</span>
+              <input
+                dir="ltr"
+                className="rounded border border-border bg-transparent px-3 py-2"
+                value={nameDe}
+                onChange={(e) => setNameDe(e.target.value)}
+              />
+            </label>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">الاسم (إنجليزي)</span>
+              <input
+                dir="ltr"
+                className="rounded border border-border bg-transparent px-3 py-2"
+                value={nameEn}
+                onChange={(e) => setNameEn(e.target.value)}
+              />
+            </label>
+          </div>
+        </AdminSection>
+
+        <AdminSection number={2} title="الوصف" hint="افصل بين الفقرات بسطر فارغ.">
+          <div className="grid gap-4">
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">الوصف (ألماني)</span>
+              <textarea
+                dir="ltr"
+                className="min-h-[200px] rounded border border-border bg-transparent px-3 py-2"
+                value={descDe}
+                onChange={(e) => setDescDe(e.target.value)}
+              />
+            </label>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">الوصف (إنجليزي)</span>
+              <textarea
+                dir="ltr"
+                className="min-h-[200px] rounded border border-border bg-transparent px-3 py-2"
+                value={descEn}
+                onChange={(e) => setDescEn(e.target.value)}
+              />
+            </label>
+          </div>
+        </AdminSection>
 
         <button
           type="button"
           onClick={handleSave}
           disabled={!ready || saving}
-          className="w-fit rounded bg-foreground px-5 py-2 text-sm text-background disabled:opacity-50"
+          className="w-fit rounded bg-foreground px-6 py-2.5 text-sm font-medium text-background disabled:opacity-50"
         >
-          {saving ? "Speichert…" : "Speichern"}
+          {saving ? "جارٍ الحفظ…" : "حفظ الاسم والوصف"}
         </button>
         {message && <p className="text-sm">{message}</p>}
-      </div>
 
-      <div className="mt-12">
-        <h2 className="text-lg font-medium">Fotos</h2>
-        <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {images.map((img, i) => (
-            <div key={img.id} className="group relative overflow-hidden rounded border border-border">
-              <img src={img.image_url} alt="" className="h-32 w-full object-cover" />
-              {i === 0 && (
-                <span className="absolute left-1 top-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white">
-                  Titelbild
-                </span>
-              )}
-              <div className="flex items-center justify-between gap-1 bg-background/80 p-1">
-                <button
-                  type="button"
-                  onClick={() => handleMove(i, -1)}
-                  disabled={!ready || i === 0}
-                  className="rounded px-1.5 py-0.5 text-xs disabled:opacity-30"
-                >
-                  ↑
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleMove(i, 1)}
-                  disabled={!ready || i === images.length - 1}
-                  className="rounded px-1.5 py-0.5 text-xs disabled:opacity-30"
-                >
-                  ↓
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDelete(img)}
-                  disabled={!ready}
-                  className="rounded px-1.5 py-0.5 text-xs text-red-600 disabled:opacity-30"
-                >
-                  Löschen
-                </button>
+        <AdminSection
+          number={3}
+          title="الصور"
+          hint="الصورة الأولى (الغلاف) هي التي تظهر في الصفحة الرئيسية. استخدم ↑ ↓ لتغيير الترتيب."
+        >
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {images.map((img, i) => (
+              <div
+                key={img.id}
+                className="group relative overflow-hidden rounded border border-border"
+              >
+                <img src={img.image_url} alt="" className="h-32 w-full object-cover" />
+                {i === 0 && (
+                  <span className="absolute right-1 top-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white">
+                    صورة الغلاف
+                  </span>
+                )}
+                <div className="flex items-center justify-between gap-1 bg-background/80 p-1">
+                  <button
+                    type="button"
+                    onClick={() => handleMove(i, -1)}
+                    disabled={!ready || i === 0}
+                    className="rounded px-1.5 py-0.5 text-xs disabled:opacity-30"
+                    aria-label="نقل للأعلى"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleMove(i, 1)}
+                    disabled={!ready || i === images.length - 1}
+                    className="rounded px-1.5 py-0.5 text-xs disabled:opacity-30"
+                    aria-label="نقل للأسفل"
+                  >
+                    ↓
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(img)}
+                    disabled={!ready}
+                    className="rounded px-1.5 py-0.5 text-xs text-red-600 disabled:opacity-30"
+                  >
+                    حذف
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <label className="mt-6 block w-fit cursor-pointer rounded border border-dashed border-border px-4 py-3 text-sm">
-          {uploading ? "Lädt hoch…" : "+ Fotos hinzufügen"}
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            className="hidden"
-            disabled={!ready || uploading}
-            onChange={(e) => {
-              void handleUpload(e.target.files);
-              e.target.value = "";
-            }}
-          />
-        </label>
+          <label className="mt-6 block w-fit cursor-pointer rounded border border-dashed border-border px-4 py-3 text-sm">
+            {uploading ? "جارٍ الرفع…" : "+ إضافة صور"}
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              className="hidden"
+              disabled={!ready || uploading}
+              onChange={(e) => {
+                void handleUpload(e.target.files);
+                e.target.value = "";
+              }}
+            />
+          </label>
+        </AdminSection>
       </div>
     </div>
   );

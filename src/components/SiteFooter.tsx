@@ -1,7 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
+import { useSiteSettings } from "../lib/site-settings";
+
 export function SiteFooter() {
   const { t } = useI18n();
+  const { contactEmail, contactPhone } = useSiteSettings();
+  const telHref = `tel:${contactPhone.replace(/[^+\d]/g, "")}`;
 
   return (
     <footer className="bg-charcoal text-ivory">
@@ -10,14 +14,14 @@ export function SiteFooter() {
           <div>
             <p className="eyebrow text-gold">{t.contact.email}</p>
             <a
-              href="mailto:office@langegasse-collection.at"
+              href={`mailto:${contactEmail}`}
               className="link-underline mt-3 inline-block text-sm opacity-80"
             >
-              office@langegasse-collection.at
+              {contactEmail}
             </a>
             <p className="eyebrow mt-6 text-gold">{t.contact.phone}</p>
-            <a href="tel:+4315550000" className="link-underline mt-3 inline-block text-sm opacity-80">
-              +43 1 555 0000
+            <a href={telHref} className="link-underline mt-3 inline-block text-sm opacity-80">
+              {contactPhone}
             </a>
           </div>
           <div className="flex flex-col gap-3">

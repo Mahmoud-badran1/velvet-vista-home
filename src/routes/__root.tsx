@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { I18nProvider } from "../i18n";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
+import { SiteSettingsContext, loadSiteSettings } from "../lib/site-settings";
 
 function NotFoundComponent() {
   return (
@@ -76,6 +77,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  loader: () => loadSiteSettings(),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -125,19 +127,22 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const siteSettings = Route.useLoaderData();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <I18nProvider>
-        <div className="flex min-h-screen flex-col">
-          <SiteHeader />
-          <main className="flex-1">
-            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-            <Outlet />
-          </main>
-          <SiteFooter />
-        </div>
-      </I18nProvider>
+      <SiteSettingsContext.Provider value={siteSettings}>
+        <I18nProvider>
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <main className="flex-1">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </main>
+            <SiteFooter />
+          </div>
+        </I18nProvider>
+      </SiteSettingsContext.Provider>
     </QueryClientProvider>
   );
 }

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
+import { useSiteSettings } from "../lib/site-settings";
 import film from "../assets/hero-film.mp4.asset.json";
 
 export const Route = createFileRoute("/film")({
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/film")({
 
 function FilmPage() {
   const { lang } = useI18n();
+  const { filmUrl } = useSiteSettings();
 
   return (
     <div className="noir min-h-[100svh]">
@@ -39,7 +41,7 @@ function FilmPage() {
         </h1>
 
         <video
-          src={film.url}
+          src={filmUrl || film.url}
           controls
           playsInline
           preload="metadata"

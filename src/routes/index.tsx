@@ -6,6 +6,7 @@ import { images, type ImageKey } from "../components/images";
 import { Reveal } from "../components/Reveal";
 import { homeCopy } from "../content/home";
 import { loadResolvedResidences, type ResolvedResidence } from "../lib/residence-content";
+import { useSiteSettings } from "../lib/site-settings";
 
 export const Route = createFileRoute("/")({
   loader: () => loadResolvedResidences(),
@@ -52,7 +53,8 @@ function Index() {
   const residences = Route.useLoaderData() as ResolvedResidence[];
   const { lang } = useI18n();
   const c = homeCopy;
-  const mailto = "mailto:office@langegasse-collection.at?subject=Private%20Viewing";
+  const { contactEmail } = useSiteSettings();
+  const mailto = `mailto:${contactEmail}?subject=Private%20Viewing`;
 
   const [cityIndex, setCityIndex] = useState(0);
   const landmarks = c.city.landmarks;
