@@ -38,6 +38,16 @@ import pmFireplaceAsset from "../assets/pm-fireplace.jpg.asset.json";
 import pmPavilionAsset from "../assets/pm-pavilion.jpg.asset.json";
 import pmTerraceAsset from "../assets/pm-terrace.jpg.asset.json";
 import pmArtAsset from "../assets/pm-art.jpg.asset.json";
+import pmArt2Asset from "../assets/pm-art2.jpg.asset.json";
+import pmDining2Asset from "../assets/pm-dining2.jpg.asset.json";
+import pmSkylineAsset from "../assets/pm-skyline.jpg.asset.json";
+import pmSkyline2Asset from "../assets/pm-skyline2.jpg.asset.json";
+import pmDeckAsset from "../assets/pm-deck.jpg.asset.json";
+import pmDeck2Asset from "../assets/pm-deck2.jpg.asset.json";
+import pmPavilion2Asset from "../assets/pm-pavilion2.jpg.asset.json";
+import pmSunAsset from "../assets/pm-sun.jpg.asset.json";
+import pmStair2Asset from "../assets/pm-stair2.jpg.asset.json";
+import pmPergolaAsset from "../assets/pm-pergola.jpg.asset.json";
 
 export const images = {
   hero,
@@ -70,6 +80,16 @@ export const images = {
   pmPavilion: pmPavilionAsset.url,
   pmTerrace: pmTerraceAsset.url,
   pmArt: pmArtAsset.url,
+  pmArt2: pmArt2Asset.url,
+  pmDining2: pmDining2Asset.url,
+  pmSkyline: pmSkylineAsset.url,
+  pmSkyline2: pmSkyline2Asset.url,
+  pmDeck: pmDeckAsset.url,
+  pmDeck2: pmDeck2Asset.url,
+  pmPavilion2: pmPavilion2Asset.url,
+  pmSun: pmSunAsset.url,
+  pmStair2: pmStair2Asset.url,
+  pmPergola: pmPergolaAsset.url,
 } as const;
 
 export type ImageKey = keyof typeof images;
