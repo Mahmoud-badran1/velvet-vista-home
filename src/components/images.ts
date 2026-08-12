@@ -48,6 +48,9 @@ import pmPavilion2Asset from "../assets/pm-pavilion2.jpg.asset.json";
 import pmSunAsset from "../assets/pm-sun.jpg.asset.json";
 import pmStair2Asset from "../assets/pm-stair2.jpg.asset.json";
 import pmPergolaAsset from "../assets/pm-pergola.jpg.asset.json";
+import pmTerraceSunsetAsset from "../assets/pm-t1.png.asset.json";
+import pmPergolaNightAsset from "../assets/pm-t2.png.asset.json";
+import pmRooftopDuskAsset from "../assets/pm-t3.png.asset.json";
 import swLivingAsset from "../assets/sw-living.jpg.asset.json";
 import swRoomAsset from "../assets/sw-room.jpg.asset.json";
 import swBedroomAsset from "../assets/sw-bedroom.jpg.asset.json";
@@ -140,6 +143,9 @@ export const images = {
   pmSun: pmSunAsset.url,
   pmStair2: pmStair2Asset.url,
   pmPergola: pmPergolaAsset.url,
+  pmTerraceSunset: pmTerraceSunsetAsset.url,
+  pmPergolaNight: pmPergolaNightAsset.url,
+  pmRooftopDusk: pmRooftopDuskAsset.url,
 } as const satisfies Record<string, string>;
 
 export type ImageKey = keyof typeof images;
