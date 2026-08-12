@@ -59,8 +59,9 @@ export function SiteHeader() {
             <nav className="hidden items-center gap-7 md:flex">
               {links.map((l) => (
                 <Link
-                  key={l.to}
+                  key={l.to + ("hash" in l ? l.hash : "")}
                   to={l.to}
+                  hash={"hash" in l ? l.hash : undefined}
                   className="eyebrow link-underline"
                   activeProps={{
                     className: "eyebrow link-underline text-teal",
