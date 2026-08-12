@@ -54,6 +54,12 @@ import swBedroomAsset from "../assets/sw-bedroom.jpg.asset.json";
 import swBathAsset from "../assets/sw-bath.jpg.asset.json";
 import swVanityAsset from "../assets/sw-vanity.jpg.asset.json";
 import swCorridorAsset from "../assets/sw-corridor.jpg.asset.json";
+import swBath2Asset from "../assets/sw-bath2.jpg.asset.json";
+import swLobbyAsset from "../assets/sw-lobby.jpg.asset.json";
+import swHallAsset from "../assets/sw-hall.jpg.asset.json";
+import swStairAsset from "../assets/sw-stair.jpg.asset.json";
+import swShowerAsset from "../assets/sw-shower.jpg.asset.json";
+import swViewAsset from "../assets/sw-view.jpg.asset.json";
 
 export const images = {
   hero,
@@ -63,6 +69,12 @@ export const images = {
   swBath: swBathAsset.url,
   swVanity: swVanityAsset.url,
   swCorridor: swCorridorAsset.url,
+  swBath2: swBath2Asset.url,
+  swLobby: swLobbyAsset.url,
+  swHall: swHallAsset.url,
+  swStair: swStairAsset.url,
+  swShower: swShowerAsset.url,
+  swView: swViewAsset.url,
   salon,
   terrace,
   josefstadt,
