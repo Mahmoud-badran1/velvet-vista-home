@@ -136,7 +136,6 @@ export const residences: Residence[] = [
       "pmDining",
       "pmDining2",
       "pmLounge",
-      "pmFireplace",
       "pmArt2",
       "pmTerrace",
       "pmPavilion",
