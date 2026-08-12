@@ -3,6 +3,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
 import { images } from "../components/images";
 import { Reveal } from "../components/Reveal";
+import { AgentCard } from "../components/AgentCard";
 import {
   loadResolvedResidences,
   getResolvedResidence,
@@ -320,6 +321,10 @@ function ResidenceDetail() {
           <Link to="/neighborhood" className="eyebrow link-underline mt-6 inline-block text-accent">
             {t.nav.neighborhood} →
           </Link>
+
+          <div className="mt-16">
+            <AgentCard />
+          </div>
         </div>
 
       </div>

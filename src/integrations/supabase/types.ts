@@ -73,8 +73,12 @@ export type Database = {
           name_de: string | null
           name_en: string | null
           price: number | null
+          price_de: string | null
+          price_en: string | null
           slug: string | null
           status: string
+          status_de: string | null
+          status_en: string | null
           title: string | null
           updated_at: string
         }
@@ -92,8 +96,12 @@ export type Database = {
           name_de?: string | null
           name_en?: string | null
           price?: number | null
+          price_de?: string | null
+          price_en?: string | null
           slug?: string | null
           status?: string
+          status_de?: string | null
+          status_en?: string | null
           title?: string | null
           updated_at?: string
         }
@@ -111,8 +119,12 @@ export type Database = {
           name_de?: string | null
           name_en?: string | null
           price?: number | null
+          price_de?: string | null
+          price_en?: string | null
           slug?: string | null
           status?: string
+          status_de?: string | null
+          status_en?: string | null
           title?: string | null
           updated_at?: string
         }
@@ -120,6 +132,9 @@ export type Database = {
       }
       site_settings: {
         Row: {
+          agent_email: string | null
+          agent_name: string | null
+          agent_photo_url: string | null
           contact_email: string | null
           contact_phone: string | null
           film_url: string | null
@@ -127,6 +142,9 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          agent_email?: string | null
+          agent_name?: string | null
+          agent_photo_url?: string | null
           contact_email?: string | null
           contact_phone?: string | null
           film_url?: string | null
@@ -134,6 +152,9 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          agent_email?: string | null
+          agent_name?: string | null
+          agent_photo_url?: string | null
           contact_email?: string | null
           contact_phone?: string | null
           film_url?: string | null

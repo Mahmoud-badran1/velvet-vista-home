@@ -31,8 +31,12 @@ function AdminIndex() {
   const [email, setEmail] = useState(siteSettings.contactEmail);
   const [phone, setPhone] = useState(siteSettings.contactPhone);
   const [filmUrl, setFilmUrl] = useState(siteSettings.filmUrl ?? "");
+  const [agentName, setAgentName] = useState(siteSettings.agentName ?? "");
+  const [agentEmail, setAgentEmail] = useState(siteSettings.agentEmail ?? "");
+  const [agentPhotoUrl, setAgentPhotoUrl] = useState(siteSettings.agentPhotoUrl ?? "");
   const [savingSettings, setSavingSettings] = useState(false);
   const [uploadingVideo, setUploadingVideo] = useState(false);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [settingsMessage, setSettingsMessage] = useState<string | null>(null);
 
   async function handleSaveSettings() {
@@ -43,6 +47,9 @@ function AdminIndex() {
       contact_email: email,
       contact_phone: phone,
       film_url: filmUrl || null,
+      agent_name: agentName || null,
+      agent_email: agentEmail || null,
+      agent_photo_url: agentPhotoUrl || null,
     });
     setSavingSettings(false);
     setSettingsMessage(saveError ? `خطأ: ${saveError.message}` : "تم الحفظ بنجاح.");
@@ -62,6 +69,22 @@ function AdminIndex() {
     const { data: publicUrl } = supabase.storage.from("site-media").getPublicUrl(path);
     setFilmUrl(publicUrl.publicUrl);
     setUploadingVideo(false);
+  }
+
+  async function handleUploadAgentPhoto(file: File | null) {
+    if (!file) return;
+    setUploadingPhoto(true);
+    setSettingsMessage(null);
+    const path = `agent/${crypto.randomUUID()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage.from("site-media").upload(path, file);
+    if (uploadError) {
+      setSettingsMessage(`خطأ أثناء الرفع: ${uploadError.message}`);
+      setUploadingPhoto(false);
+      return;
+    }
+    const { data: publicUrl } = supabase.storage.from("site-media").getPublicUrl(path);
+    setAgentPhotoUrl(publicUrl.publicUrl);
+    setUploadingPhoto(false);
   }
 
   return (
@@ -147,7 +170,71 @@ function AdminIndex() {
           {settingsMessage && <p className="mt-2 text-sm">{settingsMessage}</p>}
         </AdminSection>
 
-        <AdminSection number={2} title="العقارات الأربعة" hint="اضغط على أي عقار لتعديل الاسم والوصف والصور.">
+        <AdminSection
+          number={2}
+          title="بطاقة التواصل (الوكيل)"
+          hint="تظهر أسفل كل صفحة عقار."
+        >
+          <div className="flex items-start gap-5">
+            {agentPhotoUrl ? (
+              <img
+                src={agentPhotoUrl}
+                alt=""
+                className="h-20 w-20 shrink-0 rounded-full object-cover"
+              />
+            ) : (
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-muted text-xs text-muted-foreground">
+                بدون صورة
+              </div>
+            )}
+            <label className="block w-fit cursor-pointer self-center rounded border border-dashed border-border px-4 py-2 text-xs">
+              {uploadingPhoto ? "جارٍ الرفع…" : "ارفع صورة"}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                disabled={!ready || uploadingPhoto}
+                onChange={(e) => {
+                  void handleUploadAgentPhoto(e.target.files?.[0] ?? null);
+                  e.target.value = "";
+                }}
+              />
+            </label>
+          </div>
+
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">الاسم</span>
+              <input
+                dir="ltr"
+                className="rounded border border-border bg-transparent px-3 py-2"
+                value={agentName}
+                onChange={(e) => setAgentName(e.target.value)}
+              />
+            </label>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">البريد الإلكتروني</span>
+              <input
+                dir="ltr"
+                className="rounded border border-border bg-transparent px-3 py-2"
+                value={agentEmail}
+                onChange={(e) => setAgentEmail(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleSaveSettings}
+            disabled={!ready || savingSettings}
+            className="mt-5 w-fit rounded bg-foreground px-6 py-2.5 text-sm font-medium text-background disabled:opacity-50"
+          >
+            {savingSettings ? "جارٍ الحفظ…" : "حفظ"}
+          </button>
+          {settingsMessage && <p className="mt-2 text-sm">{settingsMessage}</p>}
+        </AdminSection>
+
+        <AdminSection number={3} title="العقارات الأربعة" hint="اضغط على أي عقار لتعديل الاسم والوصف والصور.">
           <div className="grid gap-6 sm:grid-cols-2">
             {residences.map((r) => (
               <Link

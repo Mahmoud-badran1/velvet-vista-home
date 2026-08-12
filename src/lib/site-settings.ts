@@ -5,12 +5,18 @@ export type SiteSettings = {
   contactEmail: string;
   contactPhone: string;
   filmUrl: string | null;
+  agentName: string | null;
+  agentEmail: string | null;
+  agentPhotoUrl: string | null;
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   contactEmail: "office@langegasse-collection.at",
   contactPhone: "+43 1 555 0000",
   filmUrl: null,
+  agentName: null,
+  agentEmail: null,
+  agentPhotoUrl: null,
 };
 
 export async function loadSiteSettings(): Promise<SiteSettings> {
@@ -19,6 +25,9 @@ export async function loadSiteSettings(): Promise<SiteSettings> {
     contactEmail: data?.contact_email || DEFAULT_SITE_SETTINGS.contactEmail,
     contactPhone: data?.contact_phone || DEFAULT_SITE_SETTINGS.contactPhone,
     filmUrl: data?.film_url || null,
+    agentName: data?.agent_name || null,
+    agentEmail: data?.agent_email || null,
+    agentPhotoUrl: data?.agent_photo_url || null,
   };
 }
 

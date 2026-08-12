@@ -38,6 +38,10 @@ function EditResidence() {
   const [nameEn, setNameEn] = useState(apartment.name_en ?? "");
   const [descDe, setDescDe] = useState(apartment.description_de ?? "");
   const [descEn, setDescEn] = useState(apartment.description_en ?? "");
+  const [priceDe, setPriceDe] = useState(apartment.price_de ?? "");
+  const [priceEn, setPriceEn] = useState(apartment.price_en ?? "");
+  const [statusDe, setStatusDe] = useState(apartment.status_de ?? "");
+  const [statusEn, setStatusEn] = useState(apartment.status_en ?? "");
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -48,7 +52,16 @@ function EditResidence() {
     setMessage(null);
     const { error } = await supabase
       .from("apartments")
-      .update({ name_de: nameDe, name_en: nameEn, description_de: descDe, description_en: descEn })
+      .update({
+        name_de: nameDe,
+        name_en: nameEn,
+        description_de: descDe,
+        description_en: descEn,
+        price_de: priceDe,
+        price_en: priceEn,
+        status_de: statusDe,
+        status_en: statusEn,
+      })
       .eq("id", apartment.id);
     setSaving(false);
     setMessage(error ? `خطأ: ${error.message}` : "تم الحفظ بنجاح.");
@@ -118,17 +131,58 @@ function EditResidence() {
           </div>
         </AdminSection>
 
+        <AdminSection number={3} title="السعر والحالة">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">السعر (ألماني)</span>
+              <input
+                dir="ltr"
+                className="rounded border border-border bg-transparent px-3 py-2"
+                value={priceDe}
+                onChange={(e) => setPriceDe(e.target.value)}
+              />
+            </label>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">السعر (إنجليزي)</span>
+              <input
+                dir="ltr"
+                className="rounded border border-border bg-transparent px-3 py-2"
+                value={priceEn}
+                onChange={(e) => setPriceEn(e.target.value)}
+              />
+            </label>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">الحالة (ألماني)</span>
+              <input
+                dir="ltr"
+                className="rounded border border-border bg-transparent px-3 py-2"
+                value={statusDe}
+                onChange={(e) => setStatusDe(e.target.value)}
+              />
+            </label>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">الحالة (إنجليزي)</span>
+              <input
+                dir="ltr"
+                className="rounded border border-border bg-transparent px-3 py-2"
+                value={statusEn}
+                onChange={(e) => setStatusEn(e.target.value)}
+              />
+            </label>
+          </div>
+        </AdminSection>
+
         <button
           type="button"
           onClick={handleSave}
           disabled={!ready || saving}
           className="w-fit rounded bg-foreground px-6 py-2.5 text-sm font-medium text-background disabled:opacity-50"
         >
-          {saving ? "جارٍ الحفظ…" : "حفظ الاسم والوصف"}
+          {saving ? "جارٍ الحفظ…" : "حفظ"}
         </button>
         {message && <p className="text-sm">{message}</p>}
 
-        <AdminSection number={3} title="الصور" hint="إدارة الصور أصبحت في صفحة منفصلة لتخفيف التحميل.">
+        <AdminSection number={4} title="الصور" hint="إدارة الصور أصبحت في صفحة منفصلة لتخفيف التحميل.">
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">{imageCount} صورة حاليًا</p>
             <Link
