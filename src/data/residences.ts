@@ -54,7 +54,7 @@ export const residences: Residence[] = [
     slug: "stadtwohnung-62",
     order: 2,
     image: "swLiving",
-    gallery: ["swLiving", "swRoom", "swBedroom", "swBath", "swVanity", "swCorridor"],
+    gallery: ["swLiving", "swRoom", "swBedroom", "swBath", "swVanity", "swCorridor", "swView", "swBath2", "swShower", "swStair", "swHall", "swLobby"],
     name: { de: "Stadtwohnung 62,5 m²", en: "City Residence 62.5 m²" },
     kicker: { de: "Luxus-Startwohnung in zentraler Bestlage", en: "A refined pied-à-terre in a prime central location" },
     area: "62,5 m²",
