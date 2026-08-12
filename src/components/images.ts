@@ -29,6 +29,15 @@ import detailLightAsset from "../assets/detail-light.jpg.asset.json";
 const detailLight = detailLightAsset.url;
 import cafe from "../assets/cafe.jpg";
 import filmStill from "../assets/film-still.jpg";
+import pmSalonAsset from "../assets/pm-salon.jpg.asset.json";
+import pmDiningAsset from "../assets/pm-dining.jpg.asset.json";
+import pmStairAsset from "../assets/pm-stair.jpg.asset.json";
+import pmViewAsset from "../assets/pm-view.jpg.asset.json";
+import pmLoungeAsset from "../assets/pm-lounge.jpg.asset.json";
+import pmFireplaceAsset from "../assets/pm-fireplace.jpg.asset.json";
+import pmPavilionAsset from "../assets/pm-pavilion.jpg.asset.json";
+import pmTerraceAsset from "../assets/pm-terrace.jpg.asset.json";
+import pmArtAsset from "../assets/pm-art.jpg.asset.json";
 
 export const images = {
   hero,
@@ -52,6 +61,15 @@ export const images = {
   detailLight,
   cafe,
   filmStill,
+  pmSalon: pmSalonAsset.url,
+  pmDining: pmDiningAsset.url,
+  pmStair: pmStairAsset.url,
+  pmView: pmViewAsset.url,
+  pmLounge: pmLoungeAsset.url,
+  pmFireplace: pmFireplaceAsset.url,
+  pmPavilion: pmPavilionAsset.url,
+  pmTerrace: pmTerraceAsset.url,
+  pmArt: pmArtAsset.url,
 } as const;
 
 export type ImageKey = keyof typeof images;
