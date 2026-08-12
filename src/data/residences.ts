@@ -5,7 +5,7 @@ export type Fact = { label: Record<Lang, string>; value: string };
 export type Residence = {
   slug: string;
   order: number;
-  image: "salon" | "terrace" | "hero" | "josefstadt";
+  image: string;
   gallery?: string[];
   name: Record<Lang, string>;
   kicker: Record<Lang, string>;
