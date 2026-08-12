@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
 import { getResidence, residences, type Residence } from "../data/residences";
@@ -55,18 +55,34 @@ function ResidenceDetail() {
   const { residence } = Route.useLoaderData() as { residence: Residence };
   const { lang, t } = useI18n();
   const [expanded, setExpanded] = useState(false);
+  const [lightbox, setLightbox] = useState<number | null>(null);
 
   const index = residences.findIndex((r) => r.slug === residence.slug);
   const next = residences[(index + 1) % residences.length]!;
   const others = residences.filter((r) => r.slug !== residence.slug).slice(0, 3);
 
-  const galleryKeys: ImageKey[] = [
-    residence.image,
-    ...(["salon", "terrace", "hero", "josefstadt"] as ImageKey[]).filter(
-      (k) => k !== residence.image,
-    ),
-  ];
+  const galleryKeys: ImageKey[] = (residence.gallery?.length
+    ? (residence.gallery as ImageKey[])
+    : ([
+        residence.image,
+        ...(["salon", "terrace", "hero", "josefstadt"] as ImageKey[]).filter(
+          (k) => k !== residence.image,
+        ),
+      ] as ImageKey[])
+  ).filter((k) => k in images);
   const [main, ...thumbs] = galleryKeys;
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowRight") setLightbox((i) => ((i ?? 0) + 1) % galleryKeys.length);
+      if (e.key === "ArrowLeft")
+        setLightbox((i) => ((i ?? 0) - 1 + galleryKeys.length) % galleryKeys.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightbox, galleryKeys.length]);
 
   const mailto = `mailto:office@langegasse-collection.at?subject=${encodeURIComponent(
     residence.name[lang],
@@ -113,24 +129,75 @@ function ResidenceDetail() {
             alt={residence.name[lang]}
             width={1600}
             height={1072}
-            className="h-[46vh] w-full object-cover md:h-full"
+            onClick={() => setLightbox(0)}
+            className="h-[46vh] w-full cursor-pointer object-cover md:h-full"
           />
         </figure>
         <div className="grid gap-2 md:gap-3">
-          {thumbs.slice(0, 2).map((k) => (
-            <figure key={k} className="relative overflow-hidden">
+          {thumbs.slice(0, 2).map((k, i) => (
+            <figure key={k} className="group relative overflow-hidden">
               <img
                 src={images[k]}
                 alt={residence.name[lang]}
                 loading="lazy"
                 width={1200}
                 height={800}
-                className="h-[22vh] w-full object-cover md:h-full"
+                onClick={() => setLightbox(i + 1)}
+                className="h-[22vh] w-full cursor-pointer object-cover md:h-full"
               />
+              {i === 1 && galleryKeys.length > 3 && (
+                <button
+                  type="button"
+                  onClick={() => setLightbox(0)}
+                  className="eyebrow absolute inset-0 flex items-center justify-center bg-black/45 text-white transition-colors hover:bg-black/60"
+                >
+                  {t.residences.viewPhotos} ({galleryKeys.length})
+                </button>
+              )}
             </figure>
           ))}
         </div>
       </section>
+
+      {lightbox !== null && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-[#050505]/97">
+          <div className="flex items-center justify-between px-6 py-5 text-white/80">
+            <span className="eyebrow">
+              {lightbox + 1} / {galleryKeys.length}
+            </span>
+            <button type="button" className="eyebrow" onClick={() => setLightbox(null)}>
+              {lang === "de" ? "Schließen" : "Close"} ✕
+            </button>
+          </div>
+          <div className="flex flex-1 items-center justify-center px-4 pb-6">
+            <img
+              src={images[galleryKeys[lightbox]!]}
+              alt={residence.name[lang]}
+              className="max-h-[80vh] max-w-full object-contain"
+            />
+          </div>
+          <div className="flex items-center justify-center gap-6 pb-8 text-white">
+            <button
+              type="button"
+              aria-label="Previous"
+              onClick={() =>
+                setLightbox((i) => ((i ?? 0) - 1 + galleryKeys.length) % galleryKeys.length)
+              }
+              className="h-11 w-11 rounded-full border border-white/40 transition-colors hover:bg-white/10"
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              aria-label="Next"
+              onClick={() => setLightbox((i) => ((i ?? 0) + 1) % galleryKeys.length)}
+              className="h-11 w-11 rounded-full border border-white/40 transition-colors hover:bg-white/10"
+            >
+              →
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Sticky summary bar */}
       <div className="sticky top-0 z-30 border-y border-border bg-background/90 backdrop-blur">
