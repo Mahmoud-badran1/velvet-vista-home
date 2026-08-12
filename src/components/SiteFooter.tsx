@@ -6,11 +6,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-charcoal text-ivory">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
-        <div className="grid gap-12 md:grid-cols-3">
-          <div>
-            <p className="eyebrow text-gold">{t.contact.address}</p>
-            <p className="mt-3 text-sm leading-relaxed opacity-80">{t.contact.addressValue}</p>
-          </div>
+        <div className="grid gap-12 md:grid-cols-2">
           <div>
             <p className="eyebrow text-gold">{t.contact.email}</p>
             <a
