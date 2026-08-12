@@ -6,7 +6,7 @@ export default defineTool({
   name: "list_residences",
   title: "List residences",
   description:
-    "List all residences available in the Lange Gasse Collection with their key facts (size, outdoor space, rooms, status, price).",
+    "List all residences available from Zianat with their key facts (size, outdoor space, rooms, status, price).",
   inputSchema: {
     lang: z.enum(["de", "en"]).default("en").describe("Language for the text fields."),
   },

@@ -3,6 +3,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
 import { images } from "../components/images";
 import { Reveal } from "../components/Reveal";
+import { AgentCard } from "../components/AgentCard";
 import {
   loadResolvedResidences,
   getResolvedResidence,
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/residences/$slug")({
       return { meta: [{ title: "Unavailable" }, { name: "robots", content: "noindex" }] };
     }
     const r = loaderData.residence;
-    const title = `${r.name.de} — Lange Gasse Collection`;
+    const title = `${r.name.de} — Zianat`;
     return {
       meta: [
         { title },
@@ -44,7 +45,6 @@ export const Route = createFileRoute("/residences/$slug")({
             description: r.intro.en,
             address: {
               "@type": "PostalAddress",
-              streetAddress: "Lange Gasse",
               postalCode: "1080",
               addressLocality: "Vienna",
               addressCountry: "AT",
@@ -121,8 +121,48 @@ function ResidenceDetail() {
         <span className="text-accent">{residence.name[lang]}</span>
       </nav>
 
-      {/* Gallery */}
-      <section className="grid gap-2 md:grid-cols-[2fr_1fr_1fr] md:grid-rows-2 md:gap-3 lg:h-[68vh] lg:min-h-[520px]">
+      {/* Gallery — mobile: main photo + a compact filmstrip row beneath it */}
+      <section className="md:hidden">
+        <figure className="relative overflow-hidden">
+          <img
+            src={main}
+            alt={residence.name[lang]}
+            width={1600}
+            height={1072}
+            onClick={() => setLightbox(0)}
+            className="h-[50vh] w-full cursor-pointer object-cover"
+          />
+        </figure>
+        {thumbs.length > 0 && (
+          <div className="mt-1 grid grid-cols-4 gap-1">
+            {thumbs.slice(0, 4).map((url, i) => (
+              <figure key={url} className="relative aspect-square overflow-hidden">
+                <img
+                  src={url}
+                  alt={residence.name[lang]}
+                  loading="lazy"
+                  width={400}
+                  height={400}
+                  onClick={() => setLightbox(i + 1)}
+                  className="h-full w-full cursor-pointer object-cover"
+                />
+                {i === 3 && galleryUrls.length > 5 && (
+                  <button
+                    type="button"
+                    onClick={() => setLightbox(0)}
+                    className="eyebrow absolute inset-0 flex items-center justify-center bg-black/45 text-sm text-white"
+                  >
+                    +{galleryUrls.length - 5}
+                  </button>
+                )}
+              </figure>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* Gallery — desktop: main photo, one wide photo, two half photos */}
+      <section className="hidden md:grid md:grid-cols-[2fr_1fr_1fr] md:grid-rows-2 md:gap-3 lg:h-[68vh] lg:min-h-[520px]">
         <figure className="relative overflow-hidden md:row-span-2">
           <img
             src={main}
@@ -130,7 +170,7 @@ function ResidenceDetail() {
             width={1600}
             height={1072}
             onClick={() => setLightbox(0)}
-            className="h-[46vh] w-full cursor-pointer object-cover md:h-full"
+            className="h-full w-full cursor-pointer object-cover"
           />
         </figure>
         {thumbs[0] && (
@@ -142,36 +182,32 @@ function ResidenceDetail() {
               width={1600}
               height={500}
               onClick={() => setLightbox(1)}
-              className="h-[22vh] w-full cursor-pointer object-cover md:h-full"
+              className="h-full w-full cursor-pointer object-cover"
             />
           </figure>
         )}
-        {(thumbs[1] || thumbs[2]) && (
-          <div className="grid grid-cols-2 gap-2 md:contents md:gap-3">
-            {thumbs.slice(1, 3).map((url, i) => (
-              <figure key={url} className="group relative overflow-hidden">
-                <img
-                  src={url}
-                  alt={residence.name[lang]}
-                  loading="lazy"
-                  width={1200}
-                  height={800}
-                  onClick={() => setLightbox(i + 2)}
-                  className="h-[22vh] w-full cursor-pointer object-cover md:h-full"
-                />
-                {i === 1 && galleryUrls.length > 4 && (
-                  <button
-                    type="button"
-                    onClick={() => setLightbox(0)}
-                    className="eyebrow absolute inset-0 flex items-center justify-center bg-black/45 text-white transition-colors hover:bg-black/60"
-                  >
-                    {t.residences.viewPhotos} ({galleryUrls.length})
-                  </button>
-                )}
-              </figure>
-            ))}
-          </div>
-        )}
+        {thumbs.slice(1, 3).map((url, i) => (
+          <figure key={url} className="group relative overflow-hidden">
+            <img
+              src={url}
+              alt={residence.name[lang]}
+              loading="lazy"
+              width={1200}
+              height={800}
+              onClick={() => setLightbox(i + 2)}
+              className="h-full w-full cursor-pointer object-cover"
+            />
+            {i === 1 && galleryUrls.length > 4 && (
+              <button
+                type="button"
+                onClick={() => setLightbox(0)}
+                className="eyebrow absolute inset-0 flex items-center justify-center bg-black/45 text-white transition-colors hover:bg-black/60"
+              >
+                {t.residences.viewPhotos} ({galleryUrls.length})
+              </button>
+            )}
+          </figure>
+        ))}
       </section>
 
       {lightbox !== null && (
@@ -284,6 +320,10 @@ function ResidenceDetail() {
           <Link to="/neighborhood" className="eyebrow link-underline mt-6 inline-block text-accent">
             {t.nav.neighborhood} →
           </Link>
+
+          <div className="mt-16">
+            <AgentCard />
+          </div>
         </div>
 
       </div>

@@ -6,13 +6,13 @@ import film from "../assets/hero-film.mp4.asset.json";
 export const Route = createFileRoute("/film")({
   head: () => ({
     meta: [
-      { title: "The Film — Lange Gasse Collection, Vienna" },
+      { title: "The Film — Zianat, Vienna" },
       {
         name: "description",
         content:
-          "A quiet cinematic portrait of the Lange Gasse Collection in Vienna Josefstadt — light, silence and the city at eye level.",
+          "A quiet cinematic portrait of Zianat in Vienna Josefstadt — light, silence and the city at eye level.",
       },
-      { property: "og:title", content: "The Film — Lange Gasse Collection" },
+      { property: "og:title", content: "The Film — Zianat" },
       {
         property: "og:description",
         content: "A quiet cinematic portrait of a private residence in Vienna Josefstadt.",

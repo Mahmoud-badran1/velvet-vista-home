@@ -4,13 +4,13 @@ import { useI18n } from "../i18n";
 export const Route = createFileRoute("/imprint")({
   head: () => ({
     meta: [
-      { title: "Impressum · Imprint — Lange Gasse Collection" },
+      { title: "Impressum · Imprint — Zianat" },
       {
         name: "description",
-        content: "Imprint and disclosure for the Lange Gasse Collection, 1080 Vienna.",
+        content: "Imprint and disclosure for Zianat, 1080 Vienna.",
       },
-      { property: "og:title", content: "Imprint — Lange Gasse Collection" },
-      { property: "og:description", content: "Legal disclosure, Lange Gasse Collection." },
+      { property: "og:title", content: "Imprint — Zianat" },
+      { property: "og:description", content: "Legal disclosure, Zianat." },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "/imprint" },
       { name: "twitter:card", content: "summary" },

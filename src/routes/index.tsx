@@ -12,13 +12,13 @@ export const Route = createFileRoute("/")({
   loader: () => loadResolvedResidences(),
   head: () => ({
     meta: [
-      { title: "Lange Gasse Collection — Private Residences, Vienna Josefstadt" },
+      { title: "Zianat — Private Residences, Vienna Josefstadt" },
       {
         name: "description",
         content:
-          "Between the city and the horizon: four private residences in an 1890 house on Lange Gasse, 1080 Vienna — terraces, panoramic windows and a private lift.",
+          "Between the city and the horizon: four private residences in an 1890 house in Vienna's 8th district — terraces, panoramic windows and a private lift.",
       },
-      { property: "og:title", content: "Between the City and the Horizon — Lange Gasse Collection" },
+      { property: "og:title", content: "Between the City and the Horizon — Zianat" },
       {
         property: "og:description",
         content: "Four private residences above the rooftops of Vienna's eighth district.",
@@ -34,10 +34,9 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "RealEstateAgent",
-          name: "Lange Gasse Collection",
+          name: "Zianat",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "Lange Gasse",
             postalCode: "1080",
             addressLocality: "Vienna",
             addressCountry: "AT",
@@ -68,7 +67,7 @@ function Index() {
       <section className="relative -mt-16 lg:-mt-[72px] flex min-h-[100svh] flex-col justify-end overflow-hidden">
         <img
           src={images.heroResidence}
-          alt="Lange Gasse Collection facade in evening light"
+          alt="Zianat facade in evening light"
           width={1920}
           height={1280}
           className="kenburns absolute inset-0 size-full object-cover"

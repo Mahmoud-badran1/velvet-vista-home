@@ -15,7 +15,7 @@
       {
         "name": "list_residences",
         "title": "List residences",
-        "description": "List all residences available in the Lange Gasse Collection with their key facts (size, outdoor space, rooms, status, price).",
+        "description": "List all residences available from Zianat with their key facts (size, outdoor space, rooms, status, price).",
         "annotations": {
           "readOnlyHint": true,
           "idempotentHint": true,

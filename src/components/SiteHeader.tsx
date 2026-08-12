@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { Menu, X, Search, Heart } from "lucide-react";
 import { useI18n } from "../i18n";
-import logo from "../assets/logo-nbg.png.asset.json";
 
 
 export function SiteHeader() {
@@ -42,15 +41,13 @@ export function SiteHeader() {
       >
         <div className="grid h-24 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 lg:h-[110px] lg:px-10">
           <Link to="/" className="min-w-0" onClick={() => setOpen(false)}>
-            <img
-              src={logo.url}
-              alt="Lange Gasse Collection"
-              width={600}
-              height={120}
-              className={`h-16 w-auto max-w-[400px] object-contain transition-all duration-700 sm:h-20 lg:h-24 ${
-                overFilm ? "brightness-0 invert" : ""
+            <span
+              className={`block font-[family-name:var(--font-display)] text-2xl tracking-wide transition-colors duration-700 sm:text-3xl lg:text-4xl ${
+                overFilm ? "text-white" : "text-charcoal"
               }`}
-            />
+            >
+              Zianat
+            </span>
           </Link>
 
 

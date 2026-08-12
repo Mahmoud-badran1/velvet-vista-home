@@ -25,7 +25,9 @@ export async function loadResolvedResidences(): Promise<ResolvedResidence[]> {
   const [{ data: apartments }, { data: images }] = await Promise.all([
     supabase
       .from("apartments")
-      .select("id, slug, name_de, name_en, description_de, description_en"),
+      .select(
+        "id, slug, name_de, name_en, description_de, description_en, price_de, price_en, status_de, status_en",
+      ),
     supabase
       .from("apartment_images")
       .select("apartment_id, image_url, display_order")
@@ -52,6 +54,14 @@ export async function loadResolvedResidences(): Promise<ResolvedResidence[]> {
       description: {
         de: dbRow?.description_de ? splitParagraphs(dbRow.description_de) : r.description.de,
         en: dbRow?.description_en ? splitParagraphs(dbRow.description_en) : r.description.en,
+      },
+      price: {
+        de: dbRow?.price_de || r.price.de,
+        en: dbRow?.price_en || r.price.en,
+      },
+      status: {
+        de: dbRow?.status_de || r.status.de,
+        en: dbRow?.status_en || r.status.en,
       },
       resolvedGallery: dbGallery && dbGallery.length ? dbGallery : defaultGallery(r),
       dbId: dbRow?.id ?? null,

@@ -4,10 +4,10 @@ import { useI18n } from "../i18n";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Datenschutz · Privacy — Lange Gasse Collection" },
+      { title: "Datenschutz · Privacy — Zianat" },
       { name: "description", content: "How personal data is handled on this website." },
-      { property: "og:title", content: "Privacy — Lange Gasse Collection" },
-      { property: "og:description", content: "Privacy information for langegasse-collection." },
+      { property: "og:title", content: "Privacy — Zianat" },
+      { property: "og:description", content: "Privacy information for Zianat." },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "/privacy" },
       { name: "twitter:card", content: "summary" },
