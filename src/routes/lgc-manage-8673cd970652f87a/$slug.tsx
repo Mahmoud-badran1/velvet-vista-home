@@ -3,6 +3,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { supabase } from "../../integrations/supabase/client";
 import { useAdminSession } from "../../lib/admin-auth";
 import { AdminSection } from "../../components/admin/AdminSection";
+import { compressImage } from "../../lib/image-compression";
+import { mapWithConcurrency } from "../../lib/concurrency";
 import type { Tables } from "../../integrations/supabase/types";
 
 type Apartment = Tables<"apartments">;
@@ -43,6 +45,10 @@ function EditResidence() {
   const [images, setImages] = useState<ApartmentImage[]>(initialImages);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<{ done: number; total: number } | null>(
+    null,
+  );
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
   const ready = status === "ready";
@@ -60,37 +66,66 @@ function EditResidence() {
 
   async function handleUpload(files: FileList | null) {
     if (!files || files.length === 0) return;
+    const fileArray = Array.from(files);
     setUploading(true);
     setMessage(null);
-    let nextOrder = images.length ? Math.max(...images.map((i) => i.display_order)) + 1 : 0;
-    for (const file of Array.from(files)) {
-      const path = `${apartment.slug}/${crypto.randomUUID()}-${file.name}`;
+    setUploadProgress({ done: 0, total: fileArray.length });
+
+    const startOrder = images.length ? Math.max(...images.map((i) => i.display_order)) + 1 : 0;
+    let doneCount = 0;
+
+    type UploadOk = {
+      ok: true;
+      apartment_id: string;
+      image_url: string;
+      storage_path: string;
+      display_order: number;
+      is_cover: boolean;
+    };
+    type UploadResult = UploadOk | { ok: false; error: string };
+
+    const results = await mapWithConcurrency<File, UploadResult>(fileArray, 4, async (file, i) => {
+      const { blob, contentType } = await compressImage(file);
+      const ext = contentType === "image/jpeg" ? "jpg" : (file.name.split(".").pop() ?? "jpg");
+      const path = `${apartment.slug}/${crypto.randomUUID()}.${ext}`;
       const { error: uploadError } = await supabase.storage
         .from("apartment-images")
-        .upload(path, file);
-      if (uploadError) {
-        setMessage(`خطأ أثناء الرفع: ${uploadError.message}`);
-        continue;
-      }
+        .upload(path, blob, { contentType });
+      doneCount += 1;
+      setUploadProgress({ done: doneCount, total: fileArray.length });
+      if (uploadError) return { ok: false, error: uploadError.message };
       const { data: publicUrl } = supabase.storage.from("apartment-images").getPublicUrl(path);
+      return {
+        ok: true,
+        apartment_id: apartment.id,
+        image_url: publicUrl.publicUrl,
+        storage_path: path,
+        display_order: startOrder + i,
+        is_cover: images.length === 0 && startOrder + i === 0,
+      };
+    });
+
+    const succeeded = results.filter((r): r is UploadOk => r.ok);
+    const failedCount = results.length - succeeded.length;
+
+    if (succeeded.length) {
       const { data: inserted, error: insertError } = await supabase
         .from("apartment_images")
-        .insert({
-          apartment_id: apartment.id,
-          image_url: publicUrl.publicUrl,
-          storage_path: path,
-          display_order: nextOrder,
-          is_cover: images.length === 0 && nextOrder === 0,
-        })
-        .select("*")
-        .single();
+        .insert(succeeded.map(({ ok: _ok, ...row }) => row))
+        .select("*");
       if (insertError) {
         setMessage(`خطأ: ${insertError.message}`);
-        continue;
+      } else if (inserted) {
+        setImages((prev) =>
+          [...prev, ...inserted].sort((a, b) => a.display_order - b.display_order),
+        );
       }
-      setImages((prev) => [...prev, inserted]);
-      nextOrder += 1;
     }
+    if (failedCount > 0) {
+      setMessage(`فشل رفع ${failedCount} من ${fileArray.length} صورة.`);
+    }
+
+    setUploadProgress(null);
     setUploading(false);
   }
 
@@ -107,27 +142,40 @@ function EditResidence() {
     setImages((prev) => prev.filter((i) => i.id !== image.id));
   }
 
-  async function handleMove(index: number, direction: -1 | 1) {
+  async function persistOrder(reordered: ApartmentImage[]) {
+    const withOrder = reordered.map((img, i) => ({ ...img, display_order: i, is_cover: i === 0 }));
+    setImages(withOrder);
+    const { error } = await supabase.from("apartment_images").upsert(withOrder);
+    if (error) setMessage(`خطأ: ${error.message}`);
+  }
+
+  function handleMove(index: number, direction: -1 | 1) {
     const target = index + direction;
     if (target < 0 || target >= images.length) return;
-    const a = images[index]!;
-    const b = images[target]!;
-    const [orderA, orderB] = [a.display_order, b.display_order];
-    const { error } = await supabase
-      .from("apartment_images")
-      .upsert([
-        { ...a, display_order: orderB },
-        { ...b, display_order: orderA },
-      ]);
-    if (error) {
-      setMessage(`خطأ: ${error.message}`);
+    const next = [...images];
+    const [moved] = next.splice(index, 1);
+    next.splice(target, 0, moved!);
+    void persistOrder(next);
+  }
+
+  function handleMoveToFront(index: number) {
+    if (index === 0) return;
+    const next = [...images];
+    const [moved] = next.splice(index, 1);
+    next.unshift(moved!);
+    void persistOrder(next);
+  }
+
+  function handleDrop(targetIndex: number) {
+    if (dragIndex === null || dragIndex === targetIndex) {
+      setDragIndex(null);
       return;
     }
     const next = [...images];
-    next[index] = { ...b, display_order: orderA };
-    next[target] = { ...a, display_order: orderB };
-    next.sort((x, y) => x.display_order - y.display_order);
-    setImages(next);
+    const [moved] = next.splice(dragIndex, 1);
+    next.splice(targetIndex, 0, moved!);
+    setDragIndex(null);
+    void persistOrder(next);
   }
 
   return (
@@ -207,21 +255,33 @@ function EditResidence() {
         <AdminSection
           number={3}
           title="الصور"
-          hint="الصورة الأولى (الغلاف) هي التي تظهر في الصفحة الرئيسية. استخدم ↑ ↓ لتغيير الترتيب."
+          hint="اسحب أي صورة وأفلتها في المكان الذي تريده لإعادة الترتيب، أو استخدم الأزرار. الصورة الأولى (الغلاف) هي التي تظهر في الصفحة الرئيسية."
         >
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             {images.map((img, i) => (
               <div
                 key={img.id}
-                className="group relative overflow-hidden rounded border border-border"
+                draggable={ready}
+                onDragStart={() => setDragIndex(i)}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={() => handleDrop(i)}
+                onDragEnd={() => setDragIndex(null)}
+                className={`group relative overflow-hidden rounded border border-border ${
+                  ready ? "cursor-grab active:cursor-grabbing" : ""
+                } ${dragIndex === i ? "opacity-40" : ""}`}
               >
-                <img src={img.image_url} alt="" className="h-32 w-full object-cover" />
+                <img
+                  src={img.image_url}
+                  alt=""
+                  draggable={false}
+                  className="h-32 w-full select-none object-cover"
+                />
                 {i === 0 && (
                   <span className="absolute right-1 top-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white">
                     صورة الغلاف
                   </span>
                 )}
-                <div className="flex items-center justify-between gap-1 bg-background/80 p-1">
+                <div className="flex flex-wrap items-center justify-between gap-1 bg-background/80 p-1">
                   <button
                     type="button"
                     onClick={() => handleMove(i, -1)}
@@ -240,6 +300,16 @@ function EditResidence() {
                   >
                     ↓
                   </button>
+                  {i !== 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleMoveToFront(i)}
+                      disabled={!ready}
+                      className="rounded px-1.5 py-0.5 text-xs disabled:opacity-30"
+                    >
+                      اجعلها الأولى
+                    </button>
+                  )}
                   <button
                     type="button"
                     onClick={() => handleDelete(img)}
@@ -254,7 +324,9 @@ function EditResidence() {
           </div>
 
           <label className="mt-6 block w-fit cursor-pointer rounded border border-dashed border-border px-4 py-3 text-sm">
-            {uploading ? "جارٍ الرفع…" : "+ إضافة صور"}
+            {uploading
+              ? `جارٍ الرفع… (${uploadProgress?.done ?? 0} / ${uploadProgress?.total ?? 0})`
+              : "+ إضافة صور"}
             <input
               type="file"
               accept="image/*"
