@@ -22,7 +22,7 @@ export function SiteHeader() {
   const overFilm = pathname === "/" && !scrolled && !open;
 
   const links = [
-    { to: "/residences", label: t.nav.residences },
+    { to: "/", hash: "residences" as const, label: t.nav.residences },
     { to: "/building", label: t.nav.building },
     { to: "/neighborhood", label: t.nav.neighborhood },
     { to: "/film", label: lang === "de" ? "Der Film" : "The Film" },
