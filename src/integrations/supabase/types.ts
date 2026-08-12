@@ -14,7 +14,92 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      apartment_images: {
+        Row: {
+          alt_text: string | null
+          apartment_id: string
+          created_at: string
+          display_order: number
+          id: string
+          image_url: string
+          is_cover: boolean
+          storage_path: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          apartment_id: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url: string
+          is_cover?: boolean
+          storage_path?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          apartment_id?: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url?: string
+          is_cover?: boolean
+          storage_path?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "apartment_images_apartment_id_fkey"
+            columns: ["apartment_id"]
+            isOneToOne: false
+            referencedRelation: "apartments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      apartments: {
+        Row: {
+          address: string | null
+          area: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          created_at: string
+          description: string | null
+          id: string
+          location: string | null
+          price: number | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          area?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          price?: number | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          area?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          price?: number | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
