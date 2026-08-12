@@ -199,37 +199,6 @@ function ResidenceDetail() {
         </div>
       )}
 
-      {/* Sticky summary bar */}
-      <div className="sticky top-0 z-30 border-y border-border bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4 lg:px-10">
-          <div className="min-w-0">
-            <p className="truncate font-[family-name:var(--font-display)] text-lg">
-              {residence.name[lang]}
-            </p>
-            <p className="eyebrow text-muted-foreground">{t.residences.districtValue}</p>
-          </div>
-          <div className="flex items-center gap-8">
-            <div className="hidden items-center gap-8 sm:flex">
-              {[
-                [t.residences.area, residence.area],
-                [t.residences.rooms, residence.rooms],
-                [t.residences.outdoor, residence.outdoor],
-              ].map(([label, value]) => (
-                <div key={label}>
-                  <p className="eyebrow text-muted-foreground">{label}</p>
-                  <p className="font-[family-name:var(--font-display)] text-base">{value}</p>
-                </div>
-              ))}
-            </div>
-            <a
-              href={mailto}
-              className="eyebrow bg-accent px-6 py-3 text-accent-foreground transition-colors hover:bg-foreground hover:text-background"
-            >
-              {t.residences.inquire}
-            </a>
-          </div>
-        </div>
-      </div>
 
       <div className="mx-auto grid max-w-7xl gap-16 px-6 py-16 lg:grid-cols-[1.7fr_1fr] lg:px-10 lg:py-24">
         <div className="min-w-0">
