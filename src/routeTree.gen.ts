@@ -13,9 +13,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BuildingRouteImport } from './routes/building'
 import { Route as FilmRouteImport } from './routes/film'
 import { Route as ImprintRouteImport } from './routes/imprint'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as NeighborhoodRouteImport } from './routes/neighborhood'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as ResidencesSlugRouteImport } from './routes/residences.$slug'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,6 +41,11 @@ const ImprintRoute = ImprintRouteImport.update({
   path: '/imprint',
   getParentRoute: () => rootRouteImport,
 } as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NeighborhoodRoute = NeighborhoodRouteImport.update({
   id: '/neighborhood',
   path: '/neighborhood',
@@ -47,29 +56,55 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResidencesSlugRoute = ResidencesSlugRouteImport.update({
   id: '/residences/$slug',
   path: '/residences/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/building': typeof BuildingRoute
   '/film': typeof FilmRoute
   '/imprint': typeof ImprintRoute
+  '/mcp': typeof McpRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/residences/$slug': typeof ResidencesSlugRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/building': typeof BuildingRoute
   '/film': typeof FilmRoute
   '/imprint': typeof ImprintRoute
+  '/mcp': typeof McpRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/residences/$slug': typeof ResidencesSlugRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,9 +112,13 @@ export interface FileRoutesById {
   '/building': typeof BuildingRoute
   '/film': typeof FilmRoute
   '/imprint': typeof ImprintRoute
+  '/mcp': typeof McpRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/residences/$slug': typeof ResidencesSlugRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -88,27 +127,39 @@ export interface FileRouteTypes {
     | '/building'
     | '/film'
     | '/imprint'
+    | '/mcp'
     | '/neighborhood'
     | '/privacy'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/residences/$slug'
+    | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/building'
     | '/film'
     | '/imprint'
+    | '/mcp'
     | '/neighborhood'
     | '/privacy'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/residences/$slug'
+    | '/.mcp/invoke-tool/$tool'
   id:
     | '__root__'
     | '/'
     | '/building'
     | '/film'
     | '/imprint'
+    | '/mcp'
     | '/neighborhood'
     | '/privacy'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/residences/$slug'
+    | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,9 +167,13 @@ export interface RootRouteChildren {
   BuildingRoute: typeof BuildingRoute
   FilmRoute: typeof FilmRoute
   ImprintRoute: typeof ImprintRoute
+  McpRoute: typeof McpRoute
   NeighborhoodRoute: typeof NeighborhoodRoute
   PrivacyRoute: typeof PrivacyRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ResidencesSlugRoute: typeof ResidencesSlugRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -151,6 +206,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImprintRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/neighborhood': {
       id: '/neighborhood'
       path: '/neighborhood'
@@ -165,11 +227,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/residences/$slug': {
       id: '/residences/$slug'
       path: '/residences/$slug'
       fullPath: '/residences/$slug'
       preLoaderRoute: typeof ResidencesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -180,9 +263,14 @@ const rootRouteChildren: RootRouteChildren = {
   BuildingRoute: BuildingRoute,
   FilmRoute: FilmRoute,
   ImprintRoute: ImprintRoute,
+  McpRoute: McpRoute,
   NeighborhoodRoute: NeighborhoodRoute,
   PrivacyRoute: PrivacyRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ResidencesSlugRoute: ResidencesSlugRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
