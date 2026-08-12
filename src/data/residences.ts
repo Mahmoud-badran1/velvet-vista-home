@@ -5,7 +5,7 @@ export type Fact = { label: Record<Lang, string>; value: string };
 export type Residence = {
   slug: string;
   order: number;
-  image: "salon" | "terrace" | "hero" | "josefstadt";
+  image: string;
   gallery?: string[];
   name: Record<Lang, string>;
   kicker: Record<Lang, string>;
@@ -53,7 +53,8 @@ export const residences: Residence[] = [
   {
     slug: "stadtwohnung-62",
     order: 2,
-    image: "hero",
+    image: "swLiving",
+    gallery: ["swLiving", "swRoom", "swBedroom", "swBath", "swVanity", "swCorridor"],
     name: { de: "Stadtwohnung 62,5 m²", en: "City Residence 62.5 m²" },
     kicker: { de: "Luxus-Startwohnung in zentraler Bestlage", en: "A refined pied-à-terre in a prime central location" },
     area: "62,5 m²",

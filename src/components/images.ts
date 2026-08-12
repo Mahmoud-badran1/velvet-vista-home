@@ -48,9 +48,21 @@ import pmPavilion2Asset from "../assets/pm-pavilion2.jpg.asset.json";
 import pmSunAsset from "../assets/pm-sun.jpg.asset.json";
 import pmStair2Asset from "../assets/pm-stair2.jpg.asset.json";
 import pmPergolaAsset from "../assets/pm-pergola.jpg.asset.json";
+import swLivingAsset from "../assets/sw-living.jpg.asset.json";
+import swRoomAsset from "../assets/sw-room.jpg.asset.json";
+import swBedroomAsset from "../assets/sw-bedroom.jpg.asset.json";
+import swBathAsset from "../assets/sw-bath.jpg.asset.json";
+import swVanityAsset from "../assets/sw-vanity.jpg.asset.json";
+import swCorridorAsset from "../assets/sw-corridor.jpg.asset.json";
 
 export const images = {
   hero,
+  swLiving: swLivingAsset.url,
+  swRoom: swRoomAsset.url,
+  swBedroom: swBedroomAsset.url,
+  swBath: swBathAsset.url,
+  swVanity: swVanityAsset.url,
+  swCorridor: swCorridorAsset.url,
   salon,
   terrace,
   josefstadt,
@@ -90,6 +102,9 @@ export const images = {
   pmSun: pmSunAsset.url,
   pmStair2: pmStair2Asset.url,
   pmPergola: pmPergolaAsset.url,
-} as const;
+} as const satisfies Record<string, string>;
 
 export type ImageKey = keyof typeof images;
+
+export const getImage = (key: string): string =>
+  (images as Record<string, string>)[key] ?? images.hero;

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
 import { residences } from "../data/residences";
-import { images } from "../components/images";
+import { images, getImage } from "../components/images";
 import { Reveal } from "../components/Reveal";
 
 export const Route = createFileRoute("/residences/")({
@@ -48,7 +48,7 @@ function ResidencesPage() {
             >
               <figure className="overflow-hidden">
                 <img
-                  src={images[r.image]}
+                  src={getImage(r.image)}
                   alt={r.name[lang]}
                   loading="lazy"
                   width={1600}

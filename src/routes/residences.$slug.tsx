@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useI18n } from "../i18n";
 import { getResidence, residences, type Residence } from "../data/residences";
-import { images, type ImageKey } from "../components/images";
+import { images, getImage, type ImageKey } from "../components/images";
 import { Reveal } from "../components/Reveal";
 
 export const Route = createFileRoute("/residences/$slug")({
@@ -125,7 +125,7 @@ function ResidenceDetail() {
       <section className="grid gap-2 md:grid-cols-[2fr_1fr] md:gap-3 lg:h-[68vh] lg:min-h-[520px]">
         <figure className="relative overflow-hidden">
           <img
-            src={images[main!]}
+            src={getImage(main!)}
             alt={residence.name[lang]}
             width={1600}
             height={1072}
@@ -137,7 +137,7 @@ function ResidenceDetail() {
           {thumbs.slice(0, 2).map((k, i) => (
             <figure key={k} className="group relative overflow-hidden">
               <img
-                src={images[k]}
+                src={getImage(k)}
                 alt={residence.name[lang]}
                 loading="lazy"
                 width={1200}
@@ -171,7 +171,7 @@ function ResidenceDetail() {
           </div>
           <div className="flex flex-1 items-center justify-center px-4 pb-6">
             <img
-              src={images[galleryKeys[lightbox]!]}
+              src={getImage(galleryKeys[lightbox]!)}
               alt={residence.name[lang]}
               className="max-h-[80vh] max-w-full object-contain"
             />
@@ -287,7 +287,7 @@ function ResidenceDetail() {
               >
                 <figure className="overflow-hidden">
                   <img
-                    src={images[r.image]}
+                    src={getImage(r.image)}
                     alt={r.name[lang]}
                     loading="lazy"
                     width={1200}
