@@ -6,6 +6,7 @@ export type Residence = {
   slug: string;
   order: number;
   image: "salon" | "terrace" | "hero" | "josefstadt";
+  gallery?: string[];
   name: Record<Lang, string>;
   kicker: Record<Lang, string>;
   area: string;
