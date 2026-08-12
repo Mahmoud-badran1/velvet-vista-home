@@ -57,19 +57,28 @@ export function SiteHeader() {
 
           <div className="flex shrink-0 items-center gap-6">
             <nav className="hidden items-center gap-7 md:flex">
-              {links.map((l) => (
-                <Link
-                  key={l.to + ("hash" in l ? l.hash : "")}
-                  to={l.to}
-                  hash={"hash" in l ? l.hash : undefined}
-                  className="eyebrow link-underline"
-                  activeProps={{
-                    className: "eyebrow link-underline text-teal",
-                  }}
-                >
-                  {l.label}
-                </Link>
-              ))}
+              {links.map((l) =>
+                "href" in l ? (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    className="eyebrow link-underline"
+                  >
+                    {l.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={l.to}
+                    to={l.to}
+                    className="eyebrow link-underline"
+                    activeProps={{
+                      className: "eyebrow link-underline text-teal",
+                    }}
+                  >
+                    {l.label}
+                  </Link>
+                )
+              )}
             </nav>
 
             <div className="eyebrow flex items-center gap-2 opacity-60">
@@ -105,11 +114,17 @@ export function SiteHeader() {
 
         {open && (
           <nav className="flex flex-col gap-4 border-t border-black/10 px-8 py-6">
-            {links.map((l) => (
-              <Link key={l.to} to={l.to} className="eyebrow" onClick={() => setOpen(false)}>
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) =>
+              "href" in l ? (
+                <a key={l.href} href={l.href} className="eyebrow" onClick={() => setOpen(false)}>
+                  {l.label}
+                </a>
+              ) : (
+                <Link key={l.to} to={l.to} className="eyebrow" onClick={() => setOpen(false)}>
+                  {l.label}
+                </Link>
+              )
+            )}
           </nav>
         )}
       </div>
