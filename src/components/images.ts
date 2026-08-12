@@ -23,7 +23,8 @@ const dining = diningAsset.url;
 import bathroom from "../assets/bathroom.jpg";
 import detailStone from "../assets/detail-stone.jpg";
 import detailJoinery from "../assets/detail-joinery.jpg";
-import detailLight from "../assets/detail-light.jpg";
+import detailLightAsset from "../assets/detail-light.jpg.asset.json";
+const detailLight = detailLightAsset.url;
 import cafe from "../assets/cafe.jpg";
 import filmStill from "../assets/film-still.jpg";
 
