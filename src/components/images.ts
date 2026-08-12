@@ -102,6 +102,9 @@ export const images = {
   pmSun: pmSunAsset.url,
   pmStair2: pmStair2Asset.url,
   pmPergola: pmPergolaAsset.url,
-} as const;
+} as const satisfies Record<string, string>;
 
 export type ImageKey = keyof typeof images;
+
+export const getImage = (key: string): string =>
+  (images as Record<string, string>)[key] ?? images.hero;
