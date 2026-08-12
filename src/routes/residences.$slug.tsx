@@ -200,7 +200,7 @@ function ResidenceDetail() {
       )}
 
 
-      <div className="mx-auto grid max-w-7xl gap-16 px-6 py-16 lg:grid-cols-[1.7fr_1fr] lg:px-10 lg:py-24">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
         <div className="min-w-0">
           {/* Headline */}
           <p className="eyebrow text-accent">{residence.status[lang]}</p>
@@ -271,41 +271,6 @@ function ResidenceDetail() {
           </Link>
         </div>
 
-        {/* Agent card */}
-        <aside className="h-fit border border-border bg-card p-8 lg:sticky lg:top-48">
-          <p className="eyebrow text-muted-foreground">{t.residences.listedBy}</p>
-          <p className="mt-3 font-[family-name:var(--font-display)] text-2xl">{t.brand.name}</p>
-          <p className="mt-2 text-sm text-muted-foreground">{t.contact.addressValue}</p>
-
-          <div className="mt-8 flex flex-col gap-3">
-            <a
-              href={mailto}
-              className="eyebrow bg-accent px-6 py-4 text-center text-accent-foreground transition-colors hover:bg-foreground hover:text-background"
-            >
-              {t.residences.scheduleTour}
-            </a>
-            <a
-              href="tel:+4319999999"
-              className="eyebrow border border-border px-6 py-4 text-center transition-colors hover:bg-muted"
-            >
-              {t.residences.call}
-            </a>
-          </div>
-
-          <dl className="mt-10 flex flex-col gap-5 border-t border-border pt-8">
-            {[
-              [t.residences.area, residence.area],
-              [t.residences.outdoor, residence.outdoor],
-              [t.residences.rooms, residence.rooms],
-              [t.residences.status, residence.status[lang]],
-            ].map(([label, value]) => (
-              <div key={label} className="flex items-baseline justify-between gap-6">
-                <dt className="eyebrow text-muted-foreground">{label}</dt>
-                <dd className="font-[family-name:var(--font-display)] text-lg">{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </aside>
       </div>
 
       {/* Other residences */}
