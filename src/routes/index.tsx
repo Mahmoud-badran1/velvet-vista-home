@@ -2,12 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useI18n } from "../i18n";
-import { residences } from "../data/residences";
-import { images, getImage, type ImageKey } from "../components/images";
+import { images, type ImageKey } from "../components/images";
 import { Reveal } from "../components/Reveal";
 import { homeCopy } from "../content/home";
+import { loadResolvedResidences, type ResolvedResidence } from "../lib/residence-content";
+import { useSiteSettings } from "../lib/site-settings";
 
 export const Route = createFileRoute("/")({
+  loader: () => loadResolvedResidences(),
   head: () => ({
     meta: [
       { title: "Lange Gasse Collection — Private Residences, Vienna Josefstadt" },
@@ -48,9 +50,11 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const residences = Route.useLoaderData() as ResolvedResidence[];
   const { lang } = useI18n();
   const c = homeCopy;
-  const mailto = "mailto:office@langegasse-collection.at?subject=Private%20Viewing";
+  const { contactEmail } = useSiteSettings();
+  const mailto = `mailto:${contactEmail}?subject=Private%20Viewing`;
 
   const [cityIndex, setCityIndex] = useState(0);
   const landmarks = c.city.landmarks;
@@ -383,7 +387,7 @@ function Index() {
               <Link to="/residences/$slug" params={{ slug: r.slug }} className="group block">
                 <figure className="overflow-hidden">
                   <img
-                    src={getImage(r.image)}
+                    src={r.resolvedGallery[0]}
                     alt={r.name[lang]}
                     loading="lazy"
                     width={1200}
