@@ -80,12 +80,12 @@ function Index() {
           </h3>
 
           <div className="mt-12 flex flex-wrap items-center gap-8">
-            <Link
-              to="/residences"
+            <a
+              href="/#residences"
               className="eyebrow border border-white/40 px-8 py-4 text-white transition-colors hover:bg-white hover:text-charcoal"
             >
               {c.hero.ctaPrimary[lang]}
-            </Link>
+            </a>
             <Link to="/film" className="eyebrow link-underline text-white">
               {c.hero.ctaFilm[lang]} →
             </Link>
@@ -401,9 +401,9 @@ function Index() {
           ))}
         </div>
 
-        <Link to="/residences" className="eyebrow link-underline mt-16 inline-block text-accent">
+        <a href="#residences" className="eyebrow link-underline mt-16 inline-block text-accent">
           {c.residences.cta[lang]} →
-        </Link>
+        </a>
       </section>
 
       {/* 11 — THE FILM */}

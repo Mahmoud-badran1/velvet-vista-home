@@ -110,13 +110,13 @@ function ResidenceDetail() {
         aria-label="Breadcrumb"
         className="mx-auto flex max-w-7xl flex-wrap items-center gap-2 px-6 pt-6 pb-5 text-[0.65rem] tracking-[0.22em] uppercase text-muted-foreground lg:px-10"
       >
-        <Link to="/residences" className="transition-colors hover:text-foreground">
-          {lang === "de" ? "Objekte" : "Properties"}
+        <Link to="/" className="transition-colors hover:text-foreground">
+          {lang === "de" ? "Startseite" : "Home"}
         </Link>
         <span className="opacity-40">/</span>
-        <Link to="/residences" className="transition-colors hover:text-foreground">
+        <a href="/#residences" className="transition-colors hover:text-foreground">
           {lang === "de" ? "Luxus-Residenzen" : "Luxury Apartments"}
-        </Link>
+        </a>
         <span className="opacity-40">/</span>
         <span className="text-accent">{residence.name[lang]}</span>
       </nav>
@@ -303,9 +303,9 @@ function ResidenceDetail() {
           </div>
 
           <div className="mt-16 flex flex-wrap items-center justify-between gap-6 border-t border-border pt-10">
-            <Link to="/residences" className="eyebrow link-underline">
+            <a href="/#residences" className="eyebrow link-underline">
               ← {t.residences.back}
-            </Link>
+            </a>
             <Link
               to="/residences/$slug"
               params={{ slug: next.slug }}
