@@ -22,6 +22,7 @@ import { Route as LgcManage8673cd970652f87aIndexRouteImport } from './routes/lgc
 import { Route as LgcManage8673cd970652f87aSlugRouteImport } from './routes/lgc-manage-8673cd970652f87a/$slug'
 import { Route as ResidencesSlugRouteImport } from './routes/residences.$slug'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as LgcManage8673cd970652f87aSlugPhotosRouteImport } from './routes/lgc-manage-8673cd970652f87a/$slug.photos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -93,6 +94,12 @@ const Char91DotmcpChar93InvokeToolToolRoute =
     path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
+const LgcManage8673cd970652f87aSlugPhotosRoute =
+  LgcManage8673cd970652f87aSlugPhotosRouteImport.update({
+    id: '/photos',
+    path: '/photos',
+    getParentRoute: () => LgcManage8673cd970652f87aSlugRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -104,10 +111,11 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
-  '/lgc-manage-8673cd970652f87a/$slug': typeof LgcManage8673cd970652f87aSlugRoute
+  '/lgc-manage-8673cd970652f87a/$slug': typeof LgcManage8673cd970652f87aSlugRouteWithChildren
   '/residences/$slug': typeof ResidencesSlugRoute
   '/lgc-manage-8673cd970652f87a/': typeof LgcManage8673cd970652f87aIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/lgc-manage-8673cd970652f87a/$slug/photos': typeof LgcManage8673cd970652f87aSlugPhotosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -119,10 +127,11 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
-  '/lgc-manage-8673cd970652f87a/$slug': typeof LgcManage8673cd970652f87aSlugRoute
+  '/lgc-manage-8673cd970652f87a/$slug': typeof LgcManage8673cd970652f87aSlugRouteWithChildren
   '/residences/$slug': typeof ResidencesSlugRoute
   '/lgc-manage-8673cd970652f87a': typeof LgcManage8673cd970652f87aIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/lgc-manage-8673cd970652f87a/$slug/photos': typeof LgcManage8673cd970652f87aSlugPhotosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -135,10 +144,11 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
-  '/lgc-manage-8673cd970652f87a/$slug': typeof LgcManage8673cd970652f87aSlugRoute
+  '/lgc-manage-8673cd970652f87a/$slug': typeof LgcManage8673cd970652f87aSlugRouteWithChildren
   '/residences/$slug': typeof ResidencesSlugRoute
   '/lgc-manage-8673cd970652f87a/': typeof LgcManage8673cd970652f87aIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/lgc-manage-8673cd970652f87a/$slug/photos': typeof LgcManage8673cd970652f87aSlugPhotosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/residences/$slug'
     | '/lgc-manage-8673cd970652f87a/'
     | '/.mcp/invoke-tool/$tool'
+    | '/lgc-manage-8673cd970652f87a/$slug/photos'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/residences/$slug'
     | '/lgc-manage-8673cd970652f87a'
     | '/.mcp/invoke-tool/$tool'
+    | '/lgc-manage-8673cd970652f87a/$slug/photos'
   id:
     | '__root__'
     | '/'
@@ -186,6 +198,7 @@ export interface FileRouteTypes {
     | '/residences/$slug'
     | '/lgc-manage-8673cd970652f87a/'
     | '/.mcp/invoke-tool/$tool'
+    | '/lgc-manage-8673cd970652f87a/$slug/photos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -198,7 +211,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
-  LgcManage8673cd970652f87aSlugRoute: typeof LgcManage8673cd970652f87aSlugRoute
+  LgcManage8673cd970652f87aSlugRoute: typeof LgcManage8673cd970652f87aSlugRouteWithChildren
   ResidencesSlugRoute: typeof ResidencesSlugRoute
   LgcManage8673cd970652f87aIndexRoute: typeof LgcManage8673cd970652f87aIndexRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -297,8 +310,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lgc-manage-8673cd970652f87a/$slug/photos': {
+      id: '/lgc-manage-8673cd970652f87a/$slug/photos'
+      path: '/photos'
+      fullPath: '/lgc-manage-8673cd970652f87a/$slug/photos'
+      preLoaderRoute: typeof LgcManage8673cd970652f87aSlugPhotosRouteImport
+      parentRoute: typeof LgcManage8673cd970652f87aSlugRoute
+    }
   }
 }
+
+interface LgcManage8673cd970652f87aSlugRouteChildren {
+  LgcManage8673cd970652f87aSlugPhotosRoute: typeof LgcManage8673cd970652f87aSlugPhotosRoute
+}
+
+const LgcManage8673cd970652f87aSlugRouteChildren: LgcManage8673cd970652f87aSlugRouteChildren =
+  {
+    LgcManage8673cd970652f87aSlugPhotosRoute:
+      LgcManage8673cd970652f87aSlugPhotosRoute,
+  }
+
+const LgcManage8673cd970652f87aSlugRouteWithChildren =
+  LgcManage8673cd970652f87aSlugRoute._addFileChildren(
+    LgcManage8673cd970652f87aSlugRouteChildren,
+  )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -311,7 +346,8 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
-  LgcManage8673cd970652f87aSlugRoute: LgcManage8673cd970652f87aSlugRoute,
+  LgcManage8673cd970652f87aSlugRoute:
+    LgcManage8673cd970652f87aSlugRouteWithChildren,
   ResidencesSlugRoute: ResidencesSlugRoute,
   LgcManage8673cd970652f87aIndexRoute: LgcManage8673cd970652f87aIndexRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,

@@ -1,7 +1,7 @@
 const MAX_DIMENSION = 2000;
 const JPEG_QUALITY = 0.82;
 
-export async function compressImage(file: File): Promise<{ blob: Blob; contentType: string }> {
+export async function compressImage(file: Blob): Promise<{ blob: Blob; contentType: string }> {
   if (!file.type.startsWith("image/") || file.type === "image/gif" || file.type === "image/svg+xml") {
     return { blob: file, contentType: file.type || "application/octet-stream" };
   }

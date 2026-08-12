@@ -22,6 +22,7 @@ export type Database = {
           display_order: number
           id: string
           image_url: string
+          is_compressed: boolean
           is_cover: boolean
           storage_path: string | null
         }
@@ -32,6 +33,7 @@ export type Database = {
           display_order?: number
           id?: string
           image_url: string
+          is_compressed?: boolean
           is_cover?: boolean
           storage_path?: string | null
         }
@@ -42,6 +44,7 @@ export type Database = {
           display_order?: number
           id?: string
           image_url?: string
+          is_compressed?: boolean
           is_cover?: boolean
           storage_path?: string | null
         }
