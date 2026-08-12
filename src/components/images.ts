@@ -77,6 +77,13 @@ import swS3Asset from "../assets/sw-s3.png.asset.json";
 import swS4Asset from "../assets/sw-s4.png.asset.json";
 import swS5Asset from "../assets/sw-s5.png.asset.json";
 
+import m168_1Asset from "../assets/m168-1.png.asset.json";
+import m168_2Asset from "../assets/m168-2.png.asset.json";
+import m168_3Asset from "../assets/m168-3.png.asset.json";
+import m168_4Asset from "../assets/m168-4.png.asset.json";
+import m168_5Asset from "../assets/m168-5.jpg.asset.json";
+import m168_6Asset from "../assets/m168-6.png.asset.json";
+
 export const images = {
   hero,
   swLiving: swLivingAsset.url,
@@ -146,6 +153,12 @@ export const images = {
   pmTerraceSunset: pmTerraceSunsetAsset.url,
   pmPergolaNight: pmPergolaNightAsset.url,
   pmRooftopDusk: pmRooftopDuskAsset.url,
+  m168_1: m168_1Asset.url,
+  m168_2: m168_2Asset.url,
+  m168_3: m168_3Asset.url,
+  m168_4: m168_4Asset.url,
+  m168_5: m168_5Asset.url,
+  m168_6: m168_6Asset.url,
 } as const satisfies Record<string, string>;
 
 export type ImageKey = keyof typeof images;

@@ -23,7 +23,8 @@ export const residences: Residence[] = [
   {
     slug: "maisonette-168",
     order: 1,
-    image: "salon",
+    image: "m168_1",
+    gallery: ["m168_1", "m168_2", "m168_3", "m168_4", "m168_5", "m168_6"],
     name: { de: "Maisonette 168 m²", en: "Maisonette 168 m²" },
     kicker: { de: "Exklusive Terrassenwohnung mit 60 m² Terrassen – Erstbezug in 1080 Wien", en: "Exclusive terrace residence with 60 m² terraces – first occupancy in 1080 Vienna" },
     area: "168 m²",
