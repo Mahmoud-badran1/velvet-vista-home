@@ -63,11 +63,16 @@ export type Database = {
           bedrooms: number | null
           created_at: string
           description: string | null
+          description_de: string | null
+          description_en: string | null
           id: string
           location: string | null
+          name_de: string | null
+          name_en: string | null
           price: number | null
+          slug: string | null
           status: string
-          title: string
+          title: string | null
           updated_at: string
         }
         Insert: {
@@ -77,11 +82,16 @@ export type Database = {
           bedrooms?: number | null
           created_at?: string
           description?: string | null
+          description_de?: string | null
+          description_en?: string | null
           id?: string
           location?: string | null
+          name_de?: string | null
+          name_en?: string | null
           price?: number | null
+          slug?: string | null
           status?: string
-          title: string
+          title?: string | null
           updated_at?: string
         }
         Update: {
@@ -91,11 +101,16 @@ export type Database = {
           bedrooms?: number | null
           created_at?: string
           description?: string | null
+          description_de?: string | null
+          description_en?: string | null
           id?: string
           location?: string | null
+          name_de?: string | null
+          name_en?: string | null
           price?: number | null
+          slug?: string | null
           status?: string
-          title?: string
+          title?: string | null
           updated_at?: string
         }
         Relationships: []
