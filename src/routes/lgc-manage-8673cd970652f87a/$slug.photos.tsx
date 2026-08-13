@@ -53,7 +53,11 @@ function EditPhotos() {
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
-  const legacyCount = useMemo(() => images.filter((img) => !img.is_compressed).length, [images]);
+  const riskyImages = useMemo(
+    () => images.filter((img) => img.storage_path && !img.is_compressed),
+    [images],
+  );
+  const riskyCount = riskyImages.length;
 
   async function handleUpload(files: FileList | null) {
     if (!files || files.length === 0) return;
@@ -126,9 +130,10 @@ function EditPhotos() {
     setCompressing(true);
     setMessage(null);
     let done = 0;
-    setCompressProgress({ done: 0, total: images.length });
+    const targets = riskyImages;
+    setCompressProgress({ done: 0, total: targets.length });
 
-    await mapWithConcurrency(images, 3, async (img) => {
+    await mapWithConcurrency(targets, 3, async (img) => {
       try {
         const res = await fetch(img.image_url);
         const original = await res.blob();
@@ -138,7 +143,7 @@ function EditPhotos() {
             prev.map((p) => (p.id === img.id ? { ...p, is_compressed: true } : p)),
           );
           done += 1;
-          setCompressProgress({ done, total: images.length });
+          setCompressProgress({ done, total: targets.length });
           return;
         }
         const { blob: compressed, contentType } = await compressImage(original);
@@ -180,7 +185,7 @@ function EditPhotos() {
         // skip this image on any network/decode error — it stays flagged for a retry
       }
       done += 1;
-      setCompressProgress({ done, total: images.length });
+      setCompressProgress({ done, total: targets.length });
     });
 
     setCompressProgress(null);
@@ -255,12 +260,12 @@ function EditPhotos() {
         <p className="mt-4 text-sm text-red-600">خطأ في تسجيل الدخول: {authError}</p>
       )}
 
-      {legacyCount > 0 && (
+      {riskyCount > 0 && (
         <div className="mt-6 rounded-lg border border-amber-500/40 bg-amber-500/10 p-4 text-sm">
           <p>
-            بعض الصور ({legacyCount}) رُفعت بحجمها الأصلي الكبير قبل تفعيل الضغط التلقائي — وهذا
-            سبب بطء الرفع وتعليق الصفحة سابقًا. اضغط الزر لضغطها الآن وتصغير حجمها دون التأثير على
-            جودتها الظاهرة.
+            بعض الصور ({riskyCount}) رُفعت بحجمها الأصلي الكبير قبل تفعيل الضغط التلقائي — لهذا لا
+            تُعرض معاينتها بالأسفل حتى لا تُبطئ الصفحة، وهذا كان سبب تعليقها سابقًا. اضغط الزر
+            لضغطها الآن وتصغير حجمها دون التأثير على جودتها الظاهرة.
           </p>
           <button
             type="button"
@@ -270,7 +275,7 @@ function EditPhotos() {
           >
             {compressing
               ? `جارٍ الضغط… (${compressProgress?.done ?? 0} / ${compressProgress?.total ?? 0})`
-              : `ضغط الصور الكبيرة (${legacyCount})`}
+              : `ضغط الصور الكبيرة (${riskyCount})`}
           </button>
         </div>
       )}
@@ -295,14 +300,21 @@ function EditPhotos() {
                 ready ? "cursor-grab active:cursor-grabbing" : ""
               } ${dragIndex === i ? "opacity-40" : ""}`}
             >
-              <img
-                src={img.image_url}
-                alt=""
-                draggable={false}
-                loading="lazy"
-                decoding="async"
-                className="h-32 w-full select-none object-cover"
-              />
+              {img.storage_path && !img.is_compressed ? (
+                <div className="flex h-32 w-full flex-col items-center justify-center gap-1 bg-muted px-2 text-center text-[11px] leading-snug text-muted-foreground">
+                  <span>صورة كبيرة</span>
+                  <span>اضغط "ضغط الصور الكبيرة" أعلاه لعرضها</span>
+                </div>
+              ) : (
+                <img
+                  src={img.image_url}
+                  alt=""
+                  draggable={false}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-32 w-full select-none object-cover"
+                />
+              )}
               {i === 0 && (
                 <span className="absolute right-1 top-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white">
                   صورة الغلاف

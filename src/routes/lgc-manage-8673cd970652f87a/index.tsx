@@ -29,14 +29,18 @@ function AdminIndex() {
   const ready = status === "ready";
 
   const [email, setEmail] = useState(siteSettings.contactEmail);
-  const [phone, setPhone] = useState(siteSettings.contactPhone);
+  const [phone, setPhone] = useState(siteSettings.contactPhone ?? "");
   const [filmUrl, setFilmUrl] = useState(siteSettings.filmUrl ?? "");
   const [agentName, setAgentName] = useState(siteSettings.agentName ?? "");
   const [agentEmail, setAgentEmail] = useState(siteSettings.agentEmail ?? "");
   const [agentPhotoUrl, setAgentPhotoUrl] = useState(siteSettings.agentPhotoUrl ?? "");
+  const [architecturePhotoUrl, setArchitecturePhotoUrl] = useState(
+    siteSettings.architecturePhotoUrl ?? "",
+  );
   const [savingSettings, setSavingSettings] = useState(false);
   const [uploadingVideo, setUploadingVideo] = useState(false);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [uploadingArchitecturePhoto, setUploadingArchitecturePhoto] = useState(false);
   const [settingsMessage, setSettingsMessage] = useState<string | null>(null);
 
   async function handleSaveSettings() {
@@ -45,11 +49,12 @@ function AdminIndex() {
     const { error: saveError } = await supabase.from("site_settings").upsert({
       id: 1,
       contact_email: email,
-      contact_phone: phone,
+      contact_phone: phone || null,
       film_url: filmUrl || null,
       agent_name: agentName || null,
       agent_email: agentEmail || null,
       agent_photo_url: agentPhotoUrl || null,
+      architecture_photo_url: architecturePhotoUrl || null,
     });
     setSavingSettings(false);
     setSettingsMessage(saveError ? `خطأ: ${saveError.message}` : "تم الحفظ بنجاح.");
@@ -85,6 +90,22 @@ function AdminIndex() {
     const { data: publicUrl } = supabase.storage.from("site-media").getPublicUrl(path);
     setAgentPhotoUrl(publicUrl.publicUrl);
     setUploadingPhoto(false);
+  }
+
+  async function handleUploadArchitecturePhoto(file: File | null) {
+    if (!file) return;
+    setUploadingArchitecturePhoto(true);
+    setSettingsMessage(null);
+    const path = `homepage/${crypto.randomUUID()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage.from("site-media").upload(path, file);
+    if (uploadError) {
+      setSettingsMessage(`خطأ أثناء الرفع: ${uploadError.message}`);
+      setUploadingArchitecturePhoto(false);
+      return;
+    }
+    const { data: publicUrl } = supabase.storage.from("site-media").getPublicUrl(path);
+    setArchitecturePhotoUrl(publicUrl.publicUrl);
+    setUploadingArchitecturePhoto(false);
   }
 
   return (
@@ -234,7 +255,61 @@ function AdminIndex() {
           {settingsMessage && <p className="mt-2 text-sm">{settingsMessage}</p>}
         </AdminSection>
 
-        <AdminSection number={3} title="العقارات الأربعة" hint="اضغط على أي عقار لتعديل الاسم والوصف والصور.">
+        <AdminSection
+          number={3}
+          title="صور الصفحة الرئيسية"
+          hint='صورة قسم "العمارة" بالصفحة الرئيسية.'
+        >
+          <div className="flex items-start gap-5">
+            {architecturePhotoUrl ? (
+              <img
+                src={architecturePhotoUrl}
+                alt=""
+                className="h-24 w-36 shrink-0 rounded object-cover"
+              />
+            ) : (
+              <div className="flex h-24 w-36 shrink-0 items-center justify-center rounded bg-muted text-xs text-muted-foreground">
+                الصورة الافتراضية
+              </div>
+            )}
+            <div className="flex flex-col items-start gap-2">
+              <label className="block w-fit cursor-pointer rounded border border-dashed border-border px-4 py-2 text-xs">
+                {uploadingArchitecturePhoto ? "جارٍ الرفع…" : "ارفع صورة"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  disabled={!ready || uploadingArchitecturePhoto}
+                  onChange={(e) => {
+                    void handleUploadArchitecturePhoto(e.target.files?.[0] ?? null);
+                    e.target.value = "";
+                  }}
+                />
+              </label>
+              {architecturePhotoUrl && (
+                <button
+                  type="button"
+                  onClick={() => setArchitecturePhotoUrl("")}
+                  className="text-xs text-red-600"
+                >
+                  إزالة الصورة (رجوع للصورة الافتراضية)
+                </button>
+              )}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleSaveSettings}
+            disabled={!ready || savingSettings}
+            className="mt-5 w-fit rounded bg-foreground px-6 py-2.5 text-sm font-medium text-background disabled:opacity-50"
+          >
+            {savingSettings ? "جارٍ الحفظ…" : "حفظ"}
+          </button>
+          {settingsMessage && <p className="mt-2 text-sm">{settingsMessage}</p>}
+        </AdminSection>
+
+        <AdminSection number={4} title="العقارات الأربعة" hint="اضغط على أي عقار لتعديل الاسم والوصف والصور.">
           <div className="grid gap-6 sm:grid-cols-2">
             {residences.map((r) => (
               <Link

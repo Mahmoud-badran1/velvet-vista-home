@@ -5,7 +5,7 @@ import { useSiteSettings } from "../lib/site-settings";
 export function SiteFooter() {
   const { t } = useI18n();
   const { contactEmail, contactPhone } = useSiteSettings();
-  const telHref = `tel:${contactPhone.replace(/[^+\d]/g, "")}`;
+  const telHref = contactPhone ? `tel:${contactPhone.replace(/[^+\d]/g, "")}` : null;
 
   return (
     <footer className="bg-charcoal text-ivory">
@@ -19,10 +19,17 @@ export function SiteFooter() {
             >
               {contactEmail}
             </a>
-            <p className="eyebrow mt-6 text-gold">{t.contact.phone}</p>
-            <a href={telHref} className="link-underline mt-3 inline-block text-sm opacity-80">
-              {contactPhone}
-            </a>
+            {telHref && (
+              <>
+                <p className="eyebrow mt-6 text-gold">{t.contact.phone}</p>
+                <a
+                  href={telHref}
+                  className="link-underline mt-3 inline-block text-sm opacity-80"
+                >
+                  {contactPhone}
+                </a>
+              </>
+            )}
           </div>
           <div className="flex flex-col gap-3">
             <Link to="/imprint" className="eyebrow opacity-70 hover:opacity-100">
