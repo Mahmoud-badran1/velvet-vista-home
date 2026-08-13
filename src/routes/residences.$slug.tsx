@@ -10,6 +10,7 @@ import {
   type ResolvedResidence,
 } from "../lib/residence-content";
 import { useSiteSettings } from "../lib/site-settings";
+import { formatPrice } from "../lib/format-price";
 
 export const Route = createFileRoute("/residences/$slug")({
   loader: async ({ params }) => {
@@ -90,6 +91,7 @@ function ResidenceDetail() {
 
   const paragraphs = residence.description[lang];
   const visible = expanded ? paragraphs : paragraphs.slice(0, 2);
+  const displayPrice = formatPrice(residence.price[lang], lang);
 
   const details: [string, string][] = [
     [t.residences.propertyType, t.residences.propertyTypeValue],
@@ -97,7 +99,7 @@ function ResidenceDetail() {
     [t.residences.outdoor, residence.outdoor],
     [t.residences.rooms, residence.rooms],
     [t.residences.status, residence.status[lang]],
-    [t.residences.price, residence.price[lang]],
+    [t.residences.price, displayPrice],
     [t.residences.building, t.residences.buildingValue],
     [t.residences.district, t.residences.districtValue],
     [t.residences.ref, `LGC-${String(residence.order).padStart(3, "0")}`],
@@ -257,9 +259,7 @@ function ResidenceDetail() {
           <p className="eyebrow text-accent">{residence.status[lang]}</p>
           <h1 className="mt-4 text-4xl leading-tight md:text-5xl">{residence.name[lang]}</h1>
           <p className="mt-3 text-sm text-muted-foreground">{residence.kicker[lang]}</p>
-          <p className="mt-6 font-[family-name:var(--font-display)] text-2xl">
-            {residence.price[lang]}
-          </p>
+          <p className="mt-6 font-[family-name:var(--font-display)] text-2xl">{displayPrice}</p>
 
           {/* Overview */}
           <h2 className="eyebrow mt-16 text-accent">{t.residences.overview}</h2>

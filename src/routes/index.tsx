@@ -7,6 +7,7 @@ import { Reveal } from "../components/Reveal";
 import { homeCopy } from "../content/home";
 import { loadResolvedResidences, type ResolvedResidence } from "../lib/residence-content";
 import { useSiteSettings } from "../lib/site-settings";
+import { formatPrice } from "../lib/format-price";
 
 export const Route = createFileRoute("/")({
   loader: () => loadResolvedResidences(),
@@ -399,6 +400,7 @@ function Index() {
                   <p className="eyebrow text-muted-foreground">{r.area}</p>
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">{r.kicker[lang]}</p>
+                <p className="mt-2 text-sm text-accent">{formatPrice(r.price[lang], lang)}</p>
               </Link>
             </Reveal>
           ))}
