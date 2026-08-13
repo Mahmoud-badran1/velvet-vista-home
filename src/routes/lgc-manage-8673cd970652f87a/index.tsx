@@ -5,25 +5,32 @@ import { useAdminSession } from "../../lib/admin-auth";
 import { AdminSection } from "../../components/admin/AdminSection";
 import { loadResolvedResidences, type ResolvedResidence } from "../../lib/residence-content";
 import { loadSiteSettings, type SiteSettings } from "../../lib/site-settings";
+import { loadAgents, type Agent } from "../../lib/agents";
 
 export const Route = createFileRoute("/lgc-manage-8673cd970652f87a/")({
   head: () => ({
     meta: [{ title: "الإدارة" }, { name: "robots", content: "noindex, nofollow" }],
   }),
   loader: async () => {
-    const [residences, siteSettings] = await Promise.all([
+    const [residences, siteSettings, agents] = await Promise.all([
       loadResolvedResidences(),
       loadSiteSettings(),
+      loadAgents(),
     ]);
-    return { residences, siteSettings };
+    return { residences, siteSettings, agents };
   },
   component: AdminIndex,
 });
 
 function AdminIndex() {
-  const { residences, siteSettings } = Route.useLoaderData() as {
+  const {
+    residences,
+    siteSettings,
+    agents: initialAgents,
+  } = Route.useLoaderData() as {
     residences: ResolvedResidence[];
     siteSettings: SiteSettings;
+    agents: Agent[];
   };
   const { status, error } = useAdminSession();
   const ready = status === "ready";
@@ -31,17 +38,21 @@ function AdminIndex() {
   const [email, setEmail] = useState(siteSettings.contactEmail);
   const [phone, setPhone] = useState(siteSettings.contactPhone ?? "");
   const [filmUrl, setFilmUrl] = useState(siteSettings.filmUrl ?? "");
-  const [agentName, setAgentName] = useState(siteSettings.agentName ?? "");
-  const [agentEmail, setAgentEmail] = useState(siteSettings.agentEmail ?? "");
-  const [agentPhotoUrl, setAgentPhotoUrl] = useState(siteSettings.agentPhotoUrl ?? "");
   const [architecturePhotoUrl, setArchitecturePhotoUrl] = useState(
     siteSettings.architecturePhotoUrl ?? "",
   );
   const [savingSettings, setSavingSettings] = useState(false);
   const [uploadingVideo, setUploadingVideo] = useState(false);
-  const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [uploadingArchitecturePhoto, setUploadingArchitecturePhoto] = useState(false);
   const [settingsMessage, setSettingsMessage] = useState<string | null>(null);
+
+  const [agents, setAgents] = useState<Agent[]>(initialAgents);
+  const [newAgentName, setNewAgentName] = useState("");
+  const [newAgentEmail, setNewAgentEmail] = useState("");
+  const [newAgentPhotoUrl, setNewAgentPhotoUrl] = useState("");
+  const [uploadingNewAgentPhoto, setUploadingNewAgentPhoto] = useState(false);
+  const [savingAgent, setSavingAgent] = useState(false);
+  const [agentsMessage, setAgentsMessage] = useState<string | null>(null);
 
   async function handleSaveSettings() {
     setSavingSettings(true);
@@ -51,9 +62,6 @@ function AdminIndex() {
       contact_email: email,
       contact_phone: phone || null,
       film_url: filmUrl || null,
-      agent_name: agentName || null,
-      agent_email: agentEmail || null,
-      agent_photo_url: agentPhotoUrl || null,
       architecture_photo_url: architecturePhotoUrl || null,
     });
     setSavingSettings(false);
@@ -76,22 +84,6 @@ function AdminIndex() {
     setUploadingVideo(false);
   }
 
-  async function handleUploadAgentPhoto(file: File | null) {
-    if (!file) return;
-    setUploadingPhoto(true);
-    setSettingsMessage(null);
-    const path = `agent/${crypto.randomUUID()}-${file.name}`;
-    const { error: uploadError } = await supabase.storage.from("site-media").upload(path, file);
-    if (uploadError) {
-      setSettingsMessage(`خطأ أثناء الرفع: ${uploadError.message}`);
-      setUploadingPhoto(false);
-      return;
-    }
-    const { data: publicUrl } = supabase.storage.from("site-media").getPublicUrl(path);
-    setAgentPhotoUrl(publicUrl.publicUrl);
-    setUploadingPhoto(false);
-  }
-
   async function handleUploadArchitecturePhoto(file: File | null) {
     if (!file) return;
     setUploadingArchitecturePhoto(true);
@@ -106,6 +98,68 @@ function AdminIndex() {
     const { data: publicUrl } = supabase.storage.from("site-media").getPublicUrl(path);
     setArchitecturePhotoUrl(publicUrl.publicUrl);
     setUploadingArchitecturePhoto(false);
+  }
+
+  async function handleUploadNewAgentPhoto(file: File | null) {
+    if (!file) return;
+    setUploadingNewAgentPhoto(true);
+    setAgentsMessage(null);
+    const path = `agent/${crypto.randomUUID()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage.from("site-media").upload(path, file);
+    if (uploadError) {
+      setAgentsMessage(`خطأ أثناء الرفع: ${uploadError.message}`);
+      setUploadingNewAgentPhoto(false);
+      return;
+    }
+    const { data: publicUrl } = supabase.storage.from("site-media").getPublicUrl(path);
+    setNewAgentPhotoUrl(publicUrl.publicUrl);
+    setUploadingNewAgentPhoto(false);
+  }
+
+  async function handleAddAgent() {
+    if (!newAgentName.trim()) {
+      setAgentsMessage("اكتب اسم الوكيل أولًا.");
+      return;
+    }
+    setSavingAgent(true);
+    setAgentsMessage(null);
+    const { data: inserted, error: insertError } = await supabase
+      .from("agents")
+      .insert({
+        name: newAgentName.trim(),
+        email: newAgentEmail.trim() || null,
+        photo_url: newAgentPhotoUrl || null,
+        display_order: agents.length,
+      })
+      .select("*")
+      .single();
+    setSavingAgent(false);
+    if (insertError) {
+      setAgentsMessage(`خطأ: ${insertError.message}`);
+      return;
+    }
+    setAgents((prev) => [
+      ...prev,
+      {
+        id: inserted.id,
+        name: inserted.name,
+        email: inserted.email,
+        photoUrl: inserted.photo_url,
+      },
+    ]);
+    setNewAgentName("");
+    setNewAgentEmail("");
+    setNewAgentPhotoUrl("");
+  }
+
+  async function handleDeleteAgent(agent: Agent) {
+    if (!confirm(`هل تريد بالتأكيد حذف "${agent.name}"؟`)) return;
+    const { error: deleteError } = await supabase.from("agents").delete().eq("id", agent.id);
+    if (deleteError) {
+      setAgentsMessage(`خطأ: ${deleteError.message}`);
+      return;
+    }
+    setAgents((prev) => prev.filter((a) => a.id !== agent.id));
   }
 
   return (
@@ -193,66 +247,106 @@ function AdminIndex() {
 
         <AdminSection
           number={2}
-          title="بطاقة التواصل (الوكيل)"
-          hint="تظهر أسفل كل صفحة عقار."
+          title="الوكلاء (بطاقات التواصل)"
+          hint="تظهر بطاقات كل الوكلاء أسفل كل صفحة عقار."
         >
-          <div className="flex items-start gap-5">
-            {agentPhotoUrl ? (
-              <img
-                src={agentPhotoUrl}
-                alt=""
-                className="h-20 w-20 shrink-0 rounded-full object-cover"
-              />
-            ) : (
-              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-muted text-xs text-muted-foreground">
-                بدون صورة
-              </div>
-            )}
-            <label className="block w-fit cursor-pointer self-center rounded border border-dashed border-border px-4 py-2 text-xs">
-              {uploadingPhoto ? "جارٍ الرفع…" : "ارفع صورة"}
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                disabled={!ready || uploadingPhoto}
-                onChange={(e) => {
-                  void handleUploadAgentPhoto(e.target.files?.[0] ?? null);
-                  e.target.value = "";
-                }}
-              />
-            </label>
-          </div>
+          {agents.length > 0 && (
+            <div className="grid gap-4 sm:grid-cols-2">
+              {agents.map((agent) => (
+                <div
+                  key={agent.id}
+                  className="flex items-center gap-4 rounded border border-border p-3"
+                >
+                  {agent.photoUrl ? (
+                    <img
+                      src={agent.photoUrl}
+                      alt=""
+                      className="h-14 w-14 shrink-0 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-muted text-xs text-muted-foreground">
+                      بدون صورة
+                    </div>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-medium">{agent.name}</p>
+                    {agent.email && (
+                      <p className="truncate text-xs text-muted-foreground">{agent.email}</p>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteAgent(agent)}
+                    disabled={!ready}
+                    className="shrink-0 rounded px-2 py-1 text-xs text-red-600 disabled:opacity-30"
+                  >
+                    حذف
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
 
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <label className="grid gap-1.5 text-sm">
-              <span className="font-medium">الاسم</span>
-              <input
-                dir="ltr"
-                className="rounded border border-border bg-transparent px-3 py-2"
-                value={agentName}
-                onChange={(e) => setAgentName(e.target.value)}
-              />
-            </label>
-            <label className="grid gap-1.5 text-sm">
-              <span className="font-medium">البريد الإلكتروني</span>
-              <input
-                dir="ltr"
-                className="rounded border border-border bg-transparent px-3 py-2"
-                value={agentEmail}
-                onChange={(e) => setAgentEmail(e.target.value)}
-              />
-            </label>
-          </div>
+          <div className="mt-6 rounded border border-dashed border-border p-4">
+            <p className="text-sm font-medium">إضافة وكيل جديد</p>
+            <div className="mt-3 flex items-start gap-4">
+              {newAgentPhotoUrl ? (
+                <img
+                  src={newAgentPhotoUrl}
+                  alt=""
+                  className="h-16 w-16 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-muted text-xs text-muted-foreground">
+                  بدون صورة
+                </div>
+              )}
+              <label className="block w-fit cursor-pointer self-center rounded border border-dashed border-border px-4 py-2 text-xs">
+                {uploadingNewAgentPhoto ? "جارٍ الرفع…" : "ارفع صورة"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  disabled={!ready || uploadingNewAgentPhoto}
+                  onChange={(e) => {
+                    void handleUploadNewAgentPhoto(e.target.files?.[0] ?? null);
+                    e.target.value = "";
+                  }}
+                />
+              </label>
+            </div>
 
-          <button
-            type="button"
-            onClick={handleSaveSettings}
-            disabled={!ready || savingSettings}
-            className="mt-5 w-fit rounded bg-foreground px-6 py-2.5 text-sm font-medium text-background disabled:opacity-50"
-          >
-            {savingSettings ? "جارٍ الحفظ…" : "حفظ"}
-          </button>
-          {settingsMessage && <p className="mt-2 text-sm">{settingsMessage}</p>}
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-medium">الاسم</span>
+                <input
+                  dir="ltr"
+                  className="rounded border border-border bg-transparent px-3 py-2"
+                  value={newAgentName}
+                  onChange={(e) => setNewAgentName(e.target.value)}
+                />
+              </label>
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-medium">البريد الإلكتروني</span>
+                <input
+                  dir="ltr"
+                  className="rounded border border-border bg-transparent px-3 py-2"
+                  value={newAgentEmail}
+                  onChange={(e) => setNewAgentEmail(e.target.value)}
+                />
+              </label>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleAddAgent}
+              disabled={!ready || savingAgent}
+              className="mt-4 w-fit rounded bg-foreground px-6 py-2.5 text-sm font-medium text-background disabled:opacity-50"
+            >
+              {savingAgent ? "جارٍ الإضافة…" : "+ إضافة وكيل"}
+            </button>
+          </div>
+          {agentsMessage && <p className="mt-2 text-sm">{agentsMessage}</p>}
         </AdminSection>
 
         <AdminSection

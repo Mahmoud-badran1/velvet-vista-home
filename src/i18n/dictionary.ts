@@ -125,18 +125,7 @@ export const dictionary = {
       addressValue: "1080 Wien, Österreich",
       write: "Nachricht schreiben",
     },
-    footer: { rights: "Alle Rechte vorbehalten.", imprint: "Impressum", privacy: "Datenschutz" },
-    imprint: {
-      metaTitle: "Impressum — Zianat",
-      metaDescription: "Impressum und Offenlegung für Zianat, 1080 Wien.",
-      title: "Impressum",
-      body: [
-        "Angaben gemäß §5 ECG und §25 Mediengesetz.",
-        "Zianat, 1080 Wien, Österreich.",
-        "Die vollständigen Angaben zu Medieninhaber, Firmenbuchnummer, UID und Aufsichtsbehörde werden vor Veröffentlichung ergänzt.",
-        "Angaben zum Energieausweis (HWB, fGEE) werden je Objekt nachgereicht.",
-      ],
-    },
+    footer: { rights: "Alle Rechte vorbehalten.", privacy: "Datenschutz" },
     privacy: {
       metaTitle: "Datenschutz — Zianat",
       metaDescription: "Informationen zum Umgang mit personenbezogenen Daten auf dieser Website.",
@@ -274,18 +263,7 @@ export const dictionary = {
       addressValue: "1080 Vienna, Austria",
       write: "Write a message",
     },
-    footer: { rights: "All rights reserved.", imprint: "Imprint", privacy: "Privacy" },
-    imprint: {
-      metaTitle: "Imprint — Zianat",
-      metaDescription: "Imprint and disclosure for Zianat, 1080 Vienna.",
-      title: "Imprint",
-      body: [
-        "Information pursuant to §5 ECG and §25 of the Austrian Media Act.",
-        "Zianat, 1080 Vienna, Austria.",
-        "Full details of the media owner, company register number, VAT ID and supervisory authority will be added before publication.",
-        "Energy certificate figures (HWB, fGEE) will be provided per unit.",
-      ],
-    },
+    footer: { rights: "All rights reserved.", privacy: "Privacy" },
     privacy: {
       metaTitle: "Privacy — Zianat",
       metaDescription: "How personal data is handled on this website.",

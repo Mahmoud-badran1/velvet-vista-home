@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      agents: {
+        Row: {
+          created_at: string
+          display_order: number
+          email: string | null
+          id: string
+          name: string
+          photo_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          email?: string | null
+          id?: string
+          name: string
+          photo_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          email?: string | null
+          id?: string
+          name?: string
+          photo_url?: string | null
+        }
+        Relationships: []
+      }
       apartment_images: {
         Row: {
           alt_text: string | null
@@ -132,9 +159,6 @@ export type Database = {
       }
       site_settings: {
         Row: {
-          agent_email: string | null
-          agent_name: string | null
-          agent_photo_url: string | null
           architecture_photo_url: string | null
           contact_email: string | null
           contact_phone: string | null
@@ -143,9 +167,6 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          agent_email?: string | null
-          agent_name?: string | null
-          agent_photo_url?: string | null
           architecture_photo_url?: string | null
           contact_email?: string | null
           contact_phone?: string | null
@@ -154,9 +175,6 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          agent_email?: string | null
-          agent_name?: string | null
-          agent_photo_url?: string | null
           architecture_photo_url?: string | null
           contact_email?: string | null
           contact_phone?: string | null
