@@ -12,7 +12,7 @@ type ApartmentImage = Tables<"apartment_images">;
 
 const LARGE_FILE_THRESHOLD = 900_000; // ~900 KB — legacy uncompressed uploads are far above this
 
-export const Route = createFileRoute("/lgc-manage-8673cd970652f87a/$slug/photos")({
+export const Route = createFileRoute("/lgc-manage-8673cd970652f87a/$slug_/photos")({
   head: () => ({
     meta: [{ title: "الصور" }, { name: "robots", content: "noindex, nofollow" }],
   }),
