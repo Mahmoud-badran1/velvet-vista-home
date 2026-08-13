@@ -1,49 +1,66 @@
-import { useSiteSettings } from "../lib/site-settings";
 import { useI18n } from "../i18n";
+import type { Agent } from "../lib/agents";
 
-export function AgentCard() {
-  const { agentName, agentEmail, agentPhotoUrl } = useSiteSettings();
-  const { lang } = useI18n();
+function initialsFor(name: string): string {
+  return name
+    .split(" ")
+    .map((p) => p[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
 
-  if (!agentName && !agentEmail) return null;
-
-  const initials = agentName
-    ? agentName
-        .split(" ")
-        .map((p) => p[0])
-        .slice(0, 2)
-        .join("")
-        .toUpperCase()
-    : "";
-
+function SingleAgent({ agent }: { agent: Agent }) {
   return (
     <div className="flex items-center gap-5 rounded-lg border border-border bg-card p-6">
-      {agentPhotoUrl ? (
+      {agent.photoUrl ? (
         <img
-          src={agentPhotoUrl}
-          alt={agentName ?? ""}
+          src={agent.photoUrl}
+          alt={agent.name}
           width={80}
           height={80}
           className="h-20 w-20 shrink-0 rounded-full object-cover"
         />
       ) : (
         <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-muted text-lg font-medium text-muted-foreground">
-          {initials}
+          {initialsFor(agent.name)}
         </div>
       )}
       <div className="min-w-0">
-        <p className="eyebrow text-accent">
-          {lang === "de" ? "Ihr Ansprechpartner" : "Your contact"}
-        </p>
-        {agentName && <p className="mt-1.5 text-lg font-medium">{agentName}</p>}
-        {agentEmail && (
+        <p className="mt-1.5 text-lg font-medium">{agent.name}</p>
+        {agent.email && (
           <a
-            href={`mailto:${agentEmail}`}
+            href={`mailto:${agent.email}`}
             className="link-underline mt-1 inline-block text-sm text-muted-foreground"
           >
-            {agentEmail}
+            {agent.email}
           </a>
         )}
+      </div>
+    </div>
+  );
+}
+
+export function AgentCard({ agents }: { agents: Agent[] }) {
+  const { lang } = useI18n();
+
+  if (agents.length === 0) return null;
+
+  return (
+    <div>
+      <p className="eyebrow text-accent">
+        {lang === "de"
+          ? agents.length > 1
+            ? "Ihre Ansprechpartner"
+            : "Ihr Ansprechpartner"
+          : agents.length > 1
+            ? "Your contacts"
+            : "Your contact"}
+      </p>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        {agents.map((agent) => (
+          <SingleAgent key={agent.id} agent={agent} />
+        ))}
       </div>
     </div>
   );

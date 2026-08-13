@@ -11,13 +11,14 @@ import {
 } from "../lib/residence-content";
 import { useSiteSettings } from "../lib/site-settings";
 import { formatPrice } from "../lib/format-price";
+import { loadAgents, type Agent } from "../lib/agents";
 
 export const Route = createFileRoute("/residences/$slug")({
   loader: async ({ params }) => {
-    const allResolved = await loadResolvedResidences();
+    const [allResolved, agents] = await Promise.all([loadResolvedResidences(), loadAgents()]);
     const residence = getResolvedResidence(allResolved, params.slug);
     if (!residence) throw notFound();
-    return { residence, allResolved };
+    return { residence, allResolved, agents };
   },
   head: ({ params, loaderData }) => {
     if (!loaderData) {
@@ -59,9 +60,10 @@ export const Route = createFileRoute("/residences/$slug")({
 });
 
 function ResidenceDetail() {
-  const { residence, allResolved } = Route.useLoaderData() as {
+  const { residence, allResolved, agents } = Route.useLoaderData() as {
     residence: ResolvedResidence;
     allResolved: ResolvedResidence[];
+    agents: Agent[];
   };
   const { lang, t } = useI18n();
   const { contactEmail } = useSiteSettings();
@@ -322,7 +324,7 @@ function ResidenceDetail() {
           </Link>
 
           <div className="mt-16">
-            <AgentCard />
+            <AgentCard agents={agents} />
           </div>
         </div>
 

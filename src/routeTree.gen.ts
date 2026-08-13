@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BuildingRouteImport } from './routes/building'
 import { Route as FilmRouteImport } from './routes/film'
-import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as NeighborhoodRouteImport } from './routes/neighborhood'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -37,11 +36,6 @@ const BuildingRoute = BuildingRouteImport.update({
 const FilmRoute = FilmRouteImport.update({
   id: '/film',
   path: '/film',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ImprintRoute = ImprintRouteImport.update({
-  id: '/imprint',
-  path: '/imprint',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -105,7 +99,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/building': typeof BuildingRoute
   '/film': typeof FilmRoute
-  '/imprint': typeof ImprintRoute
   '/mcp': typeof McpRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
@@ -121,7 +114,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/building': typeof BuildingRoute
   '/film': typeof FilmRoute
-  '/imprint': typeof ImprintRoute
   '/mcp': typeof McpRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
@@ -138,7 +130,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/building': typeof BuildingRoute
   '/film': typeof FilmRoute
-  '/imprint': typeof ImprintRoute
   '/mcp': typeof McpRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/privacy': typeof PrivacyRoute
@@ -156,7 +147,6 @@ export interface FileRouteTypes {
     | '/'
     | '/building'
     | '/film'
-    | '/imprint'
     | '/mcp'
     | '/neighborhood'
     | '/privacy'
@@ -172,7 +162,6 @@ export interface FileRouteTypes {
     | '/'
     | '/building'
     | '/film'
-    | '/imprint'
     | '/mcp'
     | '/neighborhood'
     | '/privacy'
@@ -188,7 +177,6 @@ export interface FileRouteTypes {
     | '/'
     | '/building'
     | '/film'
-    | '/imprint'
     | '/mcp'
     | '/neighborhood'
     | '/privacy'
@@ -205,7 +193,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BuildingRoute: typeof BuildingRoute
   FilmRoute: typeof FilmRoute
-  ImprintRoute: typeof ImprintRoute
   McpRoute: typeof McpRoute
   NeighborhoodRoute: typeof NeighborhoodRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -239,13 +226,6 @@ declare module '@tanstack/react-router' {
       path: '/film'
       fullPath: '/film'
       preLoaderRoute: typeof FilmRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/imprint': {
-      id: '/imprint'
-      path: '/imprint'
-      fullPath: '/imprint'
-      preLoaderRoute: typeof ImprintRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -325,7 +305,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BuildingRoute: BuildingRoute,
   FilmRoute: FilmRoute,
-  ImprintRoute: ImprintRoute,
   McpRoute: McpRoute,
   NeighborhoodRoute: NeighborhoodRoute,
   PrivacyRoute: PrivacyRoute,

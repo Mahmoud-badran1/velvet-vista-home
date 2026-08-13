@@ -32,9 +32,6 @@ export function SiteFooter() {
             )}
           </div>
           <div className="flex flex-col gap-3">
-            <Link to="/imprint" className="eyebrow opacity-70 hover:opacity-100">
-              {t.footer.imprint}
-            </Link>
             <Link to="/privacy" className="eyebrow opacity-70 hover:opacity-100">
               {t.footer.privacy}
             </Link>
