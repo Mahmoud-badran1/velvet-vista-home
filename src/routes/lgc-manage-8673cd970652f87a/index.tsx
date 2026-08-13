@@ -29,7 +29,7 @@ function AdminIndex() {
   const ready = status === "ready";
 
   const [email, setEmail] = useState(siteSettings.contactEmail);
-  const [phone, setPhone] = useState(siteSettings.contactPhone);
+  const [phone, setPhone] = useState(siteSettings.contactPhone ?? "");
   const [filmUrl, setFilmUrl] = useState(siteSettings.filmUrl ?? "");
   const [agentName, setAgentName] = useState(siteSettings.agentName ?? "");
   const [agentEmail, setAgentEmail] = useState(siteSettings.agentEmail ?? "");
@@ -45,7 +45,7 @@ function AdminIndex() {
     const { error: saveError } = await supabase.from("site_settings").upsert({
       id: 1,
       contact_email: email,
-      contact_phone: phone,
+      contact_phone: phone || null,
       film_url: filmUrl || null,
       agent_name: agentName || null,
       agent_email: agentEmail || null,
