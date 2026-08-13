@@ -8,6 +8,7 @@ export type SiteSettings = {
   agentName: string | null;
   agentEmail: string | null;
   agentPhotoUrl: string | null;
+  architecturePhotoUrl: string | null;
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
@@ -17,6 +18,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   agentName: null,
   agentEmail: null,
   agentPhotoUrl: null,
+  architecturePhotoUrl: null,
 };
 
 export async function loadSiteSettings(): Promise<SiteSettings> {
@@ -28,6 +30,7 @@ export async function loadSiteSettings(): Promise<SiteSettings> {
     agentName: data?.agent_name || null,
     agentEmail: data?.agent_email || null,
     agentPhotoUrl: data?.agent_photo_url || null,
+    architecturePhotoUrl: data?.architecture_photo_url || null,
   };
 }
 

@@ -52,7 +52,7 @@ function Index() {
   const residences = Route.useLoaderData() as ResolvedResidence[];
   const { lang } = useI18n();
   const c = homeCopy;
-  const { contactEmail } = useSiteSettings();
+  const { contactEmail, architecturePhotoUrl } = useSiteSettings();
   const mailto = `mailto:${contactEmail}?subject=Private%20Viewing`;
 
   const [cityIndex, setCityIndex] = useState(0);
@@ -241,7 +241,7 @@ function Index() {
         <Reveal className="grid items-center gap-14 lg:grid-cols-2">
           <figure className="overflow-hidden">
             <img
-              src={images.light}
+              src={architecturePhotoUrl || images.light}
               alt={c.architecture.title[lang]}
               loading="lazy"
               width={1600}

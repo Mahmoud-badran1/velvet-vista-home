@@ -135,6 +135,7 @@ export type Database = {
           agent_email: string | null
           agent_name: string | null
           agent_photo_url: string | null
+          architecture_photo_url: string | null
           contact_email: string | null
           contact_phone: string | null
           film_url: string | null
@@ -145,6 +146,7 @@ export type Database = {
           agent_email?: string | null
           agent_name?: string | null
           agent_photo_url?: string | null
+          architecture_photo_url?: string | null
           contact_email?: string | null
           contact_phone?: string | null
           film_url?: string | null
@@ -155,6 +157,7 @@ export type Database = {
           agent_email?: string | null
           agent_name?: string | null
           agent_photo_url?: string | null
+          architecture_photo_url?: string | null
           contact_email?: string | null
           contact_phone?: string | null
           film_url?: string | null
